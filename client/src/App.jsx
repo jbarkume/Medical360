@@ -1,8 +1,6 @@
 import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm";
-import AppPage from "./components/AppPage";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import HomePage from "./components/HomePage";
 function App() {
   return (
