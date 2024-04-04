@@ -16,7 +16,7 @@ const FormField = ({ fields, submit, page, buttonName }) => {
     console.log('Form data:', formData);
     
     //submit logic:
-    submit()
+    submit(formData);
 
     // go back to page:
 
@@ -28,7 +28,7 @@ const FormField = ({ fields, submit, page, buttonName }) => {
         <TextField key={index} name={field} onChange={handleInputChange}/>
       ))}
       <div className="flex justify-center">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onClick={handleSubmit}>{buttonName}</button>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 m-4" onClick={handleSubmit}>{buttonName}</button>
       </div>
     </div>
   );
