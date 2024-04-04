@@ -9,7 +9,7 @@ import { AuthContextProvider } from "./auth/AuthContext";
 import NewUserForm from "./components/NewUserForm";
 import AllRoomsPage from "./components/AllRoomsPage";
 import AllEquipmentPage from "./components/AllEquipmentPage";
-
+import ChatPage from "./components/ChatPage";
 import HomePage from "./components/HomePage";
 import HubPage from "./components/HubPage";
 function App() {
@@ -22,6 +22,7 @@ function App() {
             <Route path="/register" element={<RegistrationForm />} />
             <Route path="/login" element={<LoginForm/>} />
             <Route path="/create-new-user" element={<NewUserForm/>} />
+            <Route path="/chat" element={<ChatPage/>} />
           {/* <Route path="/" element={<AppPage/>} /> */}
           
         </Routes>
