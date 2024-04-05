@@ -1,12 +1,13 @@
 import React from 'react';
 
 const weeksData = [
-  { day: '22', dayOfWeek: 'MON' },
-  { day: '23', dayOfWeek: 'TUE' },
-  { day: '24', dayOfWeek: 'WED', selected: true },
-  { day: '25', dayOfWeek: 'THU' },
-  { day: '26', dayOfWeek: 'FRI' },
-  { day: '27', dayOfWeek: 'SAT' },
+  { day: '1', dayOfWeek: 'MON' },
+  { day: '2', dayOfWeek: 'TUE' },
+  { day: '3', dayOfWeek: 'WED',},
+  { day: '4', dayOfWeek: 'THU' },
+  { day: '5', dayOfWeek: 'FRI', selected: true},
+  { day: '6', dayOfWeek: 'SAT' },
+  { day: '7', dayOfWeek: 'SUN' }
 ];
 
 const WeekSelector = () => {

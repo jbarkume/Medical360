@@ -3,7 +3,7 @@ import StaffCard from "../components/StaffCard";
 import doctorImageone from "../components/doctor2.jpeg";
 import Banner from "../components/Banner";
 
-const staffMembers = [
+const doctors = [
   {
     image: doctorImageone,
     name: "Dr. Alexander Bennett, Ph.D.",
@@ -22,12 +22,6 @@ const staffMembers = [
     name: "Dr. Alexander Bennett, Ph.D.",
     role: "Dermato-Genetics",
     bio: "Specialist in genetic skin conditions and dermatological research.",
-  },
-  {
-    image: doctorImageone, 
-    name: "Nurse Jane Doe",
-    role: "On Duty",
-    bio: "Dedicated nursing professional with a focus on patient care and support.",
   },
   {
     image: doctorImageone,
@@ -38,9 +32,9 @@ const staffMembers = [
   },
 ];
 
-const AllStaffPage = () => {
+const AllDoctorsPage = () => {
 
-    const goBackPath = '/dashboard';
+    const goBackPath = '/dashboard'; 
   
     return (
       <div>
@@ -48,7 +42,7 @@ const AllStaffPage = () => {
         <div className="bg-white p-4 md:p-10">
           <div className="flex flex-col md:flex-row justify-between items-center mb-6">
             <h1 className="text-2xl md:text-4xl font-bold text-[#2260FF]">
-              All Staff
+              Doctors
             </h1>
             <div className="flex space-x-2">
               <button className="bg-[#2260FF] text-white px-4 py-2 rounded-md font-medium">
@@ -60,11 +54,11 @@ const AllStaffPage = () => {
               </button>
             </div>
           </div>
-          {/* Staff Table */}
+          {/* Doctors Table */}
           <div className="bg-[#EBF8FF] p-4 rounded-lg shadow-md">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-              {staffMembers.map((staff, index) => (
-                <StaffCard key={index} staff={staff} />
+              {doctors.map((doctor, index) => (
+                <StaffCard key={index} staff={doctor} />
               ))}
             </div>
           </div>
@@ -72,4 +66,4 @@ const AllStaffPage = () => {
       </div>
     );
   };
-export default AllStaffPage;
+export default AllDoctorsPage;
