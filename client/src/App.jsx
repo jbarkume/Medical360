@@ -37,6 +37,7 @@ import AllEquipmentPage from "./pages/AllEquipmentPage";
 import AllRoomsPage from "./pages/AllRoomsPage";
 import AdminEquipment from "./pages/AdminEquipment";
 import AdminRoom from "./pages/AdminRoom";
+import PatientNotification from "./pages/PatientNotification";
 
 function App() {
   return (
@@ -82,6 +83,7 @@ function App() {
           <Route path="/room-list" element={<AllRoomsPage />} />
           <Route path="/admin-equipment" element={<AdminEquipment />} />\
           <Route path="/admin-room" element={<AdminRoom />} />
+          <Route path="/admin-notification" element={<PatientNotification />} />
 
 
         </Routes>
