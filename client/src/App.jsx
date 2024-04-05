@@ -25,7 +25,7 @@ import ResourceManagementPage from "./pages/ResourceManagementPage";
 import BugReport from "./pages/BugReportForm";
 import FeedbackForm from "./pages/FeedbackForm";
 import CancelAppointmentForm from "./pages/CancelAppointmentForm";
-
+import UnscheduledAppointments from "./pages/UnscheduledApptPage";
 function App() {
   return (
     <BrowserRouter>
@@ -56,6 +56,7 @@ function App() {
           <Route path="bugs" element={<BugReport/>}/>
           <Route path="feedback" element={<FeedbackForm/>}/>
           <Route path="cancel-appointment" element={<CancelAppointmentForm/>}/>
+          <Route path="unscheduled" element={<UnscheduledAppointments/>}/>
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
