@@ -27,7 +27,7 @@ import FeedbackForm from "./pages/FeedbackForm";
 import CancelAppointmentForm from "./pages/CancelAppointmentForm";
 import UnscheduledAppointments from "./pages/UnscheduledApptPage";
 import EditPatientInfoPage from "./pages/EditPatientInfoPage";
-import EmergencyReassignment from "./pages/EmergencyAssignmentPage";import DepartmentRatioPage from "./pages/DepartmentRatioPage";
+import EmergencyReassignment from "./pages/EmergencyAssignmentPage";
 import PatientInfo from "./pages/PatientInfo";
 import DoctorCard from "./pages/DoctorCard";
 import DeleteEquipment from "./pages/DeleteEquipment";
@@ -37,6 +37,8 @@ import AllEquipmentPage from "./pages/AllEquipmentPage";
 import AllRoomsPage from "./pages/AllRoomsPage";
 import AdminEquipment from "./pages/AdminEquipment";
 import AdminRoom from "./pages/AdminRoom";
+import PatientNotification from "./pages/PatientNotification";
+import DepartmentRatioPage from "./pages/DepartmentRatioPage";
 
 function App() {
   return (
@@ -82,7 +84,8 @@ function App() {
           <Route path="/room-list" element={<AllRoomsPage />} />
           <Route path="/admin-equipment" element={<AdminEquipment />} />\
           <Route path="/admin-room" element={<AdminRoom />} />
-
+          <Route path="/admin-notification" element={<PatientNotification />} />
+          <Route path="/departmentratio" element={<DepartmentRatioPage />} />
 
         </Routes>
       </AuthContextProvider>
