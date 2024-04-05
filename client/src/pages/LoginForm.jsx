@@ -14,7 +14,7 @@ const LoginForm = () => {
   // handles if already logged in
   useEffect(() => {
     if (auth.loggedIn) {
-      navigate("/home")
+      navigate("/apppage")
     }
   }, [auth.loggedIn])
   

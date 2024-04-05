@@ -3,11 +3,11 @@ import TextField from './TextField';
 
 const EquipmentCard = () => {
   const fields = [
-    { name: 'Name', initialValue: 'MRI', isStatic: true },
-    { name: 'Type', initialValue: 'Machine', isStatic: true },
-    { name: 'Quantity', initialValue: '20', isStatic: true },
-    { name: 'Location', initialValue: 'Room 201', isStatic: true },
-    { name: 'Maintenance Status', initialValue: 'Good', isStatic: true }
+    { name: 'Name', initialValue: 'MRI', editable:false ,showEditIcon: false},
+    { name: 'Type', initialValue: 'Machine', editable:false ,  showEditIcon: false },
+    { name: 'Quantity', initialValue: '20', editable:false, showEditIcon: false },
+    { name: 'Location', initialValue: 'Room 201', editable:false ,showEditIcon: false },
+    { name: 'Maintenance Status', initialValue: 'Good', editable:false ,showEditIcon: false }
   ];
 
   
@@ -22,6 +22,7 @@ const EquipmentCard = () => {
           initialValue={field.initialValue}
           onChange={() => {}}
           editable={false}
+          showEditIcon={false}
         />
       ))}
     </div>
