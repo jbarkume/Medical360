@@ -22,6 +22,7 @@ import EquipmentPage from "./pages/EquipmentPage";
 import RoomPage from "./pages/RoomPage";
 import PatientPage from "./pages/PatientPage";
 import ResourceManagementPage from "./pages/ResourceManagementPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import BugReport from "./pages/BugReportForm";
 import FeedbackForm from "./pages/FeedbackForm";
 import CancelAppointmentForm from "./pages/CancelAppointmentForm";
@@ -58,6 +59,7 @@ function App() {
           <Route path="/room" element={<RoomPage />} />
           <Route path="/patientpage" element={<PatientPage />} />
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Route path="/resource-management" element={<ResourceManagementPage />} />
           <Route path="bugs" element={<BugReport/>}/>
           <Route path="feedback" element={<FeedbackForm/>}/>
@@ -65,6 +67,10 @@ function App() {
           <Route path="unscheduled" element={<UnscheduledAppointments/>}/>
 =======
 >>>>>>> 2c93ca1d4f8376dffdbf6309da170773d4b05167
+=======
+          <Route path="/resource-management" element={<ResourceManagementPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+>>>>>>> 73ed4af75e06ae058f8d0c750dbbbacc61defc6c
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
