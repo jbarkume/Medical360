@@ -1,11 +1,11 @@
-import RegistrationForm from "./screenpages/RegistrationForm";
-import LoginForm from "./screenpages/LoginForm";
+import RegistrationForm from "./pages/RegistrationForm";
+import LoginForm from "./pages/LoginForm";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthContextProvider } from "./auth/AuthContext";
-import NewUserForm from "./screenpages/NewUserForm";
-import ChatPage from "./components/ChatPage";
-import HomePage from "./components/HomePage";
-import HubPage from "./components/HubPage";
+import NewUserForm from "./pages/NewUserForm";
+import ChatPage from "./pages/ChatPage";
+import HomePage from "./pages/HomePage";
+import HubPage from "./pages/HubPage";
 function App() {
   return (
     <BrowserRouter>

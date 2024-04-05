@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "./Sidebar";
+import Sidebar from "../components/Sidebar";
 import doctorImageone from "./doctor2.jpeg";
 import doctorImagetwo from "./doctor3.jpeg";
 import doctorImagethree from "./doctor1.avif";
