@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import AuthContext from "../auth/AuthContext";
+import Banner from "../components/Banner";
 
-//doctor should be an object
-const DoctorCard = ({/*doctor*/}) => {
+
+const PatientInfo = ({}) => {
   const { auth } = useContext(AuthContext);
-  const doctor = auth.doctors[0];
+  const patient = auth.patients[0];
   return (
+    <>
+    <Banner goBackPath={"/"}/>
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="bg-[#CAD6FF] p-8 rounded-lg shadow-lg max-w-5xl w-full min-h-[600px]">
         {/* Row 1: Image and Details */}
@@ -15,20 +18,21 @@ const DoctorCard = ({/*doctor*/}) => {
             style={{ width: "200px", height: "200px" }}
           >
             <img
-              src={doctor.image}
-              alt={doctor.name}
+              src={patient.image}
+              alt={patient.name}
               className="w-full h-full object-cover"
             />
           </div>
           <div className="flex-1 px-4 space-y-4">
             <div className="bg-[#2260FF] text-white p-4 rounded-lg">
-              <h3 className="font-semibold text-md">Experience</h3>
-              <p>{doctor.experience}</p>
+              <h3 className="font-semibold text-md">Age: {patient.age}</h3>
+              <h3 className="font-semibold text-md">Sex: {patient.sex}</h3>
+              
             </div>
 
             <div className="bg-[#2260FF] text-white p-4 rounded-lg">
-              <h3 className="font-semibold text-md">Focus</h3>
-              <p>{doctor.focus}</p>
+              <h3 className="font-semibold text-md">Files</h3>
+              <p>{patient.files}</p>
             </div>
           </div>
         </div>
@@ -37,9 +41,9 @@ const DoctorCard = ({/*doctor*/}) => {
         <div className="flex justify-center items-center bg-white p-4 rounded-lg mt-4">
           <div>
             <h2 className="text-xl font-semibold text-center text-[#2260FF]">
-              {doctor.name}
+              {patient.name}
             </h2>
-            <p className="text-center ">{doctor.department}</p>
+            <p className="text-center ">{patient.email}</p>
           </div>
         </div>
 
@@ -57,24 +61,29 @@ const DoctorCard = ({/*doctor*/}) => {
             </svg>
             <h3 className="text-lg text-[#2260FF]">Schedule</h3>
           </div>
-          <p className="text-center w-full">{doctor.schedule}</p>
+          <p className="text-center w-full">{patient.schedule}</p>
         </div>
 
         {/* Row 4: Profile */}
         <div className="bg-white p-4 rounded-lg mt-4">
-          <h3 className="text-[#2260FF] font-semibold text-lg">Profile</h3>
-          <p className="text-gray-600">{doctor.profile}</p>
+          <h3 className="text-[#2260FF] font-semibold text-lg">Care Notes</h3>
+          <ul className="list-disc pl-5 text-gray-600">
+            {patient.carenotes.map((note, index) => (
+              <li key={index}>{note}</li>
+            ))}
+          </ul>
         </div>
 
         {/* Row 5: Schedule Button */}
         <div className="flex justify-center mt-4">
           <button className="bg-[#2260FF] text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800">
-            Schedule
+            Update
           </button>
         </div>
       </div>
     </div>
+    </>
   );
 };
 
-export default DoctorCard;
+export default PatientInfo;

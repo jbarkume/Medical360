@@ -30,7 +30,10 @@ import UnscheduledAppointments from "./pages/UnscheduledApptPage";
 import AllEquipmentPage from "./pages/AllEquipmentPage"
 import EditPatientInfoPage from "./pages/EditPatientInfoPage";
 import EmergencyReassignment from "./pages/EmergencyAssignmentPage";
-
+import PatientInfo from "./pages/PatientInfo";
+import DoctorCard from "./pages/DoctorCard";
+import DeleteEquipment from "./pages/DeleteEquipment";
+import DeleteRoom from "./pages/DeleteRoom";
 
 function App() {
   return (
@@ -65,7 +68,12 @@ function App() {
           <Route path="/resource-management" element={<ResourceManagementPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/edit-patient" element={<EditPatientInfoPage />} />
+          <Route path="/patientinfo" element={<PatientInfo />} />
+          <Route path="/doctorcard" element={<DoctorCard />} />
+          <Route path="/delete-equipment" element={<DeleteEquipment />} />
+          <Route path="/delete-room" element={<DeleteRoom />} />
           <Route path="/emergency" element={<EmergencyReassignment />} />
+
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
