@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
-const TextField = ({ name, onChange }) => {
+const TextField = ({ name, onChange , editable , initialValue }) => {
   // State to hold the value of the text field
   const [value, setValue] = useState('');
 
+  useEffect(() => {
+    // Set the value to initialValue when the component mounts
+    if (initialValue !== undefined) {
+      setValue(initialValue);
+    }
+  }, [initialValue]);
   // Event handler to update the value when text changes
   const handleChange = (event) => {
-    setValue(event.target.value);
-    onChange(name, event.target.value);
+    if (editable) {
+      setValue(event.target.value);
+      onChange(name, event.target.value);
+    }
+    
   };
 
   return (
@@ -24,6 +33,7 @@ const TextField = ({ name, onChange }) => {
           placeholder={`Enter ${name}`}
           value={value}
           onChange={handleChange}
+          readOnly={!editable}
         />
       </div>
     </div>
@@ -31,3 +41,4 @@ const TextField = ({ name, onChange }) => {
 };
 
 export default TextField;
+

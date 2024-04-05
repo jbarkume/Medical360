@@ -1,14 +1,8 @@
-import RegistrationForm from "./components/RegistrationForm";
-import LoginForm from "./components/LoginForm";
-import AppPage from "./components/AppPage";
+import RegistrationForm from "./screenpages/RegistrationForm";
+import LoginForm from "./screenpages/LoginForm";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Banner from "./components/Banner"
-import FormField from "./components/FormField"
-import Table from "./components/Table"
 import { AuthContextProvider } from "./auth/AuthContext";
-import NewUserForm from "./components/NewUserForm";
-import AllRoomsPage from "./components/AllRoomsPage";
-import AllEquipmentPage from "./components/AllEquipmentPage";
+import NewUserForm from "./screenpages/NewUserForm";
 import ChatPage from "./components/ChatPage";
 import HomePage from "./components/HomePage";
 import HubPage from "./components/HubPage";

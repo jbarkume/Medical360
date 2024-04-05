@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import doctorImageone from "../components/doctor2.jpeg";
 
 const AuthContext = createContext();
 
@@ -15,13 +16,26 @@ export const users = [
         isDoctor: true
     }
 ]
+export const doctorsData = [
+    {
+        name: "Dr. Olivia Turner, M.D.",
+        department: "Dermato-Endocrinology",
+        experience: "20 years",
+        focus: "The impact of hormonal imbalances on skin conditions, specializing in acne, hirsutism, and other skin disorders.",
+        schedule: "Mon - Sat / 9 AM - 4 PM",
+        profile: "Dr. Doe completed her medical degree at Stony Brook University, renowned for its rigorous medical program and emphasis on patient-centered care. She further specialized in dermatology during her residency at Yale University, where she excelled in both medical and surgical dermatology, with a particular focus on pediatric dermatology, cosmetic procedures",
+        image: doctorImageone,
+    },
+    // Add more doctor profiles as needed
+];
 
 function AuthContextProvider({ children }) {
     const [auth, setAuth] = useState({
         user: null,
         loggedIn: false,
         isAdmin: false,
-        isDoctor: false
+        isDoctor: false,
+        doctors: doctorsData,
     });
 
     useEffect(() => {
