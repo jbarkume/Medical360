@@ -18,8 +18,13 @@ const LoginForm = () => {
     }
   }, [auth.loggedIn])
   
+//made changes here
 
-  const fields = ["Email", "Password"]
+  // const fields = ["Email", "Password"]
+  const fields = [
+    { name: 'Email', initialValue: '', editable: true },
+    { name: 'Password', initialValue: '', editable: true }
+  ];
 
   const handleLogin = (formData) => {
     let email = formData.Email;

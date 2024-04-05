@@ -6,7 +6,7 @@ import AuthContext from '../auth/AuthContext';
 import { useContext } from 'react';
 
 function NewUserForm() {
-
+  //maybe some changes over here
     const fields = ["Name", "Email", "Password", "Department", "Phone Number", "Admin", "Doctor"];
     const [wrong, setWrong] = useState(false)
     const { auth } = useContext(AuthContext);
