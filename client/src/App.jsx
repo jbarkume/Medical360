@@ -28,6 +28,7 @@ import FeedbackForm from "./pages/FeedbackForm";
 import CancelAppointmentForm from "./pages/CancelAppointmentForm";
 import UnscheduledAppointments from "./pages/UnscheduledApptPage";
 import AllEquipmentPage from "./pages/AllEquipmentPage"
+import EditPatientInfoPage from "./pages/EditPatientInfoPage";
 
 
 function App() {
@@ -56,12 +57,13 @@ function App() {
           <Route path="/room" element={<RoomPage />} />
           <Route path="/patientpage" element={<PatientPage />} />
           <Route path="/resource-management" element={<ResourceManagementPage />} />
-          <Route path="bugs" element={<BugReport/>}/>
-          <Route path="feedback" element={<FeedbackForm/>}/>
-          <Route path="cancel-appointment" element={<CancelAppointmentForm/>}/>
-          <Route path="unscheduled" element={<UnscheduledAppointments/>}/>
+          <Route path="/bugs" element={<BugReport/>}/>
+          <Route path="/feedback" element={<FeedbackForm/>}/>
+          <Route path="/cancel-appointment" element={<CancelAppointmentForm/>}/>
+          <Route path="/unscheduled" element={<UnscheduledAppointments/>}/>
           <Route path="/resource-management" element={<ResourceManagementPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/edit-patient" element={<EditPatientInfoPage />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
