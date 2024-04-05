@@ -4,7 +4,7 @@ import Banner from "../components/Banner";
 const PatientPage = () => {
     return (
         <>
-            <Banner goBackPath={"/"} />
+            <Banner goBackPath={"/apppage"} />
             <PatientCard/>
             
         </>

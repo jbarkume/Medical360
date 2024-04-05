@@ -25,14 +25,19 @@ import ResourceManagementPage from "./pages/ResourceManagementPage";
 import BugReport from "./pages/BugReportForm";
 import FeedbackForm from "./pages/FeedbackForm";
 import CancelAppointmentForm from "./pages/CancelAppointmentForm";
+<<<<<<< HEAD
 import UnscheduledAppointments from "./pages/UnscheduledApptPage";
+=======
+import AllEquipmentPage from "./pages/AllEquipmentPage"
+import BugReportForm from "./pages/BugReportForm"
+
+>>>>>>> 2c93ca1d4f8376dffdbf6309da170773d4b05167
 function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HubPage />} />
           <Route path="/apppage" element={<AppPage />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/login" element={<LoginForm />} />
@@ -52,11 +57,14 @@ function App() {
           <Route path="/equipments" element={<EquipmentPage />} />
           <Route path="/room" element={<RoomPage />} />
           <Route path="/patientpage" element={<PatientPage />} />
+<<<<<<< HEAD
           <Route path="/resource-management" element={<ResourceManagementPage />} />
           <Route path="bugs" element={<BugReport/>}/>
           <Route path="feedback" element={<FeedbackForm/>}/>
           <Route path="cancel-appointment" element={<CancelAppointmentForm/>}/>
           <Route path="unscheduled" element={<UnscheduledAppointments/>}/>
+=======
+>>>>>>> 2c93ca1d4f8376dffdbf6309da170773d4b05167
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
