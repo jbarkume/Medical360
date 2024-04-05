@@ -1,6 +1,6 @@
 import React from "react";
-import Banner from "./Banner"
-import FormField from "./FormField"
+import Banner from "../components/Banner"
+import FormField from "../components/FormField"
 import AuthContext from "../auth/AuthContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

@@ -1,21 +1,21 @@
-import RegistrationForm from "./components/RegistrationForm";
-import LoginForm from "./components/LoginForm";
+import RegistrationForm from "./screenpages/RegistrationForm";
+import LoginForm from "./screenpages/LoginForm";
 import AppPage from "./components/AppPage";
-import DoctorCard from "./components/DoctorCard";
-import PatientCard from "./components/PatientCard";
+import DoctorCard from "./screenpages/DoctorCard";
+import PatientCard from "./screenpages/PatientCard";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Banner from "./components/Banner"
 import FormField from "./components/FormField"
 import Table from "./components/Table"
 import { AuthContextProvider } from "./auth/AuthContext";
-import NewUserForm from "./components/NewUserForm";
+import NewUserForm from "./screenpages/NewUserForm";
 import AllRoomsPage from "./components/AllRoomsPage";
 import AllEquipmentPage from "./components/AllEquipmentPage";
 import EquipmentCard from "./components/EquipmentCard";
 import RoomCard from './components/RoomCard';
 import ProfileCard from "./components/ProfileCard";
 
-import HomePage from "./components/HomePage";
+import HomePage from "./screenpages/HomePage";
 import HubPage from "./components/HubPage";
 function App() {
   return (

@@ -5,7 +5,7 @@ import FormField from './FormField';
 
 const ProfileCard = () => {
   const fields = [
-    { name: 'Room Number', initialValue: '205', editable: true },
+    { name: 'Name', initialValue: '205', editable: true },
     { name: 'Room Type', initialValue: 'VIP', editable: true },
     // Add other fields as necessary
   ];

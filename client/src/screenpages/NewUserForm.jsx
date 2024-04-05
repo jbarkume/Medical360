@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
-import Banner from './Banner';
-import FormField from './FormField';
+import Banner from '../components/Banner';
+import FormField from '../components/FormField';
 import AuthContext from '../auth/AuthContext';
 import { useContext } from 'react';
 
