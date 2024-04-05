@@ -33,6 +33,7 @@ import PatientInfo from "./pages/PatientInfo";
 import DoctorCard from "./pages/DoctorCard";
 import DeleteEquipment from "./pages/DeleteEquipment";
 import DeleteRoom from "./pages/DeleteRoom";
+import PatientList from "./pages/PatientList";
 
 function App() {
   return (
@@ -73,6 +74,7 @@ function App() {
           <Route path="/delete-room" element={<DeleteRoom />} />
           <Route path="/emergency" element={<EmergencyReassignment />} />
           <Route path="/departmentratio" element={<DepartmentRatioPage />} />
+          <Route path="/patient-list" element={<PatientList />} />
 
         </Routes>
       </AuthContextProvider>
