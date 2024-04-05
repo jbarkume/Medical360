@@ -9,7 +9,7 @@ import HubPage from "./pages/HubPage";
 import EditEquipmentPage from "./pages/EditEquipmentPage";
 import AllStaffPage from "./pages/AllStaffPage";
 import AppointmentPage from "./pages/AppointmentPage";
-import EditRoomPage from "./pages/EditRoomPage";
+import EditRoomPage from "./screenpages/EditRoomPage";
 import DepartmentPage from "./pages/DepartmentPage";
 import DepartmentStaffPage from "./pages/DepartmentStaffPage";
 import AllDoctorsPage from "./pages/AllDoctorsPage";

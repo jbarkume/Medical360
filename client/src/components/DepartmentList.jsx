@@ -5,7 +5,7 @@ const DepartmentList = ({ departments }) => {
 
   return (
     <div className="flex flex-col items-center justify-center" style={{ background: gradient }}>
-      <div className="flex overflow-x-auto space-x-4 py-8 pl-1" style={{ height: '300px' }}> 
+      <div className="flex overflow-x-auto space-x-4 py-8 pl-1" style={{ height: '300px', background: gradient }}> 
         {departments.map((department, index) => (
           <div key={index} className="flex-none w-48 h-50 rounded-lg shadow bg-white p-4 flex flex-col items-center justify-center"> {/* Adjusted width and height */}
             <img src={department.icon} alt={department.name} className="rounded-full w-25 h-21" /> 
