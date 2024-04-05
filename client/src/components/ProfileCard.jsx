@@ -2,7 +2,7 @@ import React from 'react';
 import FormField from './FormField';
 
 
-const ProfileCard = () => {
+const ProfileCard = ({buttonName}) => {
   const fields = [
     { name: 'Name', initialValue: 'John Doe', editable: true ,showEditIcon: true },
     { name: 'Email', initialValue: 'john.doe@stonybrook.edu',editable: true, showEditIcon: true },
@@ -23,8 +23,8 @@ const ProfileCard = () => {
     <FormField 
       fields={fields} 
       submit={handleSubmit} 
-      buttonName="Save"
-    />
+      buttonName={buttonName} />
+  
   );
 };
 
