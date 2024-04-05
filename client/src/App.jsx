@@ -13,7 +13,6 @@ import EditRoomPage from "./pages/EditRoomPage";
 import DepartmentPage from "./pages/DepartmentPage";
 import DepartmentStaffPage from "./pages/DepartmentStaffPage";
 import AllDoctorsPage from "./pages/AllDoctorsPage";
-import RoomCard from "./components/RoomCard";
 import AppPage from "./pages/AppPage";
 import NewEquipmentPage from "./pages/NewEquipmentPage";
 import NewRoomPage from "./pages/NewRoomPage";
@@ -22,6 +21,7 @@ import DeleteUserPage from "./pages/DeleteUserPage";
 import EquipmentPage from "./pages/EquipmentPage";
 import RoomPage from "./pages/RoomPage";
 import PatientPage from "./pages/PatientPage";
+import ResourceManagementPage from "./pages/ResourceManagementPage";
 
 function App() {
   return (
@@ -46,9 +46,10 @@ function App() {
           <Route path="/new-room" element={<NewRoomPage />} />
           <Route path="/new-patient" element={<NewPatientPage />} />
           <Route path="/deleteuser" element={<DeleteUserPage />} />
-          <Route path="/equipmentcard" element={<EquipmentPage />} />
-          <Route path="/roompage" element={<RoomPage />} />
+          <Route path="/equipments" element={<EquipmentPage />} />
+          <Route path="/room" element={<RoomPage />} />
           <Route path="/patientpage" element={<PatientPage />} />
+          <Route path="/resource-management" element={<ResourceManagementPage />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
