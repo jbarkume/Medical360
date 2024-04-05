@@ -22,7 +22,8 @@ import EquipmentPage from "./pages/EquipmentPage";
 import RoomPage from "./pages/RoomPage";
 import PatientPage from "./pages/PatientPage";
 import ResourceManagementPage from "./pages/ResourceManagementPage";
-
+import BugReport from "./pages/BugReportForm";
+import FeedbackForm from "./pages/FeedbackForm";
 
 function App() {
   return (
@@ -51,6 +52,8 @@ function App() {
           <Route path="/room" element={<RoomPage />} />
           <Route path="/patientpage" element={<PatientPage />} />
           <Route path="/resource-management" element={<ResourceManagementPage />} />
+          <Route path="bugs" element={<BugReport/>}/>
+          <Route path="feedback" element={<FeedbackForm/>}/>
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
