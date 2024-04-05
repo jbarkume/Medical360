@@ -6,6 +6,7 @@ import NewUserForm from "./pages/NewUserForm";
 import ChatPage from "./pages/ChatPage";
 import HomePage from "./pages/HomePage";
 import HubPage from "./pages/HubPage";
+import AllStaffPage from "./pages/AllStaffPage";
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
             <Route path="/login" element={<LoginForm/>} />
             <Route path="/create-new-user" element={<NewUserForm/>} />
             <Route path="/chat" element={<ChatPage/>} />
+            <Route path="/staff" element={<AllStaffPage />} />
           {/* <Route path="/" element={<AppPage/>} /> */}
           
         </Routes>
