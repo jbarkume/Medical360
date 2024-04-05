@@ -40,7 +40,7 @@ const staffMembers = [
 
 const AllStaffPage = () => {
 
-    const goBackPath = '/dashboard';
+    const goBackPath = '/apppage';
   
     return (
       <div>

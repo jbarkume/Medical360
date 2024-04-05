@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import doctorImageone from "../components/doctor2.jpeg";
 import doctorImagetwo from "../components/doctor3.jpeg";
 import doctorImagethree from "../components/doctor1.avif";
+import AccountCircle from "../components/AccountCircle";
 
 const AppPage = () => {
   const gradient =
@@ -17,6 +18,7 @@ const AppPage = () => {
         <h1 className="text-white text-4xl font-bold">
           Stony Brook Medical360
         </h1>
+        <AccountCircle></AccountCircle>
       </div>
       <div className="flex">
         {/* Sidebar component */}

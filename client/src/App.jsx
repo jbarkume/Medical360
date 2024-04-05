@@ -23,6 +23,11 @@ import RoomPage from "./pages/RoomPage";
 import PatientPage from "./pages/PatientPage";
 import ResourceManagementPage from "./pages/ResourceManagementPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import BugReport from "./pages/BugReportForm";
+import FeedbackForm from "./pages/FeedbackForm";
+import CancelAppointmentForm from "./pages/CancelAppointmentForm";
+import AllEquipmentPage from "./pages/AllEquipmentPage"
+import BugReportForm from "./pages/BugReportForm"
 
 function App() {
   return (
@@ -30,7 +35,6 @@ function App() {
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HubPage />} />
           <Route path="/apppage" element={<AppPage />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/login" element={<LoginForm />} />
