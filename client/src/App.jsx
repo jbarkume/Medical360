@@ -22,6 +22,8 @@ import DeleteUserPage from "./pages/DeleteUserPage";
 import EquipmentPage from "./pages/EquipmentPage";
 import RoomPage from "./pages/RoomPage";
 import PatientPage from "./pages/PatientPage";
+import AllEquipmentPage from "./pages/AllEquipmentPage"
+import BugReportForm from "./pages/BugReportForm"
 
 function App() {
   return (
@@ -29,7 +31,6 @@ function App() {
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HubPage />} />
           <Route path="/apppage" element={<AppPage />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/login" element={<LoginForm />} />
@@ -49,6 +50,7 @@ function App() {
           <Route path="/equipmentcard" element={<EquipmentPage />} />
           <Route path="/roompage" element={<RoomPage />} />
           <Route path="/patientpage" element={<PatientPage />} />
+          <Route path="/bug-report" element={<BugReportForm />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
