@@ -29,6 +29,7 @@ import CancelAppointmentForm from "./pages/CancelAppointmentForm";
 import UnscheduledAppointments from "./pages/UnscheduledApptPage";
 import AllEquipmentPage from "./pages/AllEquipmentPage"
 import EditPatientInfoPage from "./pages/EditPatientInfoPage";
+import EmergencyReassignment from "./pages/EmergencyAssignmentPage";
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/resource-management" element={<ResourceManagementPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/edit-patient" element={<EditPatientInfoPage />} />
+          <Route path="/emergency" element={<EmergencyReassignment />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
