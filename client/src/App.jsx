@@ -22,6 +22,7 @@ import EquipmentPage from "./pages/EquipmentPage";
 import RoomPage from "./pages/RoomPage";
 import PatientPage from "./pages/PatientPage";
 import ResourceManagementPage from "./pages/ResourceManagementPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/room" element={<RoomPage />} />
           <Route path="/patientpage" element={<PatientPage />} />
           <Route path="/resource-management" element={<ResourceManagementPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
