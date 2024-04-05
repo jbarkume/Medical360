@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChatPage = () => {
   return (
-    <div className="flex h-screen bg-gray-200">
+    <div className="flex h-screen" style={{ backgroundColor: '#CAD6FF' }}>
       <Sidebar />
       <ChatArea />
     </div>
@@ -15,11 +15,11 @@ const Sidebar = () => {
   const people = ['Peter', 'Unknown', 'Mary'];
 
   return (
-    <div className="w-1/4 bg-white p-5 border-r overflow-y-auto">
+    <div className="w-1/4  p-5 border-r overflow-y-auto" style={{ backgroundColor: '#CAD6FF' }}>
       <div className="p-2">
         <input className="w-full p-2 rounded border" placeholder="Search" />
       </div>
-      <div className="mt-4">
+      <div className="mt-4 bg-white">
         <h3 className="font-bold text-lg">Groups</h3>
         {groups.map((group, index) => (
           <div key={index} className="flex items-center p-2 hover:bg-gray-100 cursor-pointer rounded">
@@ -30,7 +30,7 @@ const Sidebar = () => {
           </div>
         ))}
       </div>
-      <div className="mt-4">
+      <div className="mt-4 bg-white">
         <h3 className="font-bold text-lg">People</h3>
         {people.map((person, index) => (
           <div key={index} className="flex items-center p-2 hover:bg-gray-100 cursor-pointer rounded">
@@ -65,3 +65,4 @@ const ChatArea = () => {
 };
 
 export default ChatPage;
+
