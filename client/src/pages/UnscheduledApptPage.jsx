@@ -2,7 +2,7 @@ import React from 'react';
 import { InformationCircleIcon, UserCircleIcon, SearchIcon } from '@heroicons/react/solid';
 import Banner from '../components/Banner';
 import StaffCard from '../components/StaffCard';
-import DoctorCard from '../components/DoctorCard';
+import DoctorCard from './DoctorCard';
 import doctorImageone from "../components/doctor2.jpeg";
 const appointments = [
   { id: 1, name: 'Maria Elena' },

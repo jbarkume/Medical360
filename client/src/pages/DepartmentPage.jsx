@@ -1,5 +1,4 @@
 import React from "react";
-import TopBanner from "../components/TopBanner";
 import DepartmentList from "../components/DepartmentList";
 import emergency from "../components/emergencybutton.png";
 import pediatric from "../components/pediatric.jpeg";

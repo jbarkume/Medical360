@@ -5,7 +5,6 @@ import { AuthContextProvider } from "./auth/AuthContext";
 import NewUserForm from "./pages/NewUserForm";
 import ChatPage from "./pages/ChatPage";
 import HomePage from "./pages/HomePage";
-import HubPage from "./pages/HubPage";
 import EditEquipmentPage from "./pages/EditEquipmentPage";
 import AllStaffPage from "./pages/AllStaffPage";
 import AppointmentPage from "./pages/AppointmentPage";
@@ -29,7 +28,7 @@ import CancelAppointmentForm from "./pages/CancelAppointmentForm";
 import UnscheduledAppointments from "./pages/UnscheduledApptPage";
 import AllEquipmentPage from "./pages/AllEquipmentPage"
 import EditPatientInfoPage from "./pages/EditPatientInfoPage";
-import EmergencyReassignment from "./pages/EmergencyAssignmentPage";
+import EmergencyReassignment from "./pages/EmergencyAssignmentPage";import DepartmentRatioPage from "./pages/DepartmentRatioPage";
 import PatientInfo from "./pages/PatientInfo";
 import DoctorCard from "./pages/DoctorCard";
 import DeleteEquipment from "./pages/DeleteEquipment";
@@ -73,6 +72,7 @@ function App() {
           <Route path="/delete-equipment" element={<DeleteEquipment />} />
           <Route path="/delete-room" element={<DeleteRoom />} />
           <Route path="/emergency" element={<EmergencyReassignment />} />
+          <Route path="/departmentratio" element={<DepartmentRatioPage />} />
 
         </Routes>
       </AuthContextProvider>
