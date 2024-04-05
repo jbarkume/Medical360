@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "serve -s client/dist -l $PORT",
     "build": "cd client && npm install && npm run build",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
