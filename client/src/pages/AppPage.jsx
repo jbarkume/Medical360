@@ -1,8 +1,8 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
-import doctorImageone from "./doctor2.jpeg";
-import doctorImagetwo from "./doctor3.jpeg";
-import doctorImagethree from "./doctor1.avif";
+import doctorImageone from "../components/doctor2.jpeg";
+import doctorImagetwo from "../components/doctor3.jpeg";
+import doctorImagethree from "../components/doctor1.avif";
 
 const AppPage = () => {
   const gradient =

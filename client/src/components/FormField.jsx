@@ -24,7 +24,8 @@ const FormField = ({ fields, submit, buttonName }) => {
           key={index}
           name={field.name}
           initialValue={field.initialValue} 
-          editable={field.editable} 
+          editable={field.editable}
+          showEditIcon={field.showEditIcon} 
           onChange={handleInputChange}
         />
       ))}
