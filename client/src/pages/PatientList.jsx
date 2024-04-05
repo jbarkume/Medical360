@@ -49,7 +49,7 @@ const PatientList = () => {
       <div className="mb-4">
         <h2 className="text-3xl font-semibold text-center ">List of Patients</h2>
       </div>
-      <Table cards={patientsData} />
+      <Table cards={patientsData} isAdmin={false} />
     </div>
     </>
   );

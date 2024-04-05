@@ -3,7 +3,7 @@ import Banner from '../components/Banner';
 import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
 
-const AllEquipmentPage = () => {
+const AdminEquipment = () => {
   // Hardcoded data for the list of equipment
   const equipmentData = [
     {
@@ -43,10 +43,10 @@ const AllEquipmentPage = () => {
       </div>
       <SearchBar />
       <div className="p-8">
-        <Table cards={equipmentData} isAdmin={false} />
+        <Table cards={equipmentData} isAdmin={true} />
       </div>
     </>
   );
 };
 
-export default AllEquipmentPage;
+export default AdminEquipment;

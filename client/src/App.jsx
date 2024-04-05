@@ -26,7 +26,6 @@ import BugReport from "./pages/BugReportForm";
 import FeedbackForm from "./pages/FeedbackForm";
 import CancelAppointmentForm from "./pages/CancelAppointmentForm";
 import UnscheduledAppointments from "./pages/UnscheduledApptPage";
-import AllEquipmentPage from "./pages/AllEquipmentPage"
 import EditPatientInfoPage from "./pages/EditPatientInfoPage";
 import EmergencyReassignment from "./pages/EmergencyAssignmentPage";import DepartmentRatioPage from "./pages/DepartmentRatioPage";
 import PatientInfo from "./pages/PatientInfo";
@@ -34,6 +33,10 @@ import DoctorCard from "./pages/DoctorCard";
 import DeleteEquipment from "./pages/DeleteEquipment";
 import DeleteRoom from "./pages/DeleteRoom";
 import PatientList from "./pages/PatientList";
+import AllEquipmentPage from "./pages/AllEquipmentPage";
+import AllRoomsPage from "./pages/AllRoomsPage";
+import AdminEquipment from "./pages/AdminEquipment";
+import AdminRoom from "./pages/AdminRoom";
 
 function App() {
   return (
@@ -75,6 +78,11 @@ function App() {
           <Route path="/emergency" element={<EmergencyReassignment />} />
           <Route path="/departmentratio" element={<DepartmentRatioPage />} />
           <Route path="/patient-list" element={<PatientList />} />
+          <Route path="/equipment-list" element={<AllEquipmentPage />} />
+          <Route path="/room-list" element={<AllRoomsPage />} />
+          <Route path="/admin-equipment" element={<AdminEquipment />} />\
+          <Route path="/admin-room" element={<AdminRoom />} />
+
 
         </Routes>
       </AuthContextProvider>

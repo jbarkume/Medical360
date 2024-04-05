@@ -3,7 +3,7 @@ import Banner from '../components/Banner';
 import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
 
-const AllRoomsPage = () => {
+const AdminRoom = () => {
   // Hardcoded data for the list of equipment
   const roomData = [
     {
@@ -60,10 +60,10 @@ const AllRoomsPage = () => {
       </div>
       <SearchBar />
       <div className="p-8">
-        <Table cards={roomData} isAdmin={false} />
+        <Table cards={roomData} isAdmin={true} />
       </div>
     </>
   );
 };
 
-export default AllRoomsPage;
+export default AdminRoom;
