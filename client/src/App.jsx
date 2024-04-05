@@ -24,6 +24,7 @@ import PatientPage from "./pages/PatientPage";
 import ResourceManagementPage from "./pages/ResourceManagementPage";
 import BugReport from "./pages/BugReportForm";
 import FeedbackForm from "./pages/FeedbackForm";
+import CancelAppointmentForm from "./pages/CancelAppointmentForm";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="/resource-management" element={<ResourceManagementPage />} />
           <Route path="bugs" element={<BugReport/>}/>
           <Route path="feedback" element={<FeedbackForm/>}/>
+          <Route path="cancel-appointment" element={<CancelAppointmentForm/>}/>
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>

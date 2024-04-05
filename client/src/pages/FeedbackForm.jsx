@@ -30,7 +30,6 @@ const FeedbackForm = () => {
       <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-2xl">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-semibold text-blue-600">Medical360</h1>
-          {/* <QuestionMarkCircleIcon className="h-8 w-8 text-blue-600" /> */}
           <AccountCircle></AccountCircle>
         </div>
         
