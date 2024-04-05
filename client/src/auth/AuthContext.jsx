@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import doctorImageone from "../components/doctor2.jpeg";
+import patientImage from "../components/PatientImage.png";
 
 const AuthContext = createContext();
 
@@ -26,8 +27,21 @@ export const doctorsData = [
         profile: "Dr. Doe completed her medical degree at Stony Brook University, renowned for its rigorous medical program and emphasis on patient-centered care. She further specialized in dermatology during her residency at Yale University, where she excelled in both medical and surgical dermatology, with a particular focus on pediatric dermatology, cosmetic procedures",
         image: doctorImageone,
     },
-    // Add more doctor profiles as needed
+    
 ];
+export const patientsData = [
+    {
+      name: "Patient One",
+      age: "30",
+      sex: "Male",
+      files: "3 files",
+      email: "patient.one@hospital.com",
+      schedule: "Next appointment: 10th Oct, 10:00 AM",
+      carenotes: ["Note 1", "Note 2", "Note 3"], 
+      image: patientImage, 
+    }
+   
+  ];
 
 function AuthContextProvider({ children }) {
     const [auth, setAuth] = useState({
@@ -36,6 +50,7 @@ function AuthContextProvider({ children }) {
         isAdmin: false,
         isDoctor: false,
         doctors: doctorsData,
+        patients: patientsData,
     });
 
     useEffect(() => {

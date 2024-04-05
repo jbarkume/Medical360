@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import AuthContext from "../auth/AuthContext";
+import Banner from "../components/Banner";
 
-const PatientCard = ({}) => {
+//doctor should be an object
+const DoctorCard = ({/*doctor*/}) => {
   const { auth } = useContext(AuthContext);
   const doctor = auth.doctors[0];
   return (
+    <>
+    <Banner goBackPath={"/"}/>
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="bg-[#CAD6FF] p-8 rounded-lg shadow-lg max-w-5xl w-full min-h-[600px]">
         {/* Row 1: Image and Details */}
@@ -73,7 +77,8 @@ const PatientCard = ({}) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
-export default PatientCard;
+export default DoctorCard;
