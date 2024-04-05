@@ -11,6 +11,7 @@ import AppointmentPage from "./pages/AppointmentPage";
 import DepartmentStaffPage from "./pages/DepartmentStaffPage";
 import AllDoctorsPage from "./pages/AllDoctorsPage";
 
+
 function App() {
   return (
     <BrowserRouter>
