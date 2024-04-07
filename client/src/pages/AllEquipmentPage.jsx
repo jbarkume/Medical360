@@ -5,8 +5,10 @@ import SearchBar from '../components/SearchBar';
 import AuthContext from '../auth/AuthContext';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 
 const AllEquipmentPage = () => {
+  const { auth } = useContext(AuthContext);
   // Hardcoded data for the list of equipment
   const equipmentData = [
     {
@@ -38,15 +40,23 @@ const AllEquipmentPage = () => {
 
   return (
     <>
-      <Banner goBackPath="/" />
-      <div className="flex justify-center">
-        <div className="text-blue-500 p-4 m-4 rounded-lg text-3xl">
-          All Equipment
+      <Banner goBackPath="/apppage" />
+      <div className="flex justify-center my-4">
+        <div className="text-blue-500 p-4 rounded-lg text-3xl">
+          All Equipments
         </div>
       </div>
-      <SearchBar />
+      <div className="flex justify-between items-center mx-8 mb-4">
+        <SearchBar />
+        {auth.isAdmin && (
+          // Adjusted button size to be smaller
+          <Link  to={"/new-room"}className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl">
+            New Equipment
+          </Link>
+        )}
+      </div>
       <div className="p-8">
-        <Table cards={equipmentData} isAdmin={false} />
+        <Table cards={equipmentData} isAdmin={auth.isAdmin} />
       </div>
     </>
   );

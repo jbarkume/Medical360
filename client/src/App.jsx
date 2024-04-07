@@ -38,8 +38,6 @@ import AllRoomsPage from "./pages/AllRoomsPage";
 import AllPatientPage from "./pages/AllPatientPage";
 import EditPatientPage from "./pages/EditPatientPage";
 import PatientList from "./pages/PatientList";
-import AdminEquipment from "./pages/AdminEquipment";
-import AdminRoom from "./pages/AdminRoom";
 import PatientNotification from "./pages/PatientNotification";
 
 function App() {
@@ -95,10 +93,6 @@ function App() {
           <Route path="/emergency" element={<EmergencyReassignment />} />
           <Route path="/departmentratio" element={<DepartmentRatioPage />} />
           <Route path="/patient-list" element={<PatientList />} />
-          <Route path="/equipment-list" element={<AllEquipmentPage />} />
-          <Route path="/room-list" element={<AllRoomsPage />} />
-          <Route path="/admin-equipment" element={<AdminEquipment />} />\
-          <Route path="/admin-room" element={<AdminRoom />} />
           <Route path="/admin-notification" element={<PatientNotification />} />
           <Route path="/departmentratio" element={<DepartmentRatioPage />} />
         </Routes>

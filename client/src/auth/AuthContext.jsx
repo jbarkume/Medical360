@@ -16,6 +16,19 @@ export const users = [
         isAdmin: true,
         isDoctor: false,
         isNurse: false,
+        isPatient: false,
+    },
+    {
+        name: "anten",
+        username: "anten",
+        email: "anten@example.com",
+        password: "anten@2001",
+        department: "Cardiology",
+        phone_number: "6319533283",
+        isAdmin: false,
+        isDoctor: false,
+        isNurse: false,
+        isPatient: false,
     }
 ]
 export const doctorsData = [
@@ -51,6 +64,7 @@ function AuthContextProvider({ children }) {
         isAdmin: false,
         isDoctor: false,
         isNurse: false,
+        isPatient: false,
         doctors: doctorsData,
         patients: patientsData,
     });
@@ -75,7 +89,7 @@ function AuthContextProvider({ children }) {
     }
 
     // register a user, upon success return true, otherwise return false
-    auth.register = function({name, email, password, department, phone_number, isAdmin, isDoctor}) {
+    auth.register = function({name, email, password, department, phone_number, isAdmin, isDoctor, isPatient, isNurse}) {
         let new_user = {
             name, 
             email, 
@@ -83,7 +97,9 @@ function AuthContextProvider({ children }) {
             department, 
             phone_number, 
             isAdmin, 
-            isDoctor
+            isDoctor,
+            isNurse,
+            isPatient
         }
         users.push(new_user);
         console.log(users);
@@ -101,6 +117,7 @@ function AuthContextProvider({ children }) {
                     isAdmin: user.isAdmin,
                     isDoctor: user.isDoctor,
                     isNurse: user.isNurse,
+                    isPatient: user.isPatient,
                 })
                 return true;
             }
@@ -115,7 +132,10 @@ function AuthContextProvider({ children }) {
             user: null,
             loggedIn: false,
             isAdmin: false,
-            isDoctor: false
+            isDoctor: false,
+            isNurse: false,
+            isPatient: false
+
         })
     }
 

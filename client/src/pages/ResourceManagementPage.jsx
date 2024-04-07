@@ -24,6 +24,10 @@ const ResourceManagementPage = () => {
                 <div className="p-2 rounded-full bg-white text-blue-500">👤</div>
                 <span>Staff</span>
               </Link>
+              <Link className="flex items-center space-x-3 bg-blue-500 text-white py-2 px-4 rounded-full w-full md:w-1/2 lg:w-1/4 mx-auto justify-center" to={"/all-patients"}>
+                <div className="p-2 rounded-full bg-white text-blue-500">👤</div>
+                <span>Patients</span>
+              </Link>
               <Link className="flex items-center space-x-3 bg-blue-500 text-white py-2 px-4 rounded-full w-full md:w-1/2 lg:w-1/4 mx-auto justify-center" to={"/all-equipments"}>
                 <div className="p-2 rounded-full bg-white text-blue-500">🩺</div>
                 <span>Equipment</span>
