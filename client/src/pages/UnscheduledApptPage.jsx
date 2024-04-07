@@ -8,6 +8,8 @@ import Banner from "../components/Banner";
 import StaffCard from "../components/StaffCard";
 import DoctorInfo from "./DoctorInfo";
 import doctorImageone from "../components/doctor2.jpeg";
+import { useContext } from "react";
+import AuthContext from "../auth/AuthContext";
 const appointments = [
   { id: 1, name: "Maria Elena" },
   { id: 2, name: "Jessie" },
@@ -50,6 +52,7 @@ const doctors = [
 ];
 
 const UnscheduledAppointments = () => {
+  const { auth } = useContext(AuthContext);
   return (
     <div className=" bg-gray-100 min-h-screen">
       {/* <div className="flex justify-between items-center mb-8">
@@ -58,34 +61,38 @@ const UnscheduledAppointments = () => {
       </div> */}
       <Banner goBackPath={"/apppage"} />
 
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl text-gray-700 font-bold">
-          Unscheduled Appointments
-        </h2>
-        <div>
-          <button className="bg-blue-300 text-white py-2 px-4 rounded-lg mr-2">
-            Upcoming
-          </button>
-          <button className="bg-blue-300 text-white py-2 px-4 rounded-lg">
-            Cancelled
-          </button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-4 mb-8">
-        {appointments.map((appointment) => (
-          <div
-            key={appointment.id}
-            className="bg-white rounded-lg shadow p-4 flex items-center"
-          >
-            <UserCircleIcon className="h-10 w-10 text-gray-500" />
-            <div className="ml-4">
-              <p className="font-semibold">{appointment.name}</p>
-              <button className="text-blue-500">Info</button>
-            </div>
+      {auth.isAdmin || auth.isDoctor && (
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl text-gray-700 font-bold">
+            Unscheduled Appointments
+          </h2>
+          <div>
+            <button className="bg-blue-300 text-white py-2 px-4 rounded-lg mr-2">
+              Upcoming
+            </button>
+            <button className="bg-blue-300 text-white py-2 px-4 rounded-lg">
+              Cancelled
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
+
+      {auth.isAdmin || auth.isDoctor && (
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          {appointments.map((appointment) => (
+            <div
+              key={appointment.id}
+              className="bg-white rounded-lg shadow p-4 flex items-center"
+            >
+              <UserCircleIcon className="h-10 w-10 text-gray-500" />
+              <div className="ml-4">
+                <p className="font-semibold">{appointment.name}</p>
+                <button className="text-blue-500">Info</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-2xl text-gray-700 font-bold">Available Doctors</h2>

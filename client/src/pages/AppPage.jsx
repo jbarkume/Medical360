@@ -7,7 +7,7 @@ const AppPage = () => {
   return (
     <div className="flex flex-col h-screen">
       {/* Include the Banner component at the top */}
-      <Banner goBackPath="/" showGoBack={false} />
+      <Banner goBackPath="/" showGoBackButton={false} />
 
       {/* Main container for sidebar, welcome message, and content */}
       <div className="flex flex-grow">

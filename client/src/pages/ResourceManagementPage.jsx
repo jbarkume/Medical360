@@ -17,7 +17,7 @@ const ResourceManagementPage = () => {
         {/* Resource Management Section */}
         <div className="flex-grow p-4">
           <div className="max-w-4xl mx-auto"> {/* Center the content */}
-            <h2 className="text-4xl font-bold text-blue-600 my-6 text-center">Resource Management</h2>
+            <h2 className="text-4xl font-bold text-blue-600 my-6 text-center">Resource and User Management</h2>
             <div className="space-y-4">
               {/* Links */}
               <Link className="flex items-center space-x-3 bg-blue-500 text-white py-2 px-4 rounded-full w-full md:w-1/2 lg:w-1/4 mx-auto justify-center" to={"/all-staff"}>

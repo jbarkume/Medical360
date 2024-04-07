@@ -30,7 +30,7 @@ const Sidebar = () => {
         {auth.isAdmin && (
           <li>
             <Link to="/resource-management" className="hover:underline">
-              Resource Management
+              Resource and User Management
             </Link>
           </li>
         )}

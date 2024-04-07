@@ -34,7 +34,7 @@ const doctors = [
 
 const AllDoctorsPage = () => {
 
-    const goBackPath = '/dashboard'; 
+    const goBackPath = '/apppage'; 
   
     return (
       <div>
