@@ -101,7 +101,6 @@ function App() {
           <Route path="/admin-room" element={<AdminRoom />} />
           <Route path="/admin-notification" element={<PatientNotification />} />
           <Route path="/departmentratio" element={<DepartmentRatioPage />} />
-
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
