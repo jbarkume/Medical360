@@ -1,37 +1,44 @@
-import React from 'react';
-
-// Expects cards to be a list of objects, and each object must have the exact same fields
-const Table = ({ cards }) => {
-
-    let fields = [];
-    if (cards && cards.length > 0)
-        fields = Object.keys(cards[0]);
+const Table = ({ cards, isAdmin }) => {
+    let fields = cards && cards.length > 0 ? Object.keys(cards[0]) : [];
+  
     return (
-    <div className="overflow-x-auto">
+      <div className="overflow-x-auto">
         <table className="min-w-full">
-        <thead>
-            <tr>
-                {
-                    fields.map((field, i) => {
-                        return <th key={i} className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{field}</th>
-                    })
-                }
-            </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-            {cards && cards.map((card, index) => (
-            <tr key={index}>
-                {
-                    fields.map((field, i) => {
-                        return <td key={i} className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">{card[field]}</td>
-                    })
-                }
-            </tr>
+          <thead>
+            {/* Table headers */}
+          </thead>
+          <tbody>
+            {cards.map((card, index) => (
+              <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#EDF2FB' : '#ABC4FF' }}>
+                {/* Data cells */}
+                {fields.map((field, i) => (
+                  <td key={i} className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                    {card[field]}
+                  </td>
+                ))}
+                <td className="px-7 py-4 whitespace-no-wrap text-sm leading-5 text-center">
+                  <div className={`inline-flex rounded-md shadow-sm ${!isAdmin && "justify-center w-full"}`} role="group"> {/* Adjusting div based on isAdmin */}
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
+                      onClick={() => console.log('Info for:', card.Name)}
+                    >
+                      Info
+                    </button>
+                    {isAdmin && (
+                      <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
+                        onClick={() => console.log('Deleting:', card.Name)}
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
+                </td>
+              </tr>
             ))}
-        </tbody>
+          </tbody>
         </table>
-    </div>
+      </div>
     );
-};
-
+  };
 export default Table;

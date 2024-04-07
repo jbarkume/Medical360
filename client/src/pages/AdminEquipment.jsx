@@ -2,11 +2,8 @@ import React from 'react';
 import Banner from '../components/Banner';
 import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
-import AuthContext from '../auth/AuthContext';
-import Button from '../components/Button';
-import { Link } from 'react-router-dom';
 
-const AllEquipmentPage = () => {
+const AdminEquipment = () => {
   // Hardcoded data for the list of equipment
   const equipmentData = [
     {
@@ -46,10 +43,10 @@ const AllEquipmentPage = () => {
       </div>
       <SearchBar />
       <div className="p-8">
-        <Table cards={equipmentData} isAdmin={false} />
+        <Table cards={equipmentData} isAdmin={true} />
       </div>
     </>
   );
 };
 
-export default AllEquipmentPage;
+export default AdminEquipment;

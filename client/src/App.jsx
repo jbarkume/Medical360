@@ -26,10 +26,15 @@ import BugReport from "./pages/BugReportForm";
 import FeedbackForm from "./pages/FeedbackForm";
 import CancelAppointmentForm from "./pages/CancelAppointmentForm";
 import UnscheduledAppointments from "./pages/UnscheduledApptPage";
+<<<<<<< HEAD
 import AllEquipmentPage from "./pages/AllEquipmentPage";
 import EditPatientInfoPage from "./pages/EditPatientInfoPage";
 import EmergencyReassignment from "./pages/EmergencyAssignmentPage";
 import DepartmentRatioPage from "./pages/DepartmentRatioPage";
+=======
+import EditPatientInfoPage from "./pages/EditPatientInfoPage";
+import EmergencyReassignment from "./pages/EmergencyAssignmentPage";
+>>>>>>> a44d1ed678d68006d1bdb0b486708fbddf8b0327
 import PatientInfo from "./pages/PatientInfo";
 import DoctorInfo from "./pages/DoctorInfo";
 import DeleteEquipment from "./pages/DeleteEquipment";
@@ -37,6 +42,13 @@ import DeleteRoom from "./pages/DeleteRoom";
 import AllRoomsPage from "./pages/AllRoomsPage";
 import AllPatientPage from "./pages/AllPatientPage";
 import EditPatientPage from "./pages/EditPatientPage";
+import PatientList from "./pages/PatientList";
+import AllEquipmentPage from "./pages/AllEquipmentPage";
+import AllRoomsPage from "./pages/AllRoomsPage";
+import AdminEquipment from "./pages/AdminEquipment";
+import AdminRoom from "./pages/AdminRoom";
+import PatientNotification from "./pages/PatientNotification";
+import DepartmentRatioPage from "./pages/DepartmentRatioPage";
 
 function App() {
   return (
@@ -90,6 +102,14 @@ function App() {
           <Route path="/delete-room" element={<DeleteRoom />} />
           <Route path="/emergency" element={<EmergencyReassignment />} />
           <Route path="/departmentratio" element={<DepartmentRatioPage />} />
+          <Route path="/patient-list" element={<PatientList />} />
+          <Route path="/equipment-list" element={<AllEquipmentPage />} />
+          <Route path="/room-list" element={<AllRoomsPage />} />
+          <Route path="/admin-equipment" element={<AdminEquipment />} />\
+          <Route path="/admin-room" element={<AdminRoom />} />
+          <Route path="/admin-notification" element={<PatientNotification />} />
+          <Route path="/departmentratio" element={<DepartmentRatioPage />} />
+
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
