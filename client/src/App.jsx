@@ -26,13 +26,17 @@ import BugReport from "./pages/BugReportForm";
 import FeedbackForm from "./pages/FeedbackForm";
 import CancelAppointmentForm from "./pages/CancelAppointmentForm";
 import UnscheduledAppointments from "./pages/UnscheduledApptPage";
-import AllEquipmentPage from "./pages/AllEquipmentPage"
+import AllEquipmentPage from "./pages/AllEquipmentPage";
 import EditPatientInfoPage from "./pages/EditPatientInfoPage";
-import EmergencyReassignment from "./pages/EmergencyAssignmentPage";import DepartmentRatioPage from "./pages/DepartmentRatioPage";
+import EmergencyReassignment from "./pages/EmergencyAssignmentPage";
+import DepartmentRatioPage from "./pages/DepartmentRatioPage";
 import PatientInfo from "./pages/PatientInfo";
-import DoctorCard from "./pages/DoctorCard";
+import DoctorInfo from "./pages/DoctorInfo";
 import DeleteEquipment from "./pages/DeleteEquipment";
 import DeleteRoom from "./pages/DeleteRoom";
+import AllRoomsPage from "./pages/AllRoomsPage";
+import AllPatientPage from "./pages/AllPatientPage";
+import EditPatientPage from "./pages/EditPatientPage";
 
 function App() {
   return (
@@ -43,13 +47,17 @@ function App() {
           <Route path="/apppage" element={<AppPage />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/create-new-user" element={<NewUserForm />} />
+          <Route path="/new-user" element={<NewUserForm />} />
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/all-staff" element={<AllStaffPage />} />
+          <Route path="/all-equipments" element={<AllEquipmentPage />} />
+          <Route path="/all-rooms" element={<AllRoomsPage />} />
+          <Route path="/all-patients" element={<AllPatientPage />} />
           <Route path="/book-appointment" element={<AppointmentPage />} />
-          <Route path="/doctors" element={<AllDoctorsPage />} />
+          <Route path="/all-doctors" element={<AllDoctorsPage />} />
           <Route path="/editequipmentpage" element={<EditEquipmentPage />} />
           <Route path="/editroompage" element={<EditRoomPage />} />
+          <Route path="/edit-patient" element={<EditPatientPage />} />
           <Route path="/department-staff" element={<DepartmentStaffPage />} />
           <Route path="/departmentpage" element={<DepartmentPage />} />
           <Route path="/new-equipment" element={<NewEquipmentPage />} />
@@ -59,21 +67,29 @@ function App() {
           <Route path="/equipments" element={<EquipmentPage />} />
           <Route path="/room" element={<RoomPage />} />
           <Route path="/patientpage" element={<PatientPage />} />
-          <Route path="/resource-management" element={<ResourceManagementPage />} />
-          <Route path="/bugs" element={<BugReport/>}/>
-          <Route path="/feedback" element={<FeedbackForm/>}/>
-          <Route path="/cancel-appointment" element={<CancelAppointmentForm/>}/>
-          <Route path="/unscheduled" element={<UnscheduledAppointments/>}/>
-          <Route path="/resource-management" element={<ResourceManagementPage />} />
+          <Route
+            path="/resource-management"
+            element={<ResourceManagementPage />}
+          />
+          <Route path="/bugs" element={<BugReport />} />
+          <Route path="/feedback" element={<FeedbackForm />} />
+          <Route
+            path="/cancel-appointment"
+            element={<CancelAppointmentForm />}
+          />
+          <Route path="/unscheduled" element={<UnscheduledAppointments />} />
+          <Route
+            path="/resource-management"
+            element={<ResourceManagementPage />}
+          />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/edit-patient" element={<EditPatientInfoPage />} />
           <Route path="/patientinfo" element={<PatientInfo />} />
-          <Route path="/doctorcard" element={<DoctorCard />} />
+          <Route path="/doctorinfo" element={<DoctorInfo />} />
           <Route path="/delete-equipment" element={<DeleteEquipment />} />
           <Route path="/delete-room" element={<DeleteRoom />} />
           <Route path="/emergency" element={<EmergencyReassignment />} />
           <Route path="/departmentratio" element={<DepartmentRatioPage />} />
-
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>

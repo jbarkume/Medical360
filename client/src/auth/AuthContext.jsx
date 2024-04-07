@@ -7,14 +7,15 @@ const AuthContext = createContext();
 // This is where we can store the hard coded data for now
 export const users = [
     {
-        name: "Jamie Barkume",
-        username: "jbarkume",
-        email: "jamie@barkume.com",
-        password: "5658",
+        name: "Admin",
+        username: "admin",
+        email: "admin@example.com",
+        password: "admin123",
         department: "Cardiology",
         phone_number: "6319533283",
-        isAdmin: false,
-        isDoctor: true
+        isAdmin: true,
+        isDoctor: false,
+        isNurse: false,
     }
 ]
 export const doctorsData = [
@@ -49,6 +50,7 @@ function AuthContextProvider({ children }) {
         loggedIn: false,
         isAdmin: false,
         isDoctor: false,
+        isNurse: false,
         doctors: doctorsData,
         patients: patientsData,
     });
@@ -97,7 +99,8 @@ function AuthContextProvider({ children }) {
                     user,
                     loggedIn: true,
                     isAdmin: user.isAdmin,
-                    isDoctor: user.isDoctor
+                    isDoctor: user.isDoctor,
+                    isNurse: user.isNurse,
                 })
                 return true;
             }

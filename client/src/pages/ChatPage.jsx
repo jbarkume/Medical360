@@ -1,14 +1,22 @@
 import React from 'react';
+import Banner from '../components/Banner';
 
 const ChatPage = () => {
   return (
-    <div className="flex h-screen" style={{ backgroundColor: '#CAD6FF' }}>
-      <Sidebar />
-      <ChatArea />
+    <div>
+      {/* Include the Banner component */}
+      <Banner goBackPath={"/apppage"} />
+
+      {/* Sidebar and ChatArea components */}
+      <div className="flex h-screen" style={{ backgroundColor: '#CAD6FF' }}>
+        <Sidebar />
+        <ChatArea />
+      </div>
     </div>
   );
 };
 
+// Sidebar component remains unchanged
 const Sidebar = () => {
   // For demonstration purposes, static groups and people are used
   const groups = ['Cardiology', 'Nurses', 'Nurse Ashe, Dr. Bob'];
@@ -45,6 +53,7 @@ const Sidebar = () => {
   );
 };
 
+// ChatArea component remains unchanged
 const ChatArea = () => {
   return (
     <div className="w-3/4 flex flex-col">
@@ -65,4 +74,3 @@ const ChatArea = () => {
 };
 
 export default ChatPage;
-

@@ -7,7 +7,7 @@ import { useContext } from 'react';
 
 function NewUserForm() {
   //maybe some changes over here
-    const fields = ["Name", "Email", "Password", "Department", "Phone Number", "Admin", "Doctor"];
+    const fields = ["Name", "Email", "Password", "Department", "Phone Number", "Admin", "Doctor", "Nurse"];
     const [wrong, setWrong] = useState(false)
     const { auth } = useContext(AuthContext);
 
@@ -31,7 +31,8 @@ function NewUserForm() {
             department: formData["Department"], 
             phone_number: formData["Phone Number"],
             isAdmin: formData["Admin"].toLowerCase() === "true",
-            isDoctor: formData["Doctor"].toLowerCase() === "true"
+            isDoctor: formData["Doctor"].toLowerCase() === "true",
+            isNurse: formData["Nurse"].toLowerCase() === "true"
         }
         // create user
         auth.register(user);

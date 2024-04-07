@@ -1,11 +1,11 @@
 import React from 'react';
 import Banner from '../components/Banner';
-import Calendar from '../components/Calendar'
+import Calendar from '../components/Calendar';
 import WeekSelector from '../components/WeekSelector';
 import TimeSelector from '../components/TimeSelector';
 
 const SchedulingPage = () => {
-  const goBackPath = '/dashboard';
+  const goBackPath = '/apppage';
 
   return (
     <div>
@@ -23,6 +23,13 @@ const SchedulingPage = () => {
         <Calendar />
         <WeekSelector />
         <TimeSelector />
+
+
+        <div className="flex justify-center">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4">
+            Book Appointment
+          </button>
+        </div>
       </div>
     </div>
   );

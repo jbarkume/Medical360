@@ -1,56 +1,47 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
-import doctorImageone from "../components/doctor2.jpeg";
-import doctorImagetwo from "../components/doctor3.jpeg";
-import doctorImagethree from "../components/doctor1.avif";
-import AccountCircle from "../components/AccountCircle";
+import Banner from "../components/Banner";
+import { Link } from "react-router-dom";
 
 const AppPage = () => {
-  const gradient =
-    "linear-gradient(to right, #B3E3F8, #A5CDF6, #96B5F4, #849AF1, #6F79EE, #5552EB, #5552EB, #5552EB)";
   return (
-    /*banner component */
-    <div className="flex-grow">
-      <div
-        className="h-[239px] w-full flex items-center justify-center"
-        style={{ background: gradient }}
-      >
-        <h1 className="text-white text-4xl font-bold">
-          Stony Brook Medical360
-        </h1>
-        <AccountCircle></AccountCircle>
-      </div>
-      <div className="flex">
-        {/* Sidebar component */}
-        <Sidebar />
+    <div className="flex flex-col h-screen">
+      {/* Include the Banner component at the top */}
+      <Banner goBackPath="/" showGoBack={false} />
+
+      {/* Main container for sidebar, welcome message, and content */}
+      <div className="flex flex-grow">
+        {/* Sidebar should stretch to the height of the container */}
+        <div className="flex flex-col w-64 bg-[#409BEF] text-white mt-[-16px]">
+          <Sidebar />
+        </div>
 
         {/* Main content */}
-        <div className="w-3/4 p-10">
-          <div className="grid grid-cols-2 gap-4">
-            {/* First column */}
-            <div className="flex flex-col gap-4">
-              {/* First Image */}
-              <div className="rounded-full overflow-hidden border-4 border-white shadow-lg">
-                <img src={doctorImageone} alt="Doctor 1" />
-              </div>
-              {/* Second Image */}
-              <div className="rounded-full overflow-hidden border-4 border-white shadow-lg">
-                <img src={doctorImagetwo} alt="Doctor 2" />
-              </div>
-            </div>
-
-            {/* Second column */}
-            <div className="flex flex-col gap-4">
-              {/* Third Image */}
-              <div className="rounded-full overflow-hidden border-4 border-white shadow-lg">
-                <img
-                  src={doctorImagethree}
-                  alt="Doctor 3"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
+        <div className="flex-grow flex flex-col justify-center items-center p-5">
+          {/* Welcome message */}
+          <div className="text-3xl font-bold text-gray-800 mb-5">
+            Welcome to Stony Brook Medical360
           </div>
+
+          {/* Short message */}
+          <p className="text-lg text-center text-gray-600 mb-3">
+          Your one-stop solution for medical management.
+          </p>
+
+          {/* Buttons related to Medical360 with spacing */}
+          <div className="flex justify-between">
+            <Link to="/all-doctors" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4">
+             View All Doctors
+            </Link>
+            <Link to="/unscheduled" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4">
+             View Available Doctors
+            </Link>
+            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              Button 3
+            </button>
+          </div>
+
+          {/* Your content goes here */}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const StaffCard = ({ staff }) => {
   return (
@@ -26,9 +27,9 @@ const StaffCard = ({ staff }) => {
 
       {/* Info Button */}
       <div className="flex justify-center mt-4">
-        <button className="bg-[#2260FF] text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-800 text-sm"> {/* Adjusted padding and font size */}
+        <Link to="/doctorinfo"className="bg-[#2260FF] text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-800 text-sm"> {/* Adjusted padding and font size */}
           Info
-        </button>
+        </Link>
       </div>
     </div>
   );
