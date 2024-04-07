@@ -1,7 +1,5 @@
 import React, { useState, useContext } from 'react';
 import Banner from '../components/Banner';
-import React from 'react';
-import Banner from '../components/Banner';
 import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
 import AuthContext from '../auth/AuthContext';
