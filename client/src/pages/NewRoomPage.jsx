@@ -12,7 +12,13 @@ const NewRoomPage = () => {
         { name: 'Room Number', initialValue: '', editable: true  },
         { name: ' Room Type', initialValue: '', editable: true },
         { name: 'Equipment', initialValue: '', editable: true },
-        { name: 'Availability Status', initialValue: '', editable: true },
+        { 
+            name: 'Availabity Status', 
+            initialValue: '', 
+            editable: true, 
+            type: 'select', 
+            options: ['Occupied', 'Available'] 
+        },
         
     ];
 

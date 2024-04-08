@@ -13,7 +13,13 @@ const NewEquipmentPage = () => {
         { name: 'Type', initialValue: '', editable: true },
         { name: 'Quantity', initialValue: '', editable: true },
         { name: 'Location', initialValue: '', editable: true },
-        { name: 'Maintenance Status', initialValue: '', editable: true },
+        { 
+            name: 'Maintenance Status', 
+            initialValue: '', 
+            editable: true, 
+            type: 'select', 
+            options: ['Operational', 'Maintenance Required'] 
+        },
     ];
 
     // Function to handle form submission

@@ -44,19 +44,6 @@ const AllUsersPage = () => {
     },
     // Add more user data as necessary
   ];
-
-  // Expanded fields with additional attributes and "Role" as a dropdown
-  const userFields = [
-    { name: 'Name', initialValue: ''},
-    { name: 'Email', initialValue: ''},
-    { name: 'Department', initialValue: ''},
-    { name: 'Phone Number', initialValue: ''},
-    { 
-      name: 'Role', 
-      initialValue: '', 
-    },
-  ];
-
   return (
     <>
       <Banner goBackPath="/resource-management" />
@@ -72,7 +59,7 @@ const AllUsersPage = () => {
         )}
       </div>
       <div className="p-8">
-        <Table cards={userData} fields={userFields} isAdmin={auth.isAdmin} context={"user"} />
+        <Table cards={userData} isAdmin={auth.isAdmin} context={"user"} />
       </div>
     </>
   );

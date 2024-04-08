@@ -23,12 +23,14 @@ const EditEquipmentPage = () => {
       editable: true,
       showEditIcon: true,
     },
-    {
-      name: "Maintenance Status",
-      initialValue: "Good",
+    { 
+      name: 'Maintenance Status', 
+      initialValue: 'Occupied', 
       editable: true,
-      showEditIcon: true,
-    },
+      showEditIcon: true, 
+      type: 'select', 
+      options: ['Operational', 'Maintenance Required'] 
+  },
   ];
 
   // Function to handle form submission

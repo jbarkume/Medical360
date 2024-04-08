@@ -5,56 +5,44 @@ import SearchBar from '../components/SearchBar';
 import AuthContext from '../auth/AuthContext';
 import { Link } from 'react-router-dom';
 
-
-
 const AllRoomsPage = () => {
-  // Hardcoded data for the list of equipment
   const { auth } = useContext(AuthContext);
+
+  // Updated room data to match the specified fields
   const roomData = [
     {
-      Room: '101A',
-      Type: 'Single',
-      Status: 'Occupied',
-      Patient: 'John Doe',
-      'Next Availability': 'N/A',
-      'More Info': 'Info',
+      'Room Number': '101A',
+      'Room Type': 'Single',
+      'Equipment': 'Ventilator, Heart Monitor',
+      'Availability Status': 'Occupied',
     },
     {
-      Room: '101B',
-      Type: 'Single',
-      Status: 'Available',
-      Patient: 'None',
-      'Next Availability': 'Now',
-      'More Info': 'Info',
+      'Room Number': '101B',
+      'Room Type': 'Single',
+      'Equipment': 'Heart Monitor',
+      'Availability Status': 'Available',
     },
     {
-      Room: '102',
-      Type: 'Double',
-      Status: 'Occupied',
-      Patient: 'Jane Smith',
-      'Next Availability': 'N/A',
-      'More Info': 'Info',
+      'Room Number': '102',
+      'Room Type': 'Double',
+      'Equipment': 'Ventilator',
+      'Availability Status': 'Occupied',
     },
     {
-      Room: '103',
-      Type: 'ICU',
-      Status: 'Occupied',
-      Patient: 'Emma Jones',
-      'Next Availability': 'N/A',
-      'More Info': 'Info',
+      'Room Number': '103',
+      'Room Type': 'ICU',
+      'Equipment': 'Ventilator, ECMO Machine',
+      'Availability Status': 'Occupied',
     },
     {
-      Room: '104',
-      Type: 'Recovery',
-      Status: 'Available',
-      Patient: 'None',
-      'Next Availability': 'Now',
-      'More Info': 'Info',
+      'Room Number': '104',
+      'Room Type': 'Recovery',
+      'Equipment': 'None',
+      'Availability Status': 'Available',
     },
-    // Add more room items as needed
   ];
-  
 
+  
   return (
     <>
       <Banner goBackPath="/resource-management" />
@@ -66,8 +54,7 @@ const AllRoomsPage = () => {
       <div className="flex justify-between items-center mx-8 mb-4">
         <SearchBar />
         {auth.isAdmin && (
-          // Adjusted button size to be smaller
-          <Link  to={"/new-room"}className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl">
+          <Link to={"/new-room"} className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl">
             New Room
           </Link>
         )}

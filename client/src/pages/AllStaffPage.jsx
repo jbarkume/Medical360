@@ -64,14 +64,6 @@ const AllStaffPage = () => {
               {/* Replace with actual icons */}
               <span className="font-medium">★</span>
             </button>
-            {auth.isAdmin && (
-              <Link
-                to={"/new-user"}
-                className="bg-[#2260FF] text-white px-4 py-2 rounded-md font-medium"
-              >
-                New Staff
-              </Link>
-            )}
           </div>
         </div>
         {/* Staff Table */}

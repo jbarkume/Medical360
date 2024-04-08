@@ -22,12 +22,14 @@ const EditRoomPage = () => {
       editable: true,
       showEditIcon: true,
     },
-    {
-      name: "Availability Status",
-      initialValue: "Free",
+    { 
+      name: 'Availabity Status', 
+      initialValue: 'Available', 
       editable: true,
-      showEditIcon: true,
-    },
+      showEditIcon: true, 
+      type: 'select', 
+      options: ['Occupied', 'Available'] 
+  },
   ];
 
   // Function to handle form submission
