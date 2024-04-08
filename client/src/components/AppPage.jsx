@@ -1,8 +1,8 @@
 import React from "react";
 import Sidebar from "./Sidebar";
-import doctorImageone from "./doctor2.jpeg";
-import doctorImagetwo from "./doctor3.jpeg";
-import doctorImagethree from "./doctor1.avif";
+import doctorImageone from "../images/doctor2.jpeg";
+import doctorImagetwo from "../images/doctor3.jpeg";
+import doctorImagethree from "../images/doctor1.avif";
 const AppPage = () => {
   const gradient =
     "linear-gradient(to right, #B3E3F8, #A5CDF6, #96B5F4, #849AF1, #6F79EE, #5552EB, #5552EB, #5552EB)";

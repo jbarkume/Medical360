@@ -16,7 +16,6 @@ import AppPage from "./pages/AppPage";
 import NewEquipmentPage from "./pages/NewEquipmentPage";
 import NewRoomPage from "./pages/NewRoomPage";
 import NewPatientPage from "./pages/NewPatientPage";
-import DeleteUserPage from "./pages/DeleteUserPage";
 import ResourceManagementPage from "./pages/ResourceManagementPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import BugReport from "./pages/BugReportForm";
@@ -63,7 +62,6 @@ function App() {
           <Route path="/new-equipment" element={<NewEquipmentPage />} />
           <Route path="/new-room" element={<NewRoomPage />} />
           <Route path="/new-patient" element={<NewPatientPage />} />
-          <Route path="/deleteuser" element={<DeleteUserPage />} />
           <Route
             path="/resource-management"
             element={<ResourceManagementPage />}

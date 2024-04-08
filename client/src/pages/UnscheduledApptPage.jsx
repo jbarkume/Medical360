@@ -6,8 +6,7 @@ import {
 } from "@heroicons/react/solid";
 import Banner from "../components/Banner";
 import StaffCard from "../components/StaffCard";
-import DoctorInfo from "./DoctorInfo";
-import doctorImageone from "../components/doctor2.jpeg";
+import doctorImageone from "../images/doctor2.jpeg";
 import { useContext } from "react";
 import AuthContext from "../auth/AuthContext";
 const appointments = [

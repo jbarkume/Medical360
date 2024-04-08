@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
-import doctorImageone from "../components/doctor2.jpeg";
-import patientImage from "../components/PatientImage.png";
+import doctorImageone from "../images/doctor2.jpeg";
+import patientImage from "../images/PatientImage.png";
 
 const AuthContext = createContext();
 

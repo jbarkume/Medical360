@@ -1,6 +1,6 @@
 import React from "react";
 import StaffCard from "../components/StaffCard";
-import doctorImageone from "../components/doctor2.jpeg";
+import doctorImageone from "../images/doctor2.jpeg";
 import Banner from "../components/Banner";
 
 const departmentStaff = [
