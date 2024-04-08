@@ -1,4 +1,3 @@
-// HomePage.js
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -15,16 +14,16 @@ const HomePage = () => {
       </div>
       <div className="flex mt-4">
         <Link
-          to="/register"
-          className="mx-2 px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 transition-colors duration-200"
-        >
-          Register
-        </Link>
-        <Link
           to="/login"
           className="mx-2 px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 transition-colors duration-200"
         >
           Login
+        </Link>
+        <Link
+          to="/register"
+          className="mx-2 px-4 py-2 bg-green-500 text-white font-bold rounded hover:bg-green-700 transition-colors duration-200"
+        >
+          Register
         </Link>
       </div>
     </div>
