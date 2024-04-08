@@ -20,10 +20,10 @@ const Sidebar = () => {
             </Link>
           </li>
         )}
-         {auth.isAdmin && (
+        {auth.isAdmin && (
           <li>
             <Link to="/departmentratio" className="hover:underline">
-              Department Ratio 
+              Department Ratio
             </Link>
           </li>
         )}
@@ -40,9 +40,12 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/bugs" className="hover:underline">
-            Report Bug
-          </Link>
+          {auth.isDoctor ||
+            (auth.isNurse && (
+              <Link to="/bugs" className="hover:underline">
+                Report Bug
+              </Link>
+            ))}
         </li>
       </ul>
     </div>

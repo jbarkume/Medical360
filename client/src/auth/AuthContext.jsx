@@ -16,7 +16,6 @@ export const users = [
         isAdmin: true,
         isDoctor: false,
         isNurse: false,
-        isPatient: false,
     },
     {
         name: "anten",
@@ -28,7 +27,6 @@ export const users = [
         isAdmin: false,
         isDoctor: false,
         isNurse: false,
-        isPatient: false,
     }
 ]
 export const doctorsData = [
@@ -64,7 +62,6 @@ function AuthContextProvider({ children }) {
         isAdmin: false,
         isDoctor: false,
         isNurse: false,
-        isPatient: false,
         doctors: doctorsData,
         patients: patientsData,
     });
@@ -99,7 +96,6 @@ function AuthContextProvider({ children }) {
             isAdmin, 
             isDoctor,
             isNurse,
-            isPatient
         }
         users.push(new_user);
         console.log(users);
@@ -117,7 +113,6 @@ function AuthContextProvider({ children }) {
                     isAdmin: user.isAdmin,
                     isDoctor: user.isDoctor,
                     isNurse: user.isNurse,
-                    isPatient: user.isPatient,
                 })
                 return true;
             }
@@ -134,7 +129,6 @@ function AuthContextProvider({ children }) {
             isAdmin: false,
             isDoctor: false,
             isNurse: false,
-            isPatient: false
 
         })
     }

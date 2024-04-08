@@ -60,7 +60,7 @@ const UnscheduledAppointments = () => {
       </div> */}
       <Banner goBackPath={"/apppage"} />
 
-      {auth.isAdmin || auth.isDoctor && (
+      {auth.isAdmin  && (
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl text-gray-700 font-bold">
             Unscheduled Appointments
@@ -76,7 +76,7 @@ const UnscheduledAppointments = () => {
         </div>
       )}
 
-      {auth.isAdmin || auth.isDoctor && (
+      {auth.isAdmin && (
         <div className="grid grid-cols-3 gap-4 mb-8">
           {appointments.map((appointment) => (
             <div
