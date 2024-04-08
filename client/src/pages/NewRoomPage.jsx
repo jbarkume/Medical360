@@ -29,7 +29,7 @@ const NewRoomPage = () => {
 
     return (
         <>
-            <Banner goBackPath={"/"} />
+            <Banner goBackPath={"/all-rooms"} />
             <div className="flex justify-center">
                 <div className="text-blue-500 p-4 m-4 rounded-lg text-3xl">
                     New Room Form

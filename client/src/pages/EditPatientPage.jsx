@@ -22,9 +22,11 @@ const EditPatientPage = () => {
 
     return (
         <>
-            <Banner goBackPath={"/"} />
+            <Banner goBackPath={"/all-patients"} />
             <div className="flex justify-center">
+                <div className='mb-5'>
                 <h1 className="text-3xl font-bold text-blue-500">Edit Patient</h1>
+                </div>
             </div>
             <FormField
                 fields={fields}

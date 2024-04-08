@@ -57,7 +57,7 @@ const AllRoomsPage = () => {
 
   return (
     <>
-      <Banner goBackPath="/apppage" />
+      <Banner goBackPath="/resource-management" />
       <div className="flex justify-center my-4">
         <div className="text-blue-500 p-4 rounded-lg text-3xl">
           All Rooms
@@ -73,7 +73,7 @@ const AllRoomsPage = () => {
         )}
       </div>
       <div className="p-8">
-        <Table cards={roomData} isAdmin={auth.isAdmin} />
+        <Table cards={roomData} isAdmin={auth.isAdmin} context={"room"} />
       </div>
     </>
   );

@@ -36,9 +36,9 @@ const AppPage = () => {
             <Link to="/unscheduled" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4">
              View Available Doctors
             </Link>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Button 3
-            </button>
+            <Link to="/feedback" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4">
+              Give Feedback
+            </Link>
           </div>
 
           {/* Your content goes here */}

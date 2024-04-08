@@ -13,7 +13,7 @@ const DoctorInfo = (
   const doctor = auth.doctors[0];
   return (
     <>
-      <Banner goBackPath={"/apppage"} />
+      <Banner goBackPath={"/all-doctors"} />
       <div className="flex items-center justify-center min-h-screen bg-white">
         <div className="bg-[#CAD6FF] p-8 rounded-lg shadow-lg max-w-5xl w-full min-h-[600px]">
           {/* Row 1: Image and Details */}

@@ -29,7 +29,7 @@ const NewEquipmentPage = () => {
 
     return (
         <>
-            <Banner goBackPath={"/"} />
+            <Banner goBackPath={"/all-equipments"} />
             <div className="flex justify-center">
                 <div className="text-blue-500 p-4 m-4 rounded-lg text-3xl">
                     New Equipment Form

@@ -56,7 +56,7 @@ const AllEquipmentPage = () => {
         )}
       </div>
       <div className="p-8">
-        <Table cards={equipmentData} isAdmin={auth.isAdmin} />
+        <Table cards={equipmentData} isAdmin={auth.isAdmin} context={"equipment"} />
       </div>
     </>
   );

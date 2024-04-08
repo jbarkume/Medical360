@@ -1,14 +1,52 @@
-const Table = ({ cards, isAdmin }) => {
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Table = ({ cards, isAdmin, context }) => {
   let fields = cards && cards.length > 0 ? Object.keys(cards[0]) : [];
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
+  const navigate = useNavigate();
+
+  // Placeholder function for handling item deletion
+  const handleDelete = () => {
+    console.log(`Deleting ${context}:`, itemToDelete);
+    // Here you would typically call a function to delete the item,
+    // e.g., deleteItem(itemToDelete).then(() => setShowDeleteModal(false));
+    setShowDeleteModal(false); // Close modal after deletion
+  };
+
+  // Function to dynamically determine the edit route based on the context
+  const getEditRoute = (context) => {
+    const routeMap = {
+      'patient': '/edit-patient',
+      'room': '/edit-room',
+      'equipment': '/edit-equipment',
+      'user': '/edit-user'
+    };
+    return routeMap[context] || '/';
+  };
+
+  const openDeleteModal = (item) => {
+    setItemToDelete(item);
+    setShowDeleteModal(true);
+  };
+
+  // Handle the edit action
+  const handleEdit = (itemId) => {
+    const editRoute = getEditRoute(context);
+    navigate(`${editRoute}`);
+  };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto relative">
       <table className="min-w-full">
         <thead>
-          {/* Table headers */}
           <tr>
             {fields.map((field, index) => (
-              <th key={index} className="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                key={index}
+                className="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+              >
                 {field}
               </th>
             ))}
@@ -19,33 +57,39 @@ const Table = ({ cards, isAdmin }) => {
         </thead>
         <tbody>
           {cards.map((card, index) => (
-            <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#EDF2FB' : '#ABC4FF' }}>
+            <tr
+              key={index}
+              style={{
+                backgroundColor: index % 2 === 0 ? "#EDF2FB" : "#ABC4FF",
+              }}
+            >
               {fields.map((field, i) => (
-                <td key={i} className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                <td
+                  key={i}
+                  className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500"
+                >
                   {card[field]}
                 </td>
               ))}
               <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-right">
                 <div className="inline-flex rounded-md shadow-sm" role="group">
-                  {/* Info button for all users */}
-                  <button
+                  {/* <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded-l"
-                    onClick={() => console.log('Info for:', card.Room)}
+                    onClick={() => console.log("Info for:", card)}
                   >
                     Info
-                  </button>
-                  {/* Conditionally rendered Edit and Delete buttons for admins */}
+                  </button> */}
                   {isAdmin && (
                     <>
                       <button
                         className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3"
-                        onClick={() => console.log('Editing:', card.Room)}
+                        onClick={() => handleEdit()}
                       >
                         Edit
                       </button>
                       <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-r"
-                        onClick={() => console.log('Deleting:', card.Room)}
+                        onClick={() => openDeleteModal(card)}
                       >
                         Delete
                       </button>
@@ -57,7 +101,82 @@ const Table = ({ cards, isAdmin }) => {
           ))}
         </tbody>
       </table>
+
+      {/* Deletion Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div
+              className="fixed inset-0 transition-opacity"
+              aria-hidden="true"
+            >
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <span
+              className="hidden sm:inline-block sm:align-middle sm:h-screen"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                    {/* Warning Icon */}
+                    <svg
+                      className="h-6 w-6 text-red-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3
+                      className="text-lg leading-6 font-medium text-gray-900"
+                      id="modal-headline"
+                    >
+                      Confirm Deletion
+                    </h3>
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">
+                        Are you sure you want to delete this item? This action
+                        cannot be undone.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button
+                  type="button"
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={() => handleDelete()}
+                >
+                  Delete
+                </button>
+                <button
+                  type="button"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+                  onClick={() => setShowDeleteModal(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
 export default Table;
