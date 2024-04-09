@@ -40,12 +40,12 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          {auth.isDoctor ||
-            (auth.isNurse && (
+          {(auth.isDoctor ||
+            auth.isNurse) && (
               <Link to="/bugs" className="hover:underline">
                 Report Bug
               </Link>
-            ))}
+            )}
         </li>
       </ul>
     </div>
