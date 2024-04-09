@@ -37,14 +37,6 @@ const EditUserPage = () => {
       showEditIcon: true,
     },
     {
-      name: "Role",
-      initialValue: "Admin",
-      editable: true,
-      showEditIcon: true,
-      type: "select",
-      options: ["Admin", "Doctor", "Nurse", "Patient"],
-    },
-    {
       name: "Password",
       initialValue: "pwd123",
       editable: true,
@@ -55,6 +47,14 @@ const EditUserPage = () => {
       initialValue: "pwd123",
       editable: true,
       showEditIcon: true,
+    },
+    {
+      name: "Role",
+      initialValue: "Admin",
+      editable: true,
+      showEditIcon: true,
+      type: "select",
+      options: ["Admin", "Doctor", "Nurse", "Patient"],
     },
   ];
 
