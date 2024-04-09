@@ -1,9 +1,9 @@
 import React from "react";
 import StaffCard from "./StaffCard";
-import doctorImageone from '../components/doctor1.avif';
-import doctorImagetwo from '../components/doctor2.jpeg';
+import doctorImageone from '../images/doctor1.avif';
+import doctorImagetwo from '../images/doctor2.jpeg';
 
-const DepartmentHead = ({  }) => {
+const DepartmentHead = () => {
 
     const departmentHead = [
         {

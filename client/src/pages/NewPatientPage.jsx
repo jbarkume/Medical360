@@ -9,11 +9,14 @@ const NewPatientPage = () => {
 
     // Define the fields for the equipment form
     const fields = [
-        { name: 'First Name', initialValue: '', editable: true  },
-        { name: ' Last Name', initialValue: '', editable: true },
-        { name: 'Email', initialValue: '', editable: true },
-        { name: 'Phone Number', initialValue: '', editable: true },
-        { name: 'Health Insurance', initialValue: '', editable: true },
+         { name: 'Name', initialValue: '', editable: true },
+        { name: 'Age', initialValue: '', editable: true },
+        { name: 'Checked In Date', initialValue: '', editable: true},
+        { name: 'Room', initialValue: '', editable: true,  },
+        { name: 'Doctor', initialValue: '', editable: true,  },
+        { name: 'Department', initialValue: '', editable: true, },
+        { name: 'Reason of Visit', initialValue: '', editable: true,  },
+        { name: 'Status', initialValue: '', editable: true },
         
     ];
 
@@ -30,7 +33,7 @@ const NewPatientPage = () => {
 
     return (
         <>
-            <Banner goBackPath={"/"} />
+            <Banner goBackPath={"/all-patients"} />
             <div className="flex justify-center">
                 <div className="text-blue-500 p-4 m-4 rounded-lg text-3xl">
                     New Patient Form

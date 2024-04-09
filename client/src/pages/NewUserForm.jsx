@@ -1,61 +1,58 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Banner from '../components/Banner';
 import FormField from '../components/FormField';
-import AuthContext from '../auth/AuthContext';
-import { useContext } from 'react';
 
-function NewUserForm() {
-  //maybe some changes over here
-    const fields = ["Name", "Email", "Password", "Department", "Phone Number", "Admin", "Doctor", "Nurse"];
-    const [wrong, setWrong] = useState(false)
-    const { auth } = useContext(AuthContext);
+const NewUserForm = () => {
+    const [formError, setFormError] = useState(false);
 
+    const fields = [
+        { name: 'Name', initialValue: '', editable: true },
+        { name: 'Username', initialValue: '', editable: true },
+        { name: 'Email', initialValue: '', editable: true },
+        { name: 'Password', initialValue: '', editable: true },
+        { name: 'Confirm Password', initialValue: '', editable: true },
+        { name: 'Department', initialValue: '', editable: true },
+        { name: 'Phone Number', initialValue: '', editable: true },
+        { 
+            name: 'Role', 
+            initialValue: '', 
+            editable: true, 
+            type: 'select', 
+            options: ['Admin', 'Doctor', 'Nurse', 'Patient'] 
+        },
+    ];
+
+    // Function to handle form submission
     const handleSubmit = (formData) => {
-        console.log("Creating New User...");
-        let flag = false
-        fields.forEach(field => {
-            if (!formData[field]) {
-                flag = true
-                return;
-            }
-        })
-        setWrong(flag)
-        if (flag)
-            return
-        
-        let user = {
-            name: formData["Name"],
-            email: formData["Email"],
-            password: formData["Password"], 
-            department: formData["Department"], 
-            phone_number: formData["Phone Number"],
-            isAdmin: formData["Admin"].toLowerCase() === "true",
-            isDoctor: formData["Doctor"].toLowerCase() === "true",
-            isNurse: formData["Nurse"].toLowerCase() === "true"
+        console.log("Form Data Submitted:", formData);
+
+        // Check for empty fields to validate form input
+        const isEmptyFieldPresent = Object.values(formData).some(value => value.trim() === '');
+        setFormError(isEmptyFieldPresent);
+        if (isEmptyFieldPresent) {
+            return;
         }
-        // create user
-        auth.register(user);
-    }
+        
+    };
 
     return (
         <>
-            <Banner goBackPath={"/"}></Banner>
+            <Banner goBackPath={"/all-users"} />
             <div className="flex justify-center">
-                <div className="text-blue-500 p-4 m-4 rounded-lg text-3xl">
-                    New User Form
+            <div className='mb-5'>
+                <h1 className="text-3xl font-bold text-blue-500">New User</h1>
                 </div>
             </div>
-            <FormField fields={fields} submit={handleSubmit} buttonName={"Create New User"}></FormField>
-            {wrong && 
+            <FormField fields={fields} submit={handleSubmit} buttonName="Create User" />
+            {formError && (
                 <div className="flex justify-center items-center">
-                    <div className="m-2 h-screenbg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                        <strong className="font-bold">Please Enter All Fields</strong>
+                    <div className="m-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong className="font-bold">Please fill in all fields.</strong>
                     </div>
                 </div>
-            }
+            )}
         </>
-    )
-}
+    );
+};
 
-export default NewUserForm
+export default NewUserForm;

@@ -13,7 +13,13 @@ const NewEquipmentPage = () => {
         { name: 'Type', initialValue: '', editable: true },
         { name: 'Quantity', initialValue: '', editable: true },
         { name: 'Location', initialValue: '', editable: true },
-        { name: 'Maintenance Status', initialValue: '', editable: true },
+        { 
+            name: 'Maintenance Status', 
+            initialValue: '', 
+            editable: true, 
+            type: 'select', 
+            options: ['Operational', 'Maintenance Required'] 
+        },
     ];
 
     // Function to handle form submission
@@ -29,7 +35,7 @@ const NewEquipmentPage = () => {
 
     return (
         <>
-            <Banner goBackPath={"/"} />
+            <Banner goBackPath={"/all-equipments"} />
             <div className="flex justify-center">
                 <div className="text-blue-500 p-4 m-4 rounded-lg text-3xl">
                     New Equipment Form

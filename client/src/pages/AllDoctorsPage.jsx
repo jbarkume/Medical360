@@ -1,6 +1,6 @@
 import React from "react";
 import StaffCard from "../components/StaffCard";
-import doctorImageone from "../components/doctor2.jpeg";
+import doctorImageone from "../images/doctor2.jpeg";
 import Banner from "../components/Banner";
 
 const doctors = [
@@ -34,7 +34,7 @@ const doctors = [
 
 const AllDoctorsPage = () => {
 
-    const goBackPath = '/dashboard'; 
+    const goBackPath = '/apppage'; 
   
     return (
       <div>

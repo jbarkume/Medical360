@@ -19,6 +19,12 @@ const HomePage = () => {
         >
           Login
         </Link>
+        <Link
+          to="/register"
+          className="mx-2 px-4 py-2 bg-green-500 text-white font-bold rounded hover:bg-green-700 transition-colors duration-200"
+        >
+          Register
+        </Link>
       </div>
     </div>
   );

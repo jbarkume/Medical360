@@ -1,11 +1,11 @@
 import React from "react";
 import DepartmentList from "../components/DepartmentList";
-import emergency from "../components/emergencybutton.png";
-import pediatric from "../components/pediatric.jpeg";
-import obstetrics from "../components/obstetrics.png";
-import cardiology from "../components/cardiology.jpeg";
-import neurology from "../components/neurology.png";
-import psychiatry from "../components/Psychiatry.jpeg";
+import emergency from "../images/emergencybutton.png";
+import pediatric from "../images/pediatric.jpeg";
+import obstetrics from "../images/obstetrics.png";
+import cardiology from "../images/cardiology.jpeg";
+import neurology from "../images/neurology.png";
+import psychiatry from "../images/Psychiatry.jpeg";
 import DepartmentHead from "../components/DepartmentHead";
 import Banner from "../components/Banner";
 

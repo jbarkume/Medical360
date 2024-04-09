@@ -1,11 +1,14 @@
-import React from 'react';
+import {useContext} from 'react';
 import Banner from '../components/Banner';
 import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
 import Sidebar from '../components/Sidebar'; // Import the Sidebar component
 import { Link } from 'react-router-dom';
+import AuthContext from '../auth/AuthContext';
 
 const AllPatientPage = () => {
+    const { auth } = useContext(AuthContext);
+
     // Hardcoded data for the list of patients
     const patientData = [
         { name: 'John Doe', age: 45, checkedInDate: '2024-03-15', room: '101', doctor: 'Dr. Smith', department: 'Cardiology', reasonOfVisit: 'Chest pain', status: 'Admitted' },
@@ -19,22 +22,26 @@ const AllPatientPage = () => {
 
     return (
         <>
-            <div className="flex h-screen">
-                <div className="flex flex-col flex-grow">
-                    <Banner goBackPath="/" />
-                    <div className="flex justify-center">
-                        <div className="text-blue-500 p-4 m-4 rounded-lg text-3xl">
-                            All Patients
-                        </div>
-                    </div>
-                    <SearchBar />
-                    <div className="p-8">
-                        <Table cards={patientData} isAdmin={false} />
-                    </div>
-                </div>
+          <Banner goBackPath="/resource-management" />
+          <div className="flex justify-center my-4">
+            <div className="text-blue-500 p-4 rounded-lg text-3xl">
+              All Patients
             </div>
+          </div>
+          <div className="flex justify-between items-center mx-8 mb-4">
+            <SearchBar />
+            {auth.isAdmin && (
+              // Adjusted button size to be smaller
+              <Link  to={"/new-patient"}className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl">
+                New Patient
+              </Link>
+            )}
+          </div>
+          <div className="p-8">
+            <Table cards={patientData} isAdmin={auth.isAdmin} context={"patient"} />
+          </div>
         </>
-    );
+      );
 };
 
 export default AllPatientPage;
