@@ -2,6 +2,8 @@ const express = require("express")
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
+const path = require('path');
+
 
 // config .env files
 require('dotenv').config()
@@ -17,6 +19,13 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  });
+
 
 // set up routers
 const authRouter = require('./routes/auth-router')
@@ -24,7 +33,7 @@ app.use('/auth', authRouter)
 
 // connect the database
 mongoose
-    .connect(process.env.MONGO_CONNECTION)
+    .connect(process.env.MONGODB_URI)
     .catch(e => {
         console.error('Connection error', e.message)
     })
