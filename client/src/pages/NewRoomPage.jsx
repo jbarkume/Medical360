@@ -12,7 +12,13 @@ const NewRoomPage = () => {
         { name: 'Room Number', initialValue: '', editable: true  },
         { name: ' Room Type', initialValue: '', editable: true },
         { name: 'Equipment', initialValue: '', editable: true },
-        { name: 'Availability Status', initialValue: '', editable: true },
+        { 
+            name: 'Availabity Status', 
+            initialValue: '', 
+            editable: true, 
+            type: 'select', 
+            options: ['Occupied', 'Available'] 
+        },
         
     ];
 
@@ -29,7 +35,7 @@ const NewRoomPage = () => {
 
     return (
         <>
-            <Banner goBackPath={"/"} />
+            <Banner goBackPath={"/all-rooms"} />
             <div className="flex justify-center">
                 <div className="text-blue-500 p-4 m-4 rounded-lg text-3xl">
                     New Room Form

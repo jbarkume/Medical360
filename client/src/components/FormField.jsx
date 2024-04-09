@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from './TextField';
-
 
 const FormField = ({ fields, submit, buttonName }) => {
   const [formData, setFormData] = useState({});
 
-  // Handle input changes
+  // Initialize formData with initial values when component mounts
+  useEffect(() => {
+    const initialData = fields.reduce((acc, field) => {
+      acc[field.name] = field.initialValue || '';
+      return acc;
+    }, {});
+    setFormData(initialData);
+  }, [fields]);
+
   const handleInputChange = (name, value) => {
-    setFormData({ ...formData, [name]: value });
+    setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
   };
 
-  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Form data:', formData);
@@ -18,31 +24,30 @@ const FormField = ({ fields, submit, buttonName }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto">
+    <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
       {fields.map((field, index) => (
         <TextField
           key={index}
           name={field.name}
-          initialValue={field.initialValue} 
+          initialValue={formData[field.name]}
           editable={field.editable}
-          showEditIcon={field.showEditIcon} 
+          showEditIcon={field.showEditIcon}
+          type={field.type}
+          options={field.options} // Pass options for 'select' type fields
           onChange={handleInputChange}
         />
       ))}
       <div className="flex justify-center">
-        {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 m-4" onClick={handleSubmit}>
-          {buttonName}
-        </button> */}
         <button
-    className={`font-bold py-2 px-4 rounded mt-4 m-4 ${
-      buttonName.toLowerCase() === 'delete user' ? 'bg-red-500 hover:bg-red-700' : 'bg-blue-500 hover:bg-blue-700'
-    } text-white`}
-    onClick={handleSubmit}
-  >
-    {buttonName}
-  </button>
+          type="submit"
+          className={`font-bold py-2 px-4 rounded mt-4 ${
+            buttonName.toLowerCase() === 'delete user' ? 'bg-red-500 hover:bg-red-700' : 'bg-blue-500 hover:bg-blue-700'
+          } text-white`}
+        >
+          {buttonName}
+        </button>
       </div>
-    </div>
+    </form>
   );
 };
 
