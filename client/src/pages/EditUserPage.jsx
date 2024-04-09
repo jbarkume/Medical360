@@ -25,18 +25,6 @@ const EditUserPage = () => {
       showEditIcon: true,
     },
     {
-      name: "Department",
-      initialValue: "Dermato-Genetics",
-      editable: true,
-      showEditIcon: true,
-    },
-    {
-      name: "Phone Number",
-      initialValue: "111-234-5678",
-      editable: true,
-      showEditIcon: true,
-    },
-    {
       name: "Password",
       initialValue: "pwd123",
       editable: true,
@@ -48,6 +36,19 @@ const EditUserPage = () => {
       editable: true,
       showEditIcon: true,
     },
+    {
+      name: "Department",
+      initialValue: "Dermato-Genetics",
+      editable: true,
+      showEditIcon: true,
+    },
+    {
+      name: "Phone Number",
+      initialValue: "111-234-5678",
+      editable: true,
+      showEditIcon: true,
+    },
+
     {
       name: "Role",
       initialValue: "Admin",
