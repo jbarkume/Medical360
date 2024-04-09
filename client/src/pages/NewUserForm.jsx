@@ -7,8 +7,10 @@ const NewUserForm = () => {
 
     const fields = [
         { name: 'Name', initialValue: '', editable: true },
+        { name: 'Username', initialValue: '', editable: true },
         { name: 'Email', initialValue: '', editable: true },
         { name: 'Password', initialValue: '', editable: true },
+        { name: 'Confirm Password', initialValue: '', editable: true },
         { name: 'Department', initialValue: '', editable: true },
         { name: 'Phone Number', initialValue: '', editable: true },
         { 
