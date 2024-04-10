@@ -34,6 +34,7 @@ import EditPatientPage from "./pages/EditPatientPage";
 import PatientNotification from "./pages/PatientNotification";
 import AllUsersPage from "./pages/AllUsersPage";
 import EditUserPage from "./pages/EditUserPage";
+import UserApprovalPage from "./pages/UserApprovalsPage";
 
 function App() {
   return (
@@ -77,8 +78,12 @@ function App() {
             path="/resource-management"
             element={<ResourceManagementPage />}
           />
+          <Route path="/user-approvals" element={<UserApprovalPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/edit-patient-user-info" element={<EditPatientInfoPage />} />
+          <Route
+            path="/edit-patient-user-info"
+            element={<EditPatientInfoPage />}
+          />
           <Route path="/patient-info" element={<PatientInfo />} />
           <Route path="/doctorinfo" element={<DoctorInfo />} />
           <Route path="/emergency" element={<EmergencyReassignment />} />
