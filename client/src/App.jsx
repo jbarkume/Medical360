@@ -2,7 +2,6 @@ import RegistrationForm from "./pages/RegistrationForm";
 import LoginForm from "./pages/LoginForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./auth/AuthContext";
-import NewUserForm from "./pages/NewUserForm";
 import ChatPage from "./pages/ChatPage";
 import HomePage from "./pages/HomePage";
 import EditEquipmentPage from "./pages/EditEquipmentPage";
@@ -45,7 +44,6 @@ function App() {
           <Route path="/apppage" element={<AppPage />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/new-user" element={<NewUserForm />} />
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/all-staff" element={<AllStaffPage />} />
           <Route path="/all-equipments" element={<AllEquipmentPage />} />
