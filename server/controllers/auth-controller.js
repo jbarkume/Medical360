@@ -1,37 +1,43 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const auth = require("../auth-manager")
+const auth = require("../auth-manager");
+const Department = require("../models/Department");
+const Doctor = require("../models/Doctor");
 require("dotenv").config()
 
-/**
- * Sends a response with the user if they are logged in to the site.
- * Otherwise sends a null user
- */
+// is user logged in currently
 async function loggedIn(req, res) {
     // method : GET
     // route : /auth/loggedIn
     try {
         // find user in database using JWT
-        let userId = auth.verifyUser(req)
-
+        let userId = auth.userVerify(req)
 
         // if user DNE or token expired return null user
         if (!userId) 
             return res.status(200).json({
                 loggedIn: false,
-                user: null
+                user: null,
+                department: null,
+                isDoctor: false,
+                isAdmin: false
             })
 
-        // Else find user and return it
+        // else find user and return it
         const user = await User.findById(userId);
+        let departmentId = null;
+        if (user.department) 
+            departmentId = await Department.findById(user.department)
 
         return res.status(200).json({
             loggedIn: true,
-            user: user
+            user: user,
+            department: departmentId.departmentName,
+            isDoctor: user.doctor !== null,
+            isAdmin: user.isAdmin
         })
 
     } catch (err) {
-        // internal server error
         res.status(500).json({
             message: err.message
         })
@@ -60,23 +66,22 @@ async function login(req, res) {
         let id = user._id
 
         // check password matches
-        const pwTrue = await bcrypt.compare(password, user.passwordHash);
-        if (!pwTrue) 
+        const passwordCorrect = await bcrypt.compare(password, user.passwordHash);
+        if (!passwordCorrect) 
             return res.status(401).json({
                 message: "Wrong email or password provided."
             });
 
         // login the user by signing a token and sending it in a cookie
         // then send status of 200 with user info
-        let token = auth.signToken(id);
+        let token = auth.tokenSign(id);
 
         res.cookie("token", token, {
             httpOnly: true,
             secure: true,
             sameSite: true
         }).status(200).json({
-            user: user,
-            token: token
+            user: user
         })
     } catch (err) {
         res.status(500).json({
@@ -86,7 +91,7 @@ async function login(req, res) {
 }
 
 function logout(req, res) {
-    // method : POST
+    // method : GET
     // route : /auth/logout
     
     // send cookie with token = "" and expires as soon as it gets there

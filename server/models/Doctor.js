@@ -6,7 +6,7 @@ const doctorSchema = new Schema({
   departmentName: {
     type: Schema.Types.ObjectId,
     ref: 'Department',
-    required: true
+    default: null
   },
   surgeryCount: {
     type: Number,
