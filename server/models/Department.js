@@ -15,7 +15,7 @@ const departmentSchema = new Schema({
     headModel: {
         type: String,
         required: true,
-        enum: ['Cardiology', 'Spinal'] // Add other possible models here if needed
+        enum: ['Cardiology', 'Spinal'] // Add other possible departments here if needed
     },
 
     doctorList: [{
