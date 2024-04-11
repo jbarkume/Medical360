@@ -13,19 +13,19 @@ const app = express()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: [`http://localhost:5173`],
     credentials: true
 }))
 app.use(express.json())
 app.use(cookieParser())
 
-// This is temporary, will get removed after backend is properly setup
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// // This is temporary, will get removed after backend is properly setup
+// app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// This is temporary, will get removed after backend is properly setup
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'../client/dist/index.html'));
-  });
+// // This is temporary, will get removed after backend is properly setup
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname+'../client/dist/index.html'));
+//   });
 
 
 // set up routers
@@ -40,7 +40,7 @@ mongoose
     })
 
 const db = mongoose.connection
-db.once("connection", () => {
+db.once("connected", () => {
     console.log("Connected To Database")
 })
 db.on('error', () => console.error('MongoDB connection error:'))
