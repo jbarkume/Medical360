@@ -14,6 +14,7 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({
     origin: [`https://medical360-d65d823d7d75.herokuapp.com/`],
+    // origin: [`http://localhost:5173`],
     credentials: true
 }))
 app.use(express.json())
@@ -22,7 +23,7 @@ app.use(cookieParser())
 // // This is temporary, will get removed after backend is properly setup
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// // This is temporary, will get removed after backend is properly setup
+// // // This is temporary, will get removed after backend is properly setup
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname+'../client/dist/index.html'));
   });
@@ -30,7 +31,9 @@ app.get('*', (req, res) => {
 
 // set up routers
 const authRouter = require('./routes/auth-router')
+const userRouter = require('./routes/user-router')
 app.use('/auth', authRouter)
+app.use('/users', userRouter)
 
 // connect the database
 mongoose
