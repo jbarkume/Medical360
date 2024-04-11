@@ -20,12 +20,12 @@ app.use(express.json())
 app.use(cookieParser())
 
 // // This is temporary, will get removed after backend is properly setup
-// app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // // This is temporary, will get removed after backend is properly setup
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname+'../client/dist/index.html'));
-//   });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'../client/dist/index.html'));
+  });
 
 
 // set up routers
