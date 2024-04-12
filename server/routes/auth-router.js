@@ -15,4 +15,8 @@ router.get('/logout', AuthController.logout)
 //  New user registration requests
 router.post('/register', AuthController.register)
 
+// Handles password reset requests
+router.post('/reset-password', AuthController.resetPassword);
+
+
 module.exports = router

@@ -2,7 +2,8 @@
     "scripts": {
         "build": "cd client && npm install && npm run build",
         "start": "cd server && npm install && node seed.js && npm start",
-        "heroku-postbuild": "cd client && npm install && npm run build"
+        "heroku-postbuild": "cd client && npm install && npm run build",        
+        "test": "jest"
     },
     "engines": {
         "node": "21.x",
@@ -11,11 +12,13 @@
     "dependencies": {
         "@vitejs/plugin-react": "^4.2.1",
         "autoprefixer": "^10.4.17",
-        "jest": "^29.7.0",
         "js-cookie": "^3.0.5",
         "postcss": "^8.4.33",
-        "supertest": "^6.3.4",
         "tailwindcss": "^3.4.1",
         "vite": "^5.2.6"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^6.3.4"
     }
 }

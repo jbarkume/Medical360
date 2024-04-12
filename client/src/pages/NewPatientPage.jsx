@@ -3,20 +3,24 @@ import Banner from '../components/Banner';
 import FormField from '../components/FormField';
 import AuthContext from '../auth/AuthContext';
 import { useContext } from 'react';
+import axios from 'axios';
 
 const NewPatientPage = () => {
     const [formError, setFormError] = useState(false);
 
     // Define the fields for the equipment form
     const fields = [
-         { name: 'Name', initialValue: '', editable: true },
-        { name: 'Age', initialValue: '', editable: true },
-        { name: 'Checked In Date', initialValue: '', editable: true},
-        { name: 'Room', initialValue: '', editable: true,  },
-        { name: 'Doctor', initialValue: '', editable: true,  },
-        { name: 'Department', initialValue: '', editable: true, },
-        { name: 'Reason of Visit', initialValue: '', editable: true,  },
-        { name: 'Status', initialValue: '', editable: true },
+        { name: 'patientName', initialValue: '', editable: true },
+        { name: 'email', initialValue: '', editable: true },
+        { name: 'phoneNumber', initialValue: '', editable: true },
+        { name: 'healthInsurance', initialValue: '', editable: true },
+        
+        { name: 'sex', initialValue: '', editable: true, options: ['male', 'female', 'other'] }, 
+        { name: 'age', initialValue: '', editable: true },
+        
+        // { name: 'department', initialValue: '', editable: true }, 
+        { name: 'patientStatus', initialValue: '', editable: true, options: ['admitted', 'discharged', 'under observation'] }, 
+        { name: 'roomNo', initialValue: '', editable: true },
         
     ];
 
@@ -25,6 +29,15 @@ const NewPatientPage = () => {
         // such as sending the new equipment data to a server
         console.log('New Patient Data:', formData);
         
+        axios.post('http://localhost:3000/patients', formData)
+        .then(response => {
+            console.log('Patient created:', response.data);
+            
+        })
+        .catch(error => {
+            console.error('There was an error creating the patient:', error);
+            setFormError(true); // Show error message on UI
+        });
         // Example of setting error state if form submission fails
         // setFormError(true);
         

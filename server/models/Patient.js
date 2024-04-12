@@ -7,9 +7,9 @@ const patientSchema = new Schema({
     email: { type: String, required: true },
     phoneNumber: { type: String, required: true },
     healthInsurance: { type: String, required: true },
-    visitNo: { type: Number, required: true },
+    visitNo: { type: Number },
     sex: { type: String, required: true, enum: ['male', 'female', 'other'] },
-    age: { type: Number, required: true },
+    age: { type: String, required: true },
     medicalHistory: [{
                 date: Date,
                 reasonForVisit: String,
@@ -20,10 +20,10 @@ const patientSchema = new Schema({
     department: {
                 type: Schema.Types.ObjectId,
                 ref: 'Department',
-                required: true
+                
         },
     patientStatus: { type: String, required: true, enum: ['admitted', 'discharged', 'under observation'] },
-    roomNo: Number,
+    roomNo: {type: String}
 })
 
 const Patient = mongoose.model('Patient', patientSchema);
