@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Banner from "../components/Banner";
 import Table from "../components/Table";
-import SearchBar from "../components/SearchBar"; // Optional, based on your UI design
+import SearchBar from "../components/SearchBar";
 import { Link } from "react-router-dom";
 import AuthContext from "../auth/AuthContext";
 
@@ -59,15 +59,7 @@ const AllUsersPage = () => {
         <h1 className="text-3xl font-bold text-blue-500">All Users</h1>
       </div>
       <div className="flex justify-between items-center mx-8 mb-4">
-        <SearchBar /> {/* Optional */}
-        {auth.isAdmin && (
-          <Link
-            to={"/new-user"}
-            className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl"
-          >
-            New User
-          </Link>
-        )}
+        <SearchBar /> 
       </div>
       <div className="p-8">
         <Table cards={userData} isAdmin={auth.isAdmin} context={"user"} />

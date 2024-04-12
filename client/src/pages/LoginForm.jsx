@@ -12,8 +12,9 @@ const LoginForm = () => {
   useEffect(() => {
     if (auth.loggedIn) {
       navigate("/apppage");
+      setWrong(false);
     }
-  }, [auth.loggedIn, navigate]);
+  }, [auth]);
 
   const fields = [
     { name: 'Email', initialValue: '', editable: true },
@@ -23,12 +24,10 @@ const LoginForm = () => {
   const handleLogin = (formData) => {
     let email = formData.Email;
     let password = formData.Password;
-    if (auth.login(email, password)) {
-      setWrong(false);
-      navigate("/apppage"); // Navigate to the home page or dashboard after login
-    } else {
-      setWrong(true);
-    }
+    auth.login(email, password).then(() => {
+      if (!auth.loggedIn)
+        setWrong(true);
+    });
   };
 
   return (
