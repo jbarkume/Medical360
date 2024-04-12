@@ -4,11 +4,13 @@ import Banner from "../components/Banner";
 import { Link } from "react-router-dom";
 import AuthContext from "../auth/AuthContext";
 import { useContext } from "react";
+import GlobalContext from "../store/GlobalContext";
 
 const AppPage = () => {
   const { auth } = useContext(AuthContext);
+  const { store } = useContext(GlobalContext);
 
-  console.log(auth)
+  console.log(store)
 
   return (
     <div className="flex flex-col h-screen">

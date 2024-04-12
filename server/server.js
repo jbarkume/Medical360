@@ -3,10 +3,6 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
 const path = require('path');
-const patientRouter = require('./routes/patient-router');
-
-
-
 
 // config .env files
 require('dotenv').config()
@@ -17,29 +13,32 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({
 
-    origin: [`https://medical360-d65d823d7d75.herokuapp.com/`],
-    // origin: [`http://localhost:5173`],
+    // origin: [`https://medical360-d65d823d7d75.herokuapp.com/`],
+    origin: [`http://localhost:5173`],
     credentials: true
 }))
 app.use(express.json())
 app.use(cookieParser())
 
 // // This is temporary, will get removed after backend is properly setup
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
-
-app.use('/patients', patientRouter);
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'../client/dist/index.html'));
-  });
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname+'../client/dist/index.html'));
+//   });
 
 
 // set up routers
 const authRouter = require('./routes/auth-router')
 const userRouter = require('./routes/user-router')
+const patientRouter = require('./routes/patient-router');
+const departmentRouter = require('./routes/department-router');
+
+app.use('/patients', patientRouter);
 app.use('/auth', authRouter)
 app.use('/users', userRouter)
+app.use('/departments', departmentRouter);
 
 // connect the database
 mongoose

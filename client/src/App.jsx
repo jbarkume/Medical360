@@ -34,61 +34,64 @@ import PatientNotification from "./pages/PatientNotification";
 import AllUsersPage from "./pages/AllUsersPage";
 import EditUserPage from "./pages/EditUserPage";
 import UserApprovalPage from "./pages/UserApprovalsPage";
+import { GlobalContextProvider } from "./store/GlobalContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <AuthContextProvider>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/apppage" element={<AppPage />} />
-          <Route path="/register" element={<RegistrationForm />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/chat" element={<ChatPage />} />
-          <Route path="/all-staff" element={<AllStaffPage />} />
-          <Route path="/all-equipments" element={<AllEquipmentPage />} />
-          <Route path="/all-rooms" element={<AllRoomsPage />} />
-          <Route path="/all-patients" element={<AllPatientPage />} />
-          <Route path="/all-users" element={<AllUsersPage />} />
-          <Route path="/book-appointment" element={<AppointmentPage />} />
-          <Route path="/all-doctors" element={<AllDoctorsPage />} />
-          <Route path="/edit-equipment/" element={<EditEquipmentPage />} />
-          <Route path="/edit-room/" element={<EditRoomPage />} />
-          <Route path="/edit-patient" element={<EditPatientPage />} />
-          <Route path="/edit-user" element={<EditUserPage />} />
-          <Route path="/department-staff" element={<DepartmentStaffPage />} />
-          <Route path="/departmentpage" element={<DepartmentPage />} />
-          <Route path="/new-equipment" element={<NewEquipmentPage />} />
-          <Route path="/new-room" element={<NewRoomPage />} />
-          <Route path="/new-patient" element={<NewPatientPage />} />
-          <Route
-            path="/resource-management"
-            element={<ResourceManagementPage />}
-          />
-          <Route path="/bugs" element={<BugReport />} />
-          <Route path="/feedback" element={<FeedbackForm />} />
-          <Route
-            path="/cancel-appointment"
-            element={<CancelAppointmentForm />}
-          />
-          <Route path="/unscheduled" element={<UnscheduledAppointments />} />
-          <Route
-            path="/resource-management"
-            element={<ResourceManagementPage />}
-          />
-          <Route path="/user-approvals" element={<UserApprovalPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route
-            path="/edit-patient-user-info"
-            element={<EditPatientInfoPage />}
-          />
-          <Route path="/patient-info" element={<PatientInfo />} />
-          <Route path="/doctorinfo" element={<DoctorInfo />} />
-          <Route path="/emergency" element={<EmergencyReassignment />} />
-          <Route path="/departmentratio" element={<DepartmentRatioPage />} />
-          <Route path="/admin-notification" element={<PatientNotification />} />
-        </Routes>
-      </AuthContextProvider>
+      <GlobalContextProvider>
+        <AuthContextProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/apppage" element={<AppPage />} />
+            <Route path="/register" element={<RegistrationForm />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/chat" element={<ChatPage />} />
+            <Route path="/all-staff" element={<AllStaffPage />} />
+            <Route path="/all-equipments" element={<AllEquipmentPage />} />
+            <Route path="/all-rooms" element={<AllRoomsPage />} />
+            <Route path="/all-patients" element={<AllPatientPage />} />
+            <Route path="/all-users" element={<AllUsersPage />} />
+            <Route path="/book-appointment" element={<AppointmentPage />} />
+            <Route path="/all-doctors" element={<AllDoctorsPage />} />
+            <Route path="/edit-equipment/" element={<EditEquipmentPage />} />
+            <Route path="/edit-room/" element={<EditRoomPage />} />
+            <Route path="/edit-patient" element={<EditPatientPage />} />
+            <Route path="/edit-user" element={<EditUserPage />} />
+            <Route path="/department-staff" element={<DepartmentStaffPage />} />
+            <Route path="/departmentpage" element={<DepartmentPage />} />
+            <Route path="/new-equipment" element={<NewEquipmentPage />} />
+            <Route path="/new-room" element={<NewRoomPage />} />
+            <Route path="/new-patient" element={<NewPatientPage />} />
+            <Route
+              path="/resource-management"
+              element={<ResourceManagementPage />}
+            />
+            <Route path="/bugs" element={<BugReport />} />
+            <Route path="/feedback" element={<FeedbackForm />} />
+            <Route
+              path="/cancel-appointment"
+              element={<CancelAppointmentForm />}
+            />
+            <Route path="/unscheduled" element={<UnscheduledAppointments />} />
+            <Route
+              path="/resource-management"
+              element={<ResourceManagementPage />}
+            />
+            <Route path="/user-approvals" element={<UserApprovalPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route
+              path="/edit-patient-user-info"
+              element={<EditPatientInfoPage />}
+            />
+            <Route path="/patient-info" element={<PatientInfo />} />
+            <Route path="/doctorinfo" element={<DoctorInfo />} />
+            <Route path="/emergency" element={<EmergencyReassignment />} />
+            <Route path="/departmentratio" element={<DepartmentRatioPage />} />
+            <Route path="/admin-notification" element={<PatientNotification />} />
+          </Routes>
+        </AuthContextProvider>
+      </GlobalContextProvider>
     </BrowserRouter>
   );
 }

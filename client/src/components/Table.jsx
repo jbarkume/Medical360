@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../store/GlobalContext";
 
 const Table = ({ cards, isAdmin, context }) => {
-  let fields = cards && cards.length > 0 ? Object.keys(cards[0]) : [];
+
+  let newCards = cards;
+  const { store } = useContext(GlobalContext);
+  if (context === "patient") {
+    newCards = cards.map(patient => {
+      return {
+        "name": patient.patientName,
+        "email": patient.email,
+        "sex": patient.sex,
+        "age": patient.age,
+        "status": patient.patientStatus,
+        "room": patient.roomNo,
+        "department": store.id_to_department[patient.department],
+      }
+    });
+  }
+
+  let fields = newCards && newCards.length > 0 ? Object.keys(newCards[0]) : [];
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
   const navigate = useNavigate();
@@ -33,8 +51,10 @@ const Table = ({ cards, isAdmin, context }) => {
 
   // Handle the edit action
   const handleEdit = (itemId) => {
+    if (context === "patient")
+      store.getPatient(itemId); // marks this patient as the current patient to edit
     const editRoute = getEditRoute(context);
-    navigate(`${editRoute}`);
+    navigate(`${editRoute}`)
   };
 
   return (
@@ -68,7 +88,7 @@ const Table = ({ cards, isAdmin, context }) => {
                   key={i}
                   className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500"
                 >
-                  {card[field]}
+                  {newCards[index][field]}
                 </td>
               ))}
               <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-right">
@@ -83,7 +103,7 @@ const Table = ({ cards, isAdmin, context }) => {
                     <>
                       <button
                         className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3"
-                        onClick={() => handleEdit()}
+                        onClick={() => handleEdit(card._id)}
                       >
                         Edit
                       </button>
