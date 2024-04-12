@@ -10,6 +10,7 @@ import GlobalContext from '../store/GlobalContext';
 const AllPatientPage = () => {
     const { auth } = useContext(AuthContext);
     const { store } = useContext(GlobalContext);
+    const [patients, setPatients] = useState({});
 
     // // Hardcoded data for the list of patients
     // const patientData = [
@@ -23,7 +24,8 @@ const AllPatientPage = () => {
     // ];
 
     useEffect(() => {
-      store.getAllPatients()
+      store.getAllDepartments();
+      store.getAllPatients();
     }, []);
     return (
         <>
@@ -43,7 +45,7 @@ const AllPatientPage = () => {
             )}
           </div>
           <div className="p-8">
-            {store.patients && <Table cards={store.patients} isAdmin={auth.isAdmin} context={"patient"} />}
+            {store && <Table cards={store.patients} isAdmin={auth.isAdmin} context={"patient"} />}
           </div>
         </>
       );
