@@ -34,6 +34,8 @@ import PatientNotification from "./pages/PatientNotification";
 import AllUsersPage from "./pages/AllUsersPage";
 import EditUserPage from "./pages/EditUserPage";
 import UserApprovalPage from "./pages/UserApprovalsPage";
+import DepartmentForm from "./pages/DepartmentForm";
+
 
 function App() {
   return (
@@ -87,6 +89,7 @@ function App() {
           <Route path="/emergency" element={<EmergencyReassignment />} />
           <Route path="/departmentratio" element={<DepartmentRatioPage />} />
           <Route path="/admin-notification" element={<PatientNotification />} />
+          <Route path="/department-form" element={< DepartmentForm/>} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
