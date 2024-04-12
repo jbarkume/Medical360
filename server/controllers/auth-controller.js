@@ -155,11 +155,37 @@ async function register(req, res) {
     })
 }
 
+async function resetPassword(req, res) {
+  const { email, newPassword } = req.body;
+
+  if (!email || !newPassword) {
+      return res.status(400).json({ message: "Please provide all required fields." });
+  }
+
+  try {
+      const user = await User.findOne({ email });
+      if (!user) {
+          
+          return res.status(200).json({ message: "If an account with that email exists, the password has been reset." });
+      }
+
+      const saltRounds = 10;
+      user.passwordHash = await bcrypt.hash(newPassword, saltRounds);
+      await user.save();
+
+      res.status(200).json({ message: "Password has been successfully reset." });
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+}
+
+
 const AuthController =  {
     loggedIn,
     login,
     register,
-    logout
+    logout,
+    resetPassword
 }
 
 module.exports = AuthController
