@@ -46,7 +46,7 @@ function AuthContextProvider({ children }) {
 
   useEffect(() => {
     // get whether use is logged in or not
-    auth.getLoggedIn(auth.token);
+    auth.getLoggedIn(localStorage.getItem("token"));
   }, []);
 
   auth.getLoggedIn = async function (token) {
@@ -100,10 +100,8 @@ function AuthContextProvider({ children }) {
     try{
       const response = await api.login(email, password);
       if (response.status === 200) {
-        setAuth({
-          token: response.data.token
-        })
-        auth.getLoggedIn();
+        localStorage.setItem("token", response.data.token)
+        auth.getLoggedIn(response.data.token);
       }
     } catch(error){
       console.log(error);
