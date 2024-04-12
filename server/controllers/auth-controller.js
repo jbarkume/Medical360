@@ -11,8 +11,7 @@ async function loggedIn(req, res) {
     // route : /auth/loggedIn
     try {
         // find user in database using JWT
-        // let userId = auth.userVerify(req)
-        let userId = req.body.id;
+        let userId = auth.userVerify(req)
 
         // if user DNE or token expired return null user
         if (!userId) 

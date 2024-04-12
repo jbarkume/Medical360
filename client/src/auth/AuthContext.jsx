@@ -49,10 +49,10 @@ function AuthContextProvider({ children }) {
       auth.getLoggedIn(auth.user._id);
   }, []);
 
-  auth.getLoggedIn = async function (id) {
+  auth.getLoggedIn = async function () {
     // get whether user is logged in or not
     try {
-      const response = await api.loggedIn(id);
+      const response = await api.loggedIn();
       if (response.status === 200) {
         setAuth({
           ...auth,
