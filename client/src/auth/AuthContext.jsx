@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import doctorImageone from "../images/doctor2.jpeg";
 import patientImage from "../images/PatientImage.png";
+import api from "./auth-api"
 
 const AuthContext = createContext();
 
@@ -62,26 +63,34 @@ function AuthContextProvider({ children }) {
     isAdmin: false,
     isDoctor: false,
     isNurse: false,
+    department: null,
     doctors: doctorsData,
     patients: patientsData,
   });
 
   useEffect(() => {
     // get whether use is logged in or not
+    auth.getLoggedIn();
   }, []);
 
-  auth.getLoggedIn = function () {
+  auth.getLoggedIn = async function () {
     // get whether user is logged in or not
-    // if (response.status === 200) {
-    //     setAuth({
-    //         user: response.data.user,
-    //         loggedIn: response.data.loggedIn,
-    //         isAdmin: false,
-    //         isDoctor: response.data.user.department.toLowerCase() === "doctor"
-    //     })
-    //     return true;
-    // }
-    // return false
+    try {
+      const response = await api.loggedIn();
+      if (response.status === 200) {
+        setAuth({
+          ...auth,
+          user: response.data.user,
+          loggedIn: response.data.loggedIn,
+          isAdmin: response.data.isAdmin,
+          isDoctor: response.data.isDoctor,
+          department: response.data.department
+        });
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+
   };
 
   // register a user, upon success return true, otherwise return false
@@ -111,33 +120,32 @@ function AuthContextProvider({ children }) {
   };
 
   // login the user with email and passwrod. Upon success, set user to logged in. upon false, print why and return false
-  auth.login = function (email, password) {
-    for (let i = 0; i < users.length; i++) {
-      let user = users[i];
-      if (user.email === email && user.password === password) {
-        setAuth({
-          user,
-          loggedIn: true,
-          isAdmin: user.isAdmin,
-          isDoctor: user.isDoctor,
-          isNurse: user.isNurse,
-        });
-        return true;
+  auth.login = async function (email, password) {
+    try{
+      const response = await api.login(email, password);
+      if (response.status === 200) {
+        auth.getLoggedIn();
       }
+    } catch(error){
+      console.log(error);
     }
-    console.log("User not found");
-    return false;
   };
 
   // logout the user
-  auth.logout = function () {
-    setAuth({
-      user: null,
-      loggedIn: false,
-      isAdmin: false,
-      isDoctor: false,
-      isNurse: false,
-    });
+  auth.logout = async function () {
+    const response = await api.logout();
+    if (response.status === 200) {
+      console.log("logged out");
+      setAuth({
+        ...auth,
+        user: null,
+        loggedIn: false,
+        isAdmin: false,
+        isDoctor: false,
+        isNurse: false,
+        department: null
+      });
+    }
   };
 
   return (

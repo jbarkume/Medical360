@@ -8,6 +8,8 @@ import { useContext } from "react";
 const AppPage = () => {
   const { auth } = useContext(AuthContext);
 
+  console.log(auth)
+
   return (
     <div className="flex flex-col h-screen">
       {/* Include the Banner component at the top */}

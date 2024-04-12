@@ -7,11 +7,6 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  username: {
-    type: String,
-    required: true,
-    unique: true
-  },
   email: {
     type: String,
     required: true,
@@ -22,10 +17,22 @@ const userSchema = new Schema({
     required: true
   },
   department: {
-    type: String
+    type: Schema.Types.ObjectId,
+    ref: "Department",
+    default: null
   },
   phone_number: {
     type: String
+  },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
+  doctor: {
+    type: Schema.Types.ObjectId,
+    ref: "Doctor",
+    default: null,
   }
 });
 

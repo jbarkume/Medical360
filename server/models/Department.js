@@ -7,10 +7,16 @@ const departmentSchema = new Schema({
         type: String,
         required: true
      },
-    head: {
+     head: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Doctor',
-        required: true },
+        refPath: 'headModel',
+        required: true,
+    },
+    headModel: {
+        type: String,
+        required: true,
+        enum: ['Cardiology', 'Spinal'] // Add other possible departments here if needed
+    },
 
     doctorList: [{
         type: mongoose.Schema.Types.ObjectId,
