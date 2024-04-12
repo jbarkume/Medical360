@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import storeApi from "./store-api";
+import userApi from "../auth/user-api"
 
 const GlobalContext = createContext();
 
@@ -119,6 +120,21 @@ function GlobalContextProvider({ children }) {
         const response = await storeApi.deletePatient(id);
         if (response.status === 200) {
               console.log("deleted Patient")
+              setStore({
+                ...store,
+                currentPatient: null,
+              })
+          }
+      } catch(err){
+          console.log(err.message);
+      }
+  }
+
+  store.deleteUser = async function(id) {
+    try{
+        const response = await userApi.deleteUser(id);
+        if (response.status === 200) {
+              console.log("deleted user")
               setStore({
                 ...store,
                 currentPatient: null,

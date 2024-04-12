@@ -73,25 +73,45 @@ async function getPatient(req, res) {
     }
   }
   
-  // Function to get all patients
-  async function getAllPatients(req, res) {
-      try {
+// Function to get all patients
+async function getAllPatients(req, res) {
+    try {
         const patients = await Patient.find();
-        res.status(200).json({
-            patients
+            res.status(200).json({
+                patients
         });
-      } catch (error) {
+    } catch (error) {
         res.status(500).json({
             message: error.message
         });
-      }
     }
+}
+
+// Function to delete a Patient by their ID
+async function deletePatient(req, res) {
+    try {
+      const patient = await Patient.findByIdAndDelete(req.params.id);
+      if (!patient) {
+        return res.status(404).json({
+          message: "patient not found",
+        });
+      }
+      res.status(200).json({
+        message: "Deleted patient",
+      });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+
 
 const PatientController = {
     createPatient,
     updatePatient,
     getAllPatients,
-    getPatient
+    getPatient,
+    deletePatient
 }
 
 module.exports = PatientController

@@ -36,4 +36,6 @@ router.get('/:id', (req, res) => {
         .catch(error => res.status(500).json({ error: 'Error fetching patient: ' + error }));
 });
 
+router.delete("/:id", PatientController.deletePatient);
+
 module.exports = router;

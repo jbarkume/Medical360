@@ -10,7 +10,7 @@ const Patient = require("./models/Patient");
 require("dotenv").config();
 
 
-mongoose.connect("mongodb+srv://medical360:admin123@medical360.wh0h2hw.mongodb.net/test", {
+mongoose.connect("mongodb://localhost/medical360", {
   useUnifiedTopology: true,
 });
 
@@ -20,7 +20,7 @@ db.once("open", async () => {
   console.log("Connected to MongoDB");
 
   try {
-    const departments = ["Cardiology", "Spinal"];
+    const departments = ["Cardiology", "Spinal", "Plastic", "Oncology"];
     // Create admin user
     const adminUser = new User({
       name: "Admin",

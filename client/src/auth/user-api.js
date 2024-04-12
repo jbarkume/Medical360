@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/auth";
+const BASE_URL = "http://localhost:3000";
 // const BASE_URL = "http://localhost:3000/auth"
 
 const api = axios.create({
@@ -10,9 +10,13 @@ const api = axios.create({
 
 // Function to register a new user
 export const register = (userData) => {
-    return api.post('/register', userData);
+    return api.post('/auth/register', userData);
 };
 
+// Function to delete user
+export const deleteUser = id => api.delete(`/users/${id}`);
+
 export default {
-    register
+    register,
+    deleteUser
 }

@@ -18,6 +18,14 @@ const Table = ({ cards, isAdmin, context }) => {
         "department": store.id_to_department[patient.department],
       }
     });
+  } else if (context === "user") {
+    newCards = cards.map(user => {
+      return {
+        "name": user.name,
+        "email": user.email,
+        "department": store.id_to_department[user.department],
+      }
+    });
   }
 
   let fields = newCards && newCards.length > 0 ? Object.keys(newCards[0]) : [];
@@ -30,10 +38,11 @@ const Table = ({ cards, isAdmin, context }) => {
     console.log(`Deleting ${context}:`, itemToDelete);
     // Here you would typically call a function to delete the item,
     // e.g., deleteItem(itemToDelete).then(() => setShowDeleteModal(false));
-    if (context === "patient") {
+    if (context === "patient")
       store.deletePatient(itemToDelete._id);
-      setShowDeleteModal(false); // Close modal after deletion
-    }
+    else if (context === "user")
+      store.deleteUser(itemToDelete._id);
+    setShowDeleteModal(false); // Close modal after deletion
   };
 
   // Function to dynamically determine the edit route based on the context

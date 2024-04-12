@@ -3,9 +3,11 @@ import Banner from "../components/Banner";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
 import AuthContext from "../auth/AuthContext";
+import GlobalContext from "../store/GlobalContext";
 
 const AllUsersPage = () => {
   const { auth } = useContext(AuthContext);
+  const { store } = useContext(GlobalContext);
   const [userData, setUserData] = useState([]); // State to hold the user data
 
   useEffect(() => {
@@ -21,7 +23,8 @@ const AllUsersPage = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
-        const data = await response.json(); // This should be the array directly
+        const data = (await response.json()).users; // This should be the array directly
+        console.log(data);
         if (!Array.isArray(data)) {
           // Check if the data is an array
           console.error("Expected an array of users, received:", data);
@@ -33,7 +36,7 @@ const AllUsersPage = () => {
         setUserData([]); // Ensure userData is reset to an empty array on error
       }
     };
-
+    store.getAllDepartments();
     fetchUsers();
   }, [auth.token]); // Re-fetch when auth.token changes
 

@@ -26,18 +26,20 @@ async function getUser(req, res) {
 async function getAllUsers(req, res) {
   try {
     const users = await User.find()
-      .select("-passwordHash -_id -__v -isAdmin -doctor") // Exclude specified fields
-      .populate("department", "departmentName -_id"); // Populate departmentName
+    //   .select("-passwordHash -_id -__v -isAdmin -doctor") // Exclude specified fields
+    //   .populate("department", "departmentName -_id"); // Populate departmentName
 
-    // Transform users to use just the departmentName
-    const transformedUsers = users.map((user) => ({
-      name: user.name,
-      email: user.email,
-      department: user.department ? user.department.departmentName : "No Department Assigned",
-      phone_number: user.phone_number,
-    }));
+    // // Transform users to use just the departmentName
+    // const transformedUsers = users.map((user) => ({
+    //   name: user.name,
+    //   email: user.email,
+    //   department: user.department ? user.department.departmentName : "No Department Assigned",
+    //   phone_number: user.phone_number,
+    // }));
 
-    res.status(200).json(transformedUsers);
+    res.status(200).json({
+      users
+    });
   } catch (error) {
     console.error("Server Error:", error);
     res.status(500).json({ message: error.message });

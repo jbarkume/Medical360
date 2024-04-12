@@ -52,7 +52,7 @@ app.use('/departments', departmentRouter);
 // Connect to the database
 mongoose
   .connect(
-    "mongodb+srv://medical360:admin123@medical360.wh0h2hw.mongodb.net/test",
+    "mongodb://localhost/medical360",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
