@@ -20,7 +20,7 @@ const NewPatientPage = () => {
     const [formError, setFormError] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/departments/alldepartments')
+        axios.get('https://medical360-d65d823d7d75.herokuapp.com/departments/alldepartments')
             .then(response => {
                 setDepartments(response.data);
             })
@@ -46,7 +46,7 @@ const NewPatientPage = () => {
             return;
         }
     
-        axios.post('http://localhost:3000/patients', formData)
+        axios.post('https://medical360-d65d823d7d75.herokuapp.com/patients', formData)
             .then(response => {
                 console.log('Patient created:', response.data);
                 navigate("/all-patients");

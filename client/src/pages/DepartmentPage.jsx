@@ -22,14 +22,14 @@ const DepartmentPage = () => {
   }, []);
 
   const fetchDepartments = async () => {
-    const response = await fetch('http://localhost:3000/departments/alldepartments');
+    const response = await fetch('https://medical360-d65d823d7d75.herokuapp.com/departments/alldepartments');
     const data = await response.json();
     setDepartments(data);
   };
 
   const deleteDepartment = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/departments/${id}`, {
+      const response = await fetch(`https://medical360-d65d823d7d75.herokuapp.com/departments/${id}`, {
             method: 'DELETE',
       });
       if (!response.ok) {

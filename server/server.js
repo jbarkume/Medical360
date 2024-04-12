@@ -17,7 +17,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["http://localhost:5173"], // Ensure the client's address is correctly listed
+    origin: ["https://medical360-d65d823d7d75.herokuapp.com/"], // Ensure the client's address is correctly listed
     credentials: true, // For sending cookies over CORS
   })
 );
@@ -28,13 +28,13 @@ app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
 
 // Serve static files (Make sure this is before your catch-all route if you are using React Router)
-// app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 
 // // Catch-all handler for SPA (Make sure the path is correctly formatted)
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "../client/dist/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/dist/index.html"));
+});
 
 
 // set up routers
@@ -52,7 +52,7 @@ app.use('/departments', departmentRouter);
 // Connect to the database
 mongoose
   .connect(
-    "mongodb://localhost/medical360",
+    "mongodb+srv://medical360:admin123@medical360.wh0h2hw.mongodb.net/medical360",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

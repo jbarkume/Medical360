@@ -1,7 +1,7 @@
 
 describe('Department Creation', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/login');
+    cy.visit('https://medical360-d65d823d7d75.herokuapp.com/login');
     cy.get('#Email').type('admin@example.com');
     cy.get('#Password').type('admin123');
     cy.get('button').contains('Login').click();
@@ -28,7 +28,7 @@ describe('Department Creation', () => {
 
     cy.get('button').contains('Create New Department').click();
     
-    cy.visit('http://localhost:5173/departmentpage');
+    cy.visit('https://medical360-d65d823d7d75.herokuapp.com/departmentpage');
     cy.contains('Orthology').should('be.visible');
     cy.contains('Orthology').parent().find('img').should('have.attr', 'src').should('include', 'uploads');
     // Assume 'Orthology' is the department name you want to delete
