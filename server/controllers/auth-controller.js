@@ -173,7 +173,7 @@ async function resetPassword(req, res) {
         const user = await User.findOne({ email });
         if (!user) {
             
-            return res.status(200).json({ message: "If an account with that email exists, a password reset link has been sent." });
+            return res.status(200).json({ message: "If an account with that email exists, the password has been reset." });
         }
 
         const saltRounds = 10;
