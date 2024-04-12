@@ -1,26 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const Patient = require('../models/Patient');
+const PatientController = require('../controllers/patient-controller');
 
 // POST route to create a new patient
-router.post('/', (req, res) => {
-    const newPatient = new Patient({
-        patientName: req.body.patientName,
-        email: req.body.email,
-        phoneNumber: req.body.phoneNumber,
-        healthInsurance: req.body.healthInsurance,
-        
-        sex: req.body.sex,
-        age: req.body.age,
-       
-        department: req.body.department, 
-        patientStatus: req.body.patientStatus,
-        roomNo: req.body.roomNo,
-    });
+router.post('/', PatientController.createPatient);
 
-    newPatient.save()
-        .then(patient => res.status(201).json(patient))
-        .catch(error => res.status(400).json({ error: 'Error saving patient: ' + error }));
-});
+// PUT to update patient data by id
+router.put('/:id', PatientController.updatePatient);
+
+// GET route to get all patients
+router.get("/", PatientController.getAllPatients);
+
+// GET route to get single patient by id
+router.get("/:id", PatientController.getPatient);
 
 module.exports = router;

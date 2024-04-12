@@ -2,6 +2,7 @@ import React from 'react';
 import FormField from '../components/FormField';
 import Banner from '../components/Banner';
 import FileUpload from '../components/UploadFile';
+import { useLocation } from 'react-router-dom';
 
 const EditPatientInfoPage = () => {
     const fields = [

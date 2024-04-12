@@ -1,25 +1,30 @@
-import {useContext} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import Banner from '../components/Banner';
 import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
 import Sidebar from '../components/Sidebar'; // Import the Sidebar component
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../auth/AuthContext';
+import GlobalContext from '../store/GlobalContext';
 
 const AllPatientPage = () => {
     const { auth } = useContext(AuthContext);
+    const { store } = useContext(GlobalContext);
 
-    // Hardcoded data for the list of patients
-    const patientData = [
-        { name: 'John Doe', age: 45, checkedInDate: '2024-03-15', room: '101', doctor: 'Dr. Smith', department: 'Cardiology', reasonOfVisit: 'Chest pain', status: 'Admitted' },
-        { name: 'Jane Smith', age: 32, checkedInDate: '2024-03-18', room: '102', doctor: 'Dr. Johnson', department: 'Orthopedics', reasonOfVisit: 'Fractured leg', status: 'Discharged' },
-        { name: 'Michael Johnson', age: 55, checkedInDate: '2024-03-20', room: '103', doctor: 'Dr. Brown', department: 'Neurology', reasonOfVisit: 'Headache', status: 'Admitted' },
-        { name: 'Emily Davis', age: 28, checkedInDate: '2024-03-22', room: '104', doctor: 'Dr. White', department: 'Pulmonology', reasonOfVisit: 'Difficulty breathing', status: 'Admitted' },
-        { name: 'David Wilson', age: 68, checkedInDate: '2024-03-25', room: '105', doctor: 'Dr. Lee', department: 'Oncology', reasonOfVisit: 'Cancer treatment', status: 'Discharged' },
-        { name: 'Sarah Adams', age: 40, checkedInDate: '2024-03-28', room: '106', doctor: 'Dr. Martinez', department: 'Pediatrics', reasonOfVisit: 'Fever', status: 'Admitted' },
-        // Add more patient data as necessary
-    ];
+    // // Hardcoded data for the list of patients
+    // const patientData = [
+    //     { name: 'John Doe', age: 45, checkedInDate: '2024-03-15', room: '101', doctor: 'Dr. Smith', department: 'Cardiology', reasonOfVisit: 'Chest pain', status: 'Admitted' },
+    //     { name: 'Jane Smith', age: 32, checkedInDate: '2024-03-18', room: '102', doctor: 'Dr. Johnson', department: 'Orthopedics', reasonOfVisit: 'Fractured leg', status: 'Discharged' },
+    //     { name: 'Michael Johnson', age: 55, checkedInDate: '2024-03-20', room: '103', doctor: 'Dr. Brown', department: 'Neurology', reasonOfVisit: 'Headache', status: 'Admitted' },
+    //     { name: 'Emily Davis', age: 28, checkedInDate: '2024-03-22', room: '104', doctor: 'Dr. White', department: 'Pulmonology', reasonOfVisit: 'Difficulty breathing', status: 'Admitted' },
+    //     { name: 'David Wilson', age: 68, checkedInDate: '2024-03-25', room: '105', doctor: 'Dr. Lee', department: 'Oncology', reasonOfVisit: 'Cancer treatment', status: 'Discharged' },
+    //     { name: 'Sarah Adams', age: 40, checkedInDate: '2024-03-28', room: '106', doctor: 'Dr. Martinez', department: 'Pediatrics', reasonOfVisit: 'Fever', status: 'Admitted' },
+    //     // Add more patient data as necessary
+    // ];
 
+    useEffect(() => {
+      store.getAllPatients()
+    }, []);
     return (
         <>
           <Banner goBackPath="/resource-management" />
@@ -38,7 +43,7 @@ const AllPatientPage = () => {
             )}
           </div>
           <div className="p-8">
-            <Table cards={patientData} isAdmin={auth.isAdmin} context={"patient"} />
+            {store.patients && <Table cards={store.patients} isAdmin={auth.isAdmin} context={"patient"} />}
           </div>
         </>
       );
