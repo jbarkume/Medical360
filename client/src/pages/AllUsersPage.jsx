@@ -1,57 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
-import { Link } from "react-router-dom";
 import AuthContext from "../auth/AuthContext";
 
 const AllUsersPage = () => {
   const { auth } = useContext(AuthContext);
+  const [userData, setUserData] = useState([]); // State to hold the user data
 
-  // Expanded user data with additional fields
-  const userData = [
-    {
-      name: "John Doe",
-      username: "johndoe",
-      email: "john.doe@stonybrook.edu",
-      department: "Dermato-Genetics",
-      phone: "111-234-5678",
-      role: "Admin",
-      password: "medical123",
-      confirmPassword: "medical123",
-    },
-    {
-      name: "Jane Smith",
-      username: "janesmith",
-      email: "jane.smith@stonybrook.edu",
-      department: "Molecular Biology",
-      phone: "222-345-6789",
-      role: "Doctor",
-      password: "pwd123",
-      confirmPassword: "pwd123",
-    },
-    {
-      name: "Michael Johnson",
-      username: "michaeljohnson",
-      email: "michael.johnson@stonybrook.edu",
-      department: "Computational Biology",
-      phone: "333-456-7890",
-      role: "Nurse",
-      password: "test123",
-      confirmPassword: "test123",
-    },
-    {
-      name: "Emily Davis",
-      username: "emilydavis",
-      email: "emily.davis@stonybrook.edu",
-      department: "Neurogenetics",
-      phone: "444-567-8901",
-      role: "Patient",
-      password: "abc123",
-      confirmPassword: "abc123",
-    },
-    // Add more user data as necessary
-  ];
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/users", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`, // Use actual auth token here
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await response.json(); // This should be the array directly
+        if (!Array.isArray(data)) {
+          // Check if the data is an array
+          console.error("Expected an array of users, received:", data);
+          throw new Error("Data format error: Expected an array of users");
+        }
+        setUserData(data); // Set fetched user data to state, ensuring you're setting the array
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        setUserData([]); // Ensure userData is reset to an empty array on error
+      }
+    };
+
+    fetchUsers();
+  }, [auth.token]); // Re-fetch when auth.token changes
+
   return (
     <>
       <Banner goBackPath="/resource-management" />
@@ -59,10 +44,14 @@ const AllUsersPage = () => {
         <h1 className="text-3xl font-bold text-blue-500">All Users</h1>
       </div>
       <div className="flex justify-between items-center mx-8 mb-4">
-        <SearchBar /> 
+        <SearchBar />
       </div>
       <div className="p-8">
-        <Table cards={userData} isAdmin={auth.isAdmin} context={"user"} />
+        {Array.isArray(userData) ? (
+          <Table cards={userData} isAdmin={auth.isAdmin} context="user" />
+        ) : (
+          <p>No user data available.</p>
+        )}
       </div>
     </>
   );
