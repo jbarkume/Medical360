@@ -1,8 +1,10 @@
+
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const Department = require('../models/Department');
 const path = require('path');
+const DepartmentController = require("../controllers/department-controller")
 
 
 
@@ -51,5 +53,14 @@ router.delete('/:id', (req, res) => {
         .catch(error => res.status(400).json({ error: 'Error deleting department: ' + error }));
 });
 
+// get all departments
+router.get('/', DepartmentController.getAllDepartments)
+
+// update department by id
+router.put('/:id', DepartmentController.updateDepartment)
+
+// get department by id
+router.get('/:id', DepartmentController.getDepartment)
 
 module.exports = router;
+

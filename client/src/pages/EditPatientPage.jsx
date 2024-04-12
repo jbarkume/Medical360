@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FormField from '../components/FormField';
 import Banner from '../components/Banner';
+import GlobalContext from '../store/GlobalContext';
+import { useNavigate } from 'react-router-dom';
 
 const EditPatientPage = () => {
-    const fields = [
-        { name: 'Name', initialValue: '', editable: true, showEditIcon: true },
-        { name: 'Age', initialValue: '', editable: true, showEditIcon: true },
-        { name: 'Checked In Date', initialValue: '', editable: true, showEditIcon: true },
-        { name: 'Room', initialValue: '', editable: true, showEditIcon: true },
-        { name: 'Doctor', initialValue: '', editable: true, showEditIcon: true },
-        { name: 'Department', initialValue: '', editable: true, showEditIcon: true },
-        { name: 'Reason of Visit', initialValue: '', editable: true, showEditIcon: true },
-        { name: 'Status', initialValue: '', editable: true, showEditIcon: true }
-    ];
+
+    const { store } = useContext(GlobalContext);
+    const navigate = useNavigate();
+
+
+    const fieldsToAvoid = ["_id", "medicalHistory", "__v"];
 
     // Function to handle form submission
     const handleSubmit = (formData) => {
         // Such as updating the patient data or sending it to a server
-        console.log('Updated Patient Data:', formData);
+        formData["department"] = store.department_to_id[formData["department"]]
+        store.updatePatient(store.currentPatient._id, formData).then(() => {
+            navigate("/all-patients");
+        });
     };
 
     return (
@@ -28,11 +29,28 @@ const EditPatientPage = () => {
                 <h1 className="text-3xl font-bold text-blue-500">Edit Patient</h1>
                 </div>
             </div>
-            <FormField
-                fields={fields}
+            {store.currentPatient && <FormField
+                fields={Object.keys(store.currentPatient)
+                    .filter(key => {
+                        if (!fieldsToAvoid.includes(key))
+                            return true;
+                    })
+                    .map(key => {
+                        let obj = {
+                            name: key,
+                            initialValue: store.currentPatient[key],
+                            editable: true,
+                            showEditIcon: true
+                        };
+                        if (key == "department") {
+                            obj["options"] = ["Cardiology", "Spinal"];
+                            obj["type"] = "select";
+                        }
+                        return obj
+                })}
                 submit={handleSubmit}
                 buttonName="Save"
-            />
+            />}
         </>
     );
 };
