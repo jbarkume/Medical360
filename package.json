@@ -1,7 +1,7 @@
 {
     "scripts": {
         "build": "cd client && npm install && npm run build",
-        "start": "cd server && npm install && node seed.js && npm start",
+        "start": "cd server && npm install && npm start",
         "heroku-postbuild": "cd client && npm install && npm run build",        
         "test": "jest"
     },
