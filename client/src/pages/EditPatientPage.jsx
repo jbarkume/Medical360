@@ -43,8 +43,9 @@ const EditPatientPage = () => {
                             showEditIcon: true
                         };
                         if (key == "department") {
-                            obj["options"] = ["Cardiology", "Spinal"];
+                            obj["options"] = Object.keys(store.department_to_id);
                             obj["type"] = "select";
+                            obj["initialValue"] = store.id_to_department[obj["initialValue"]]
                         }
                         return obj
                 })}

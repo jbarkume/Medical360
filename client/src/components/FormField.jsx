@@ -74,6 +74,7 @@ const FormField = ({ fields, submit, buttonName }) => {
                     showEditIcon={field.showEditIcon}
                     type={field.type} // Add this line
                     onChange={handleInputChange}
+                    options={field.options}
                 />
             ))}
             <div className="flex justify-center">

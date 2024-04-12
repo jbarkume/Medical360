@@ -114,6 +114,21 @@ function GlobalContextProvider({ children }) {
     }
   };
 
+  store.deletePatient = async function(id) {
+    try{
+        const response = await storeApi.deletePatient(id);
+        if (response.status === 200) {
+              console.log("deleted Patient")
+              setStore({
+                ...store,
+                currentPatient: null,
+              })
+          }
+      } catch(err){
+          console.log(err.message);
+      }
+  }
+
   return (
     <GlobalContext.Provider
       value={{

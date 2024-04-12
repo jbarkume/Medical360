@@ -18,6 +18,8 @@ export const updatePatient = (id, newData) => api.put(`/patients/${id}`, newData
 
 export const createPatient = patientData => api.post("/patients/", patientData);
 
+export const deletePatient = id => api.delete( `/patients/${id}`);
+
 export const getAllDepartments = () => api.get("/departments/");
 
 export const getDepartment = id => api.get(`/departments/${id}`);
@@ -31,5 +33,6 @@ export default {
     createPatient,
     getAllDepartments,
     getDepartment,
-    updateDepartment
+    updateDepartment,
+    deletePatient
 }

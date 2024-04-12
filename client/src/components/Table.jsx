@@ -30,7 +30,10 @@ const Table = ({ cards, isAdmin, context }) => {
     console.log(`Deleting ${context}:`, itemToDelete);
     // Here you would typically call a function to delete the item,
     // e.g., deleteItem(itemToDelete).then(() => setShowDeleteModal(false));
-    setShowDeleteModal(false); // Close modal after deletion
+    if (context === "patient") {
+      store.deletePatient(itemToDelete._id);
+      setShowDeleteModal(false); // Close modal after deletion
+    }
   };
 
   // Function to dynamically determine the edit route based on the context
