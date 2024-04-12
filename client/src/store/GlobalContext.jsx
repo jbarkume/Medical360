@@ -14,16 +14,6 @@ function GlobalContextProvider({ children }) {
     currentDeparment: null
   });
 
-  useEffect(() => {
-    store.getAllDepartments().then(() => {
-        store.id_to_department = store.departments.reduce((result, obj) => {
-            result[obj._id] = obj.departmentName;
-            return result;
-          }, {});
-        store.department_to_id =  Object.fromEntries(Object.entries(store.id_to_department).map(([key, value]) => [value, key]));
-    })
-  }, [])
-
   // create patient with given data
   store.createPatient = async function (data) {
     // get whether user is logged in or not
@@ -108,10 +98,16 @@ function GlobalContextProvider({ children }) {
     try {
         const response = await storeApi.getAllDepartments();
         if (response.status === 200) {
+            let departments = response.data.departments
+            store.id_to_department = departments.reduce((result, obj) => {
+                result[obj._id] = obj.departmentName;
+                return result;
+              }, {});
+            store.department_to_id =  Object.fromEntries(Object.entries(store.id_to_department).map(([key, value]) => [value, key]));
             setStore({
                 ...store,
-                departments: response.data.departments
-            })
+                departments
+            });
         }
     } catch (err) {
         console.log(err);
