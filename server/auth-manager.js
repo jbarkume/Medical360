@@ -5,7 +5,7 @@ function authManager() {
 
     userVerify = (req) => {
         try {
-            const token = req.cookies.token;
+            const token = req.body.token;
             if (!token) {
                 return null;
             }

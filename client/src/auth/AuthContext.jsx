@@ -41,18 +41,18 @@ function AuthContextProvider({ children }) {
     department: null,
     doctors: doctorsData,
     patients: patientsData,
+    token: null,
   });
 
   useEffect(() => {
     // get whether use is logged in or not
-    if (auth.user)
-      auth.getLoggedIn(auth.user._id);
+    auth.getLoggedIn(auth.token);
   }, []);
 
-  auth.getLoggedIn = async function () {
+  auth.getLoggedIn = async function (token) {
     // get whether user is logged in or not
     try {
-      const response = await api.loggedIn();
+      const response = await api.loggedIn(token);
       if (response.status === 200) {
         setAuth({
           ...auth,
@@ -60,7 +60,7 @@ function AuthContextProvider({ children }) {
           loggedIn: response.data.loggedIn,
           isAdmin: response.data.isAdmin,
           isDoctor: response.data.isDoctor,
-          department: response.data.department
+          department: response.data.department,
         });
       }
     } catch (err) {
@@ -100,6 +100,9 @@ function AuthContextProvider({ children }) {
     try{
       const response = await api.login(email, password);
       if (response.status === 200) {
+        setAuth({
+          token: response.data.token
+        })
         auth.getLoggedIn();
       }
     } catch(error){
@@ -119,7 +122,8 @@ function AuthContextProvider({ children }) {
         isAdmin: false,
         isDoctor: false,
         isNurse: false,
-        department: null
+        department: null,
+        token: null,
       });
     }
   };
