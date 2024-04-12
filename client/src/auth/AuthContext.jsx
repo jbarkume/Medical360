@@ -5,31 +5,6 @@ import api from "./auth-api"
 
 const AuthContext = createContext();
 
-// This is where we can store the hard coded data for now
-export const users = [
-  {
-    name: "Admin",
-    username: "admin",
-    email: "admin@example.com",
-    password: "admin123",
-    department: "Cardiology",
-    phone_number: "6319533283",
-    isAdmin: true,
-    isDoctor: false,
-    isNurse: false,
-  },
-  {
-    name: "anten",
-    username: "anten",
-    email: "anten@example.com",
-    password: "anten@2001",
-    department: "Cardiology",
-    phone_number: "6319533283",
-    isAdmin: false,
-    isDoctor: true,
-    isNurse: true,
-  },
-];
 export const doctorsData = [
   {
     name: "Dr. Olivia Turner, M.D.",

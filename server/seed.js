@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const Chance = require('chance');
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const Chance = require("chance");
 const chance = new Chance();
-const User = require('./models/User');
-const Doctor = require('./models/Doctor');
-const Department = require('./models/Department');
-const Patient = require('./models/Patient');
+const User = require("./models/User");
+const Doctor = require("./models/Doctor");
+const Department = require("./models/Department");
+const Patient = require("./models/Patient");
 
-require('dotenv').config()
+require("dotenv").config();
 
 // Connect to MongoDB
 mongoose.connect("mongodb+srv://medical360:admin123@medical360.wh0h2hw.mongodb.net/test", {
@@ -16,16 +16,16 @@ mongoose.connect("mongodb+srv://medical360:admin123@medical360.wh0h2hw.mongodb.n
 
 const db = mongoose.connection;
 
-db.once('open', async () => {
-  console.log('Connected to MongoDB');
+db.once("open", async () => {
+  console.log("Connected to MongoDB");
 
   try {
-    const departments = ["Cardiology", "Spinal"]
+    const departments = ["Cardiology", "Spinal"];
     // Create admin user
     const adminUser = new User({
-      name: 'Admin',
-      email: 'admin@example.com',
-      passwordHash: await bcrypt.hash('admin123', 10),
+      name: "Admin",
+      email: "admin@example.com",
+      passwordHash: await bcrypt.hash("admin123", 10),
       isAdmin: true,
     });
     await adminUser.save();
@@ -33,120 +33,114 @@ db.once('open', async () => {
     // create doctor for head of departments
     let department_ids = [];
     for (let i = 0; i < departments.length; i++) {
+      // create user that is head doctor
+      const doctor = new Doctor({
+        surgeryCount: chance.integer(),
+        appointmentNo: chance.integer(),
+        hours: chance.integer(),
+        profileDetails: {
+          focusAreas: [chance.word(), chance.word()],
+          specialization: [chance.word(), chance.word()],
+        },
+        schedule: [
+          { day: "Monday", start: chance.date(), end: chance.date() },
+          { day: "Tuesday", start: chance.date(), end: chance.date() },
+        ],
+        patientList: [],
+      });
 
-        // create user that is head doctor
-        const doctor = new Doctor({
-            surgeryCount: chance.integer(),
-            appointmentNo: chance.integer(),
-            hours: chance.integer(),
-            profileDetails: {
-            focusAreas: [chance.word(), chance.word()],
-            specialization: [chance.word(), chance.word()]
-            },
-            schedule: [
-            { day: 'Monday', start: chance.date(), end: chance.date() },
-            { day: 'Tuesday', start: chance.date(), end: chance.date() }
-            ],
-            patientList: []
-        });
+      await doctor.save();
 
-        await doctor.save();
+      const name = chance.name();
+      const email = chance.email();
+      const passwordHash = await bcrypt.hash("password123", 10);
+      const isAdmin = true;
 
+      const user = new User({
+        name,
+        email,
+        passwordHash,
+        isAdmin,
+        doctor: doctor._id,
+      });
 
-        const name = chance.name();
-        const email = chance.email();
-        const passwordHash = await bcrypt.hash('password123', 10);
-        const isAdmin = true;
+      await user.save();
 
-        const user = new User({
-            name,
-            email,
-            passwordHash,
-            isAdmin,
-            doctor: doctor._id
-        });
+      const dep = new Department({
+        departmentName: departments[i],
+        head: doctor._id, // Head can be added later
+        headModel: departments[i],
+      });
 
-        await user.save();
+      await dep.save();
 
-        const dep = new Department({
-            departmentName: departments[i],
-            head: doctor._id, // Head can be added later
-            headModel: departments[i],
-        })
+      department_ids.push(dep._id);
 
-        await dep.save();
+      // update user and doctor with department
+      await User.findOneAndUpdate({ _id: user._id }, { department: dep._id });
 
-        department_ids.push(dep._id);
-
-        // update user and doctor with department
-        await User.findOneAndUpdate(
-            { _id: user._id },
-            { department: dep._id },
-        );
-
-        await Doctor.findOneAndUpdate(
-            { _id: doctor._id },
-            { departmentName: dep._id },
-        );
+      await Doctor.findOneAndUpdate(
+        { _id: doctor._id },
+        { departmentName: dep._id }
+      );
     }
 
     // Populate users that are doctors and not heads
     const users = [];
-    const doctors = []
+    const doctors = [];
     for (let i = 0; i < 5; i++) {
-        const doctor = new Doctor({
-            departmentName: chance.pickone(department_ids),
-            surgeryCount: chance.integer(),
-            appointmentNo: chance.integer(),
-            hours: chance.integer(),
-            profileDetails: {
-            focusAreas: [chance.word(), chance.word()],
-            specialization: [chance.word(), chance.word()]
-            },
-            schedule: [
-            { day: 'Monday', start: chance.date(), end: chance.date() },
-            { day: 'Tuesday', start: chance.date(), end: chance.date() }
-            ],
-            patientList: []
-        });
+      const doctor = new Doctor({
+        departmentName: chance.pickone(department_ids),
+        surgeryCount: chance.integer(),
+        appointmentNo: chance.integer(),
+        hours: chance.integer(),
+        profileDetails: {
+          focusAreas: [chance.word(), chance.word()],
+          specialization: [chance.word(), chance.word()],
+        },
+        schedule: [
+          { day: "Monday", start: chance.date(), end: chance.date() },
+          { day: "Tuesday", start: chance.date(), end: chance.date() },
+        ],
+        patientList: [],
+      });
 
+      const name = chance.name();
+      const email = chance.email();
+      const passwordHash = await bcrypt.hash("password123", 10);
+      const isAdmin = false;
+      const department = chance.pickone(department_ids); // assign to doctor
 
-        const name = chance.name();
-        const email = chance.email();
-        const passwordHash = await bcrypt.hash('password123', 10);
-        const isAdmin = false;
-        const department = chance.pickone(department_ids); // assign to doctor
-
-        const user = new User({
-            name,
-            email,
-            passwordHash,
-            isAdmin,
-            department, // Set department reference
-            doctor: doctor._id
-        });
-        doctors.push(doctor);
-        users.push(user);
+      const user = new User({
+        name,
+        email,
+        passwordHash,
+        isAdmin,
+        department, // Set department reference
+        doctor: doctor._id,
+      });
+      doctors.push(doctor);
+      users.push(user);
     }
 
     await User.insertMany(users);
     await Doctor.insertMany(doctors);
 
     // populate users that are nurses
-    const nurses = []
+    const nurses = [];
     for (let i = 0; i < 5; i++) {
-        const name = chance.name();
-        const email = chance.email();
-        const passwordHash = await bcrypt.hash('password123', 10);
-        const isAdmin = false;
+      const name = chance.name();
+      const email = chance.email();
+      const passwordHash = await bcrypt.hash("password123", 10);
+      const isAdmin = false;
 
-        const nurse = new User({
-            name,
-            email,
-            passwordHash,
-            isAdmin,
-        });
-        nurses.push(nurse);
+      const nurse = new User({
+        name,
+        email,
+        passwordHash,
+        isAdmin,
+      });
+      nurses.push(nurse);
     }
 
     await User.insertMany(nurses);
@@ -155,32 +149,35 @@ db.once('open', async () => {
     const patients = [];
     let allDoctors = await Doctor.find();
     for (let i = 0; i < 10; i++) {
+      let doctor = chance.pickone(allDoctors);
 
-        let doctor = chance.pickone(allDoctors);
+      const patient = new Patient({
+        patientName: chance.name(),
+        email: chance.email(),
+        phoneNumber: chance.phone(),
+        healthInsurance: chance.word(),
+        visitNo: chance.integer(),
+        sex: chance.pickone(["male", "female", "other"]),
+        age: chance.integer({ min: 18, max: 100 }),
+        department: chance.pickone(department_ids),
+        patientStatus: chance.pickone([
+          "admitted",
+          "discharged",
+          "under observation",
+        ]),
+        roomNo: chance.integer({ min: 100, max: 200 }),
+      });
+      patients.push(patient);
 
-        const patient = new Patient({
-            patientName: chance.name(),
-            email: chance.email(),
-            phoneNumber: chance.phone(),
-            healthInsurance: chance.word(),
-            visitNo: chance.integer(),
-            sex: chance.pickone(['male', 'female', 'other']),
-            age: chance.integer({ min: 18, max: 100 }),
-            department: chance.pickone(department_ids),
-            patientStatus: chance.pickone(['admitted', 'discharged', 'under observation']),
-            roomNo: chance.integer({ min: 100, max: 200 }),
-        });
-        patients.push(patient);
-
-        // add patient to doctors patients
-        doctor.patientList.push(patient._id);
-        await doctor.save();
+      // add patient to doctors patients
+      doctor.patientList.push(patient._id);
+      await doctor.save();
     }
     await Patient.insertMany(patients);
 
-    console.log('Seeding completed');
+    console.log("Seeding completed");
   } catch (error) {
-    console.error('Seeding error:', error);
+    console.error("Seeding error:", error);
   } finally {
     // Close connection
     db.close();
