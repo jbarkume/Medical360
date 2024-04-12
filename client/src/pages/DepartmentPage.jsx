@@ -22,14 +22,14 @@ const DepartmentPage = () => {
   }, []);
 
   const fetchDepartments = async () => {
-    const response = await fetch('http://localhost:3000/department/alldepartments');
+    const response = await fetch('http://localhost:3000/departments/alldepartments');
     const data = await response.json();
     setDepartments(data);
   };
 
   const deleteDepartment = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/department/${id}`, {
+      const response = await fetch(`http://localhost:3000/departments/${id}`, {
             method: 'DELETE',
       });
       if (!response.ok) {

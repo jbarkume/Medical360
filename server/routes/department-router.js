@@ -21,7 +21,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 // POST route to create a new department with image upload
 router.post('/department', upload.single('Icon'), (req, res) => {
+    console.log("here I am");
     const newDepartment = new Department({
+       
         departmentName: req.body.Name,
         iconPath: req.file ? req.file.filename : null  
     });

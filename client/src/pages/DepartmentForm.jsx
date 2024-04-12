@@ -38,8 +38,9 @@ const DepartmentForm = () => {
         Object.keys(formData).forEach(key => {
             data.append(key, formData[key]);
         });
+        console.log("I am creating the department data");
     
-        axios.post('http://localhost:3000/department/department', data, {
+        axios.post('http://localhost:3000/departments/department', data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
