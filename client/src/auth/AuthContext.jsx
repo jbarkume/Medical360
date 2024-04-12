@@ -45,13 +45,14 @@ function AuthContextProvider({ children }) {
 
   useEffect(() => {
     // get whether use is logged in or not
-    auth.getLoggedIn();
+    if (auth.user)
+      auth.getLoggedIn(auth.user._id);
   }, []);
 
-  auth.getLoggedIn = async function () {
+  auth.getLoggedIn = async function (id) {
     // get whether user is logged in or not
     try {
-      const response = await api.loggedIn();
+      const response = await api.loggedIn(id);
       if (response.status === 200) {
         setAuth({
           ...auth,

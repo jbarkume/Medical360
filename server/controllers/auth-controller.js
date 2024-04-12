@@ -3,109 +3,105 @@ const bcrypt = require("bcrypt");
 const auth = require("../auth-manager");
 const Department = require("../models/Department");
 const Doctor = require("../models/Doctor");
-const mongoose = require("mongoose");
-require("dotenv").config();
+require("dotenv").config()
 
 // is user logged in currently
 async function loggedIn(req, res) {
-  // method : GET
-  // route : /auth/loggedIn
-  try {
-    // find user in database using JWT
-    let userId = auth.userVerify(req);
+    // method : GET
+    // route : /auth/loggedIn
+    try {
+        // find user in database using JWT
+        // let userId = auth.userVerify(req)
+        let userId = req.body.id;
 
-    // if user DNE or token expired return null user
-    if (!userId)
-      return res.status(200).json({
-        loggedIn: false,
-        user: null,
-        department: null,
-        isDoctor: false,
-        isAdmin: false,
-      });
+        // if user DNE or token expired return null user
+        if (!userId) 
+            return res.status(200).json({
+                loggedIn: false,
+                user: null,
+                department: null,
+                isDoctor: false,
+                isAdmin: false
+            })
 
-    // else find user and return it
-    const user = await User.findById(userId);
-    let departmentId = null;
-    if (user.department)
-      departmentId = await Department.findById(user.department);
+        // else find user and return it
+        const user = await User.findById(userId);
+        let departmentId = null;
+        if (user.department) 
+            departmentId = await Department.findById(user.department)
 
-    return res.status(200).json({
-      loggedIn: true,
-      user: user,
-      department: departmentId ? departmentId.departmentName : null,
-      isDoctor: user.doctor !== null,
-      isAdmin: user.isAdmin,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: err.message,
-    });
-  }
+        return res.status(200).json({
+            loggedIn: true,
+            user: user,
+            department: departmentId.departmentName,
+            isDoctor: user.doctor !== null,
+            isAdmin: user.isAdmin
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+        })
+    }
 }
 
 async function login(req, res) {
-  // method : POST
-  // route : /auth/register
+    // method : POST
+    // route : /auth/register
 
-  try {
-    // check fields are provided
-    const { email, password } = req.body;
-    if (!email || !password)
-      return res.status(400).json({
-        message: "Please enter all required fields.",
-      });
+    try {
+        // check fields are provided
+        const { email, password } = req.body;
+        if (!email || !password)
+            return res.status(400).json({
+                message: "Please enter all required fields."
+            });
 
-    // find user by email. If none exists send status of 401 with wrong fields provided
-    const user = await User.findOne({ email: email.toLowerCase() });
-    if (!user)
-      return res.status(401).json({
-        message: "Wrong email or password provided.",
-      });
+        // find user by email. If none exists send status of 401 with wrong fields provided
+        const user = await User.findOne({ email: email });
+        if (!user)
+            return res.status(401).json({
+                message: "Wrong email or password provided."
+            });
 
-    let id = user._id;
+        let id = user._id
 
-    // check password matches
-    const passwordCorrect = await bcrypt.compare(password, user.passwordHash);
-    if (!passwordCorrect)
-      return res.status(401).json({
-        message: "Wrong email or password provided.",
-      });
+        // check password matches
+        const passwordCorrect = await bcrypt.compare(password, user.passwordHash);
+        if (!passwordCorrect) 
+            return res.status(401).json({
+                message: "Wrong email or password provided."
+            });
 
-    // login the user by signing a token and sending it in a cookie
-    // then send status of 200 with user info
-    let token = auth.tokenSign(id);
+        // login the user by signing a token and sending it in a cookie
+        // then send status of 200 with user info
+        let token = auth.tokenSign(id);
 
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: true,
-      })
-      .status(200)
-      .json({
-        user: user,
-      });
-  } catch (err) {
-    res.status(500).json({
-      message: err.message,
-    });
-  }
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: true
+        }).status(200).json({
+            user: user
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+        });
+    }
 }
 
 function logout(req, res) {
-  // method : GET
-  // route : /auth/logout
-
-  // send cookie with token = "" and expires as soon as it gets there
-  res
-    .cookie("token", "", {
-      httpOnly: true,
-      expires: new Date(0),
-      secure: true,
-      sameSite: "none",
-    })
-    .send();
+    // method : GET
+    // route : /auth/logout
+    
+    // send cookie with token = "" and expires as soon as it gets there
+    res.cookie("token", "", {
+        httpOnly: true,
+        expires: new Date(0),
+        secure: true,
+        sameSite: "none"
+    }).send();
 }
 
 async function register(req, res) {
@@ -139,25 +135,21 @@ async function register(req, res) {
 
     // check if user with certain fields (email) already exists
     // if they do, send status 400
-    let user = await User.findOne({ email: email.toLowerCase()});
+    let user = await User.findOne({ email: email});
     if (user) 
         return res.status(400).json({
             message: "An account with this email address already exists."
         })
 
-    // check if department exists
-    let newDeparmtent = await Department.findOne({ departmentName: department});
-    if (!newDeparmtent)
-        return res.status(404).json({
-            message: "Department does not exist"
-        });
+    // generate username based on name provided
+    let username = `${name}12345`
 
     // hash password and save user in database
     let saltRounds = 8;
     let salt = await bcrypt.genSalt(saltRounds);
     const passwordHash = await bcrypt.hash(password, salt);
 
-    user = {name, email, passwordHash, department} // add more fields if needed
+    user = {name, username, email, passwordHash, department, phone_number}
     await new User(user).save();
     
     // send status of 200 along with user created info if needed
@@ -167,36 +159,11 @@ async function register(req, res) {
     })
 }
 
-async function resetPassword(req, res) {
-    const { email, newPassword } = req.body;
-
-    if (!email || !newPassword) {
-        return res.status(400).json({ message: "Please provide all required fields." });
-    }
-
-    try {
-        const user = await User.findOne({ email });
-        if (!user) {
-            
-            return res.status(200).json({ message: "If an account with that email exists, the password has been reset." });
-        }
-
-        const saltRounds = 10;
-        user.passwordHash = await bcrypt.hash(newPassword, saltRounds);
-        await user.save();
-
-        res.status(200).json({ message: "Password has been successfully reset." });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-}
-
 const AuthController =  {
     loggedIn,
     login,
     register,
-    logout,
-    resetPassword
+    logout
 }
 
-module.exports = AuthController;
+module.exports = AuthController
