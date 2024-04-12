@@ -32,7 +32,7 @@ async function loggedIn(req, res) {
         return res.status(200).json({
             loggedIn: true,
             user: user,
-            department: departmentId.departmentName,
+            department: departmentId ? departmentId.departmentName : null,
             isDoctor: user.doctor !== null,
             isAdmin: user.isAdmin
         })
@@ -57,7 +57,7 @@ async function login(req, res) {
             });
 
         // find user by email. If none exists send status of 401 with wrong fields provided
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({ email: email.toLowerCase() });
         if (!user)
             return res.status(401).json({
                 message: "Wrong email or password provided."
@@ -134,21 +134,25 @@ async function register(req, res) {
 
     // check if user with certain fields (email) already exists
     // if they do, send status 400
-    let user = await User.findOne({ email: email});
+    let user = await User.findOne({ email: email.toLowerCase()});
     if (user) 
         return res.status(400).json({
             message: "An account with this email address already exists."
         })
 
-    // generate username based on name provided
-    let username = `${name}12345`
+    // check if department exists
+    let newDeparmtent = await Department.findOne({ departmentName: department});
+    if (!newDeparmtent)
+        return res.status(404).json({
+            message: "Department does not exist"
+        });
 
     // hash password and save user in database
     let saltRounds = 8;
     let salt = await bcrypt.genSalt(saltRounds);
     const passwordHash = await bcrypt.hash(password, salt);
 
-    user = {name, username, email, passwordHash, department, phone_number}
+    user = {name, email, passwordHash, department} // add more fields if needed
     await new User(user).save();
     
     // send status of 200 along with user created info if needed
