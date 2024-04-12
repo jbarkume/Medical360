@@ -13,6 +13,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
@@ -29,10 +30,12 @@ app.use('/uploads', express.static('uploads'));
 // Serve static files (Make sure this is before your catch-all route if you are using React Router)
 // app.use(express.static(path.join(__dirname, "../client/dist")));
 
+
 // // Catch-all handler for SPA (Make sure the path is correctly formatted)
 // app.get("*", (req, res) => {
 //   res.sendFile(path.resolve(__dirname, "../client/dist/index.html"));
 // });
+
 
 // set up routers
 const authRouter = require('./routes/auth-router')
@@ -63,3 +66,4 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Run the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+

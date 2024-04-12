@@ -9,7 +9,7 @@ const Patient = require("./models/Patient");
 
 require("dotenv").config();
 
-// Connect to MongoDB
+
 mongoose.connect("mongodb+srv://medical360:admin123@medical360.wh0h2hw.mongodb.net/test", {
   useUnifiedTopology: true,
 });
