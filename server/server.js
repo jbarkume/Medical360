@@ -43,7 +43,7 @@ app.use('/users', userRouter)
 
 // connect the database
 mongoose
-    .connect("mongodb://127.0.0.1:27017")
+    .connect(process.env.MONGODB_URI)
     .catch(e => {
         console.error('Connection error', e.message)
     })
