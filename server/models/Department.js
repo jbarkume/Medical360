@@ -10,18 +10,22 @@ const departmentSchema = new Schema({
      head: {
         type: mongoose.Schema.Types.ObjectId,
         refPath: 'headModel',
-        required: true,
+        required: false,
     },
     headModel: {
         type: String,
-        required: true,
+        required: false,
         enum: ['Cardiology', 'Spinal'] // Add other possible departments here if needed
     },
 
     doctorList: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Doctor'
-    }]
+    }],
+    iconPath: {
+        type: String,  // Path to the stored image file
+        required: false
+    },
 
 })
 
