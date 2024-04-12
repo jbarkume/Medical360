@@ -113,6 +113,7 @@ function AuthContextProvider({ children }) {
     const response = await api.logout();
     if (response.status === 200) {
       console.log("logged out");
+      localStorage.removeItem("token")
       setAuth({
         ...auth,
         user: null,

@@ -17,7 +17,7 @@ export const login = (email, password) => {
 
 export const logout = () => api.get("/logout");
 
-export const loggedIn = (token) => api.get("/loggedIn", {token});
+export const loggedIn = (token) => api.post("/loggedIn", {token});
 
 // export const register = (data) => api.post("/register")
 
