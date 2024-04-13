@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 // ask if user logged in request
-router.get("/loggedIn/" + ":id", AuthController.loggedIn);
+router.get("/loggedIn", AuthController.loggedIn);
 
 // existing user login requests
 router.post("/login", AuthController.login);

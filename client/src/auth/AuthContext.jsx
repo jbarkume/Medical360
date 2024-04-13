@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import doctorImageone from "../images/doctor2.jpeg";
 import patientImage from "../images/PatientImage.png";
-import api from "./auth-api"
+import api from "./auth-api";
 
 const AuthContext = createContext();
 
@@ -41,18 +41,17 @@ function AuthContextProvider({ children }) {
     department: null,
     doctors: doctorsData,
     patients: patientsData,
-    token: null,
   });
 
   useEffect(() => {
     // get whether use is logged in or not
-    auth.getLoggedIn(localStorage.getItem("token"));
+    auth.getLoggedIn();
   }, []);
 
-  auth.getLoggedIn = async function (token) {
+  auth.getLoggedIn = async function () {
     // get whether user is logged in or not
     try {
-      const response = await api.loggedIn(token);
+      const response = await api.loggedIn();
       if (response.status === 200) {
         setAuth({
           ...auth,
@@ -66,7 +65,6 @@ function AuthContextProvider({ children }) {
     } catch (err) {
       console.log(err.message);
     }
-
   };
 
   // register a user, upon success return true, otherwise return false
@@ -97,13 +95,12 @@ function AuthContextProvider({ children }) {
 
   // login the user with email and passwrod. Upon success, set user to logged in. upon false, print why and return false
   auth.login = async function (email, password) {
-    try{
+    try {
       const response = await api.login(email, password);
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.token)
-        auth.getLoggedIn(response.data.token);
+        auth.getLoggedIn();
       }
-    } catch(error){
+    } catch (error) {
       console.log(error);
     }
   };
@@ -113,7 +110,6 @@ function AuthContextProvider({ children }) {
     const response = await api.logout();
     if (response.status === 200) {
       console.log("logged out");
-      localStorage.removeItem("token")
       setAuth({
         ...auth,
         user: null,
@@ -122,7 +118,6 @@ function AuthContextProvider({ children }) {
         isDoctor: false,
         isNurse: false,
         department: null,
-        token: null,
       });
     }
   };
