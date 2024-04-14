@@ -25,7 +25,7 @@ db.once("open", async () => {
     const adminUser = new User({
       name: "Admin",
       email: "admin@example.com",
-      passwordHash: await bcrypt.hash("admin123", 10),
+      passwordHash: await bcrypt.hash("admin@123", 10),
       isAdmin: true,
     });
     await adminUser.save();
@@ -53,7 +53,7 @@ db.once("open", async () => {
 
       const name = chance.name();
       const email = chance.email();
-      const passwordHash = await bcrypt.hash("password123", 10);
+      const passwordHash = await bcrypt.hash("password@123", 10);
       const isAdmin = true;
 
       const user = new User({
@@ -107,7 +107,7 @@ db.once("open", async () => {
 
       const name = chance.name();
       const email = chance.email();
-      const passwordHash = await bcrypt.hash("password123", 10);
+      const passwordHash = await bcrypt.hash("password@123", 10);
       const isAdmin = false;
       const department = chance.pickone(department_ids); // assign to doctor
 
@@ -131,7 +131,7 @@ db.once("open", async () => {
     for (let i = 0; i < 5; i++) {
       const name = chance.name();
       const email = chance.email();
-      const passwordHash = await bcrypt.hash("password123", 10);
+      const passwordHash = await bcrypt.hash("password@123", 10);
       const isAdmin = false;
 
       const nurse = new User({
