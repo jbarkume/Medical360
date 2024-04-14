@@ -43,7 +43,7 @@ app.use("/patients", patientRouter);
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/departments", departmentRouter);
-app.use("/equipments", roomRouter);
+app.use("/rooms", roomRouter);
 app.use("/equipments", equipmentRouter);
 
 
