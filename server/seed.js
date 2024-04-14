@@ -6,13 +6,16 @@ const User = require("./models/User");
 const Doctor = require("./models/Doctor");
 const Department = require("./models/Department");
 const Patient = require("./models/Patient");
-
+const Room = require("./models/Room");
+const Equipment = require("./models/Equipment");
 require("dotenv").config();
 
-
-mongoose.connect("mongodb+srv://medical360:admin123@medical360.wh0h2hw.mongodb.net/medical360", {
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://medical360:admin123@medical360.wh0h2hw.mongodb.net/medical360",
+  {
+    useUnifiedTopology: true,
+  }
+);
 
 const db = mongoose.connection;
 
@@ -25,6 +28,7 @@ db.once("open", async () => {
     const adminUser = new User({
       name: "Admin",
       email: "admin@example.com",
+      phoneNumber: chance.phone(),
       passwordHash: await bcrypt.hash("admin@123", 10),
       isAdmin: true,
     });
@@ -131,12 +135,15 @@ db.once("open", async () => {
     for (let i = 0; i < 5; i++) {
       const name = chance.name();
       const email = chance.email();
+      const phoneNumber = chance.phone();
+
       const passwordHash = await bcrypt.hash("password@123", 10);
       const isAdmin = false;
 
       const nurse = new User({
         name,
         email,
+        phoneNumber,
         passwordHash,
         isAdmin,
       });
@@ -174,6 +181,71 @@ db.once("open", async () => {
       await doctor.save();
     }
     await Patient.insertMany(patients);
+
+    // Define room-equipment mapping
+    const roomEquipmentMapping = {
+      ICU: ["ECG Machine", "Ventilator", "Defibrillator"],
+      General: ["Ultrasound", "X-Ray", "Blood Pressure Monitor"],
+      Surgical: ["Anesthesia Machine", "Surgical Table", "Surgical Lights"],
+      Maternity: ["Fetal Doppler", "Ultrasound", "Incubator"],
+    };
+
+    // Generate equipment
+    const equipmentList = [];
+    Object.entries(roomEquipmentMapping).forEach(
+      ([roomType, equipmentTypes]) => {
+        equipmentTypes.forEach((type) => {
+          for (let i = 0; i < 2; i++) {
+            // Create two of each type for diversity
+            const equipment = new Equipment({
+              equipmentName: `${type} ${i}`,
+              equipmentType: type,
+              quantity: chance.integer({ min: 1, max: 2 }),
+              location: `${roomType} Storage`,
+              maintenanceStatus: chance.pickone([
+                "Operational",
+                "Maintenance Required",
+              ]),
+            });
+            equipmentList.push(equipment);
+          }
+        });
+      }
+    );
+
+    await Equipment.insertMany(equipmentList);
+
+    // Map typed equipment for room assignment
+    const typedEquipment = {};
+    Object.keys(roomEquipmentMapping).forEach((roomType) => {
+      typedEquipment[roomType] = equipmentList
+        .filter((eq) =>
+          roomEquipmentMapping[roomType].includes(eq.equipmentType)
+        )
+        .map((eq) => eq._id);
+    });
+
+    // Create rooms, assigning equipment based on room type
+    const roomNumbers = [...Array(20).keys()].map((i) => `Room ${100 + i}`);
+    const rooms = roomNumbers.map((roomNumber) => {
+      const roomType = chance.pickone([
+        "ICU",
+        "General",
+        "Surgical",
+        "Maternity",
+      ]);
+      return new Room({
+        roomNumber,
+        roomType,
+        equipment: chance.pickset(
+          typedEquipment[roomType],
+          chance.integer({ min: 1, max: typedEquipment[roomType].length })
+        ),
+        availabilityStatus: chance.pickone(["Occupied", "Available"]),
+      });
+    });
+
+    await Room.insertMany(rooms);
 
     console.log("Seeding completed");
   } catch (error) {
