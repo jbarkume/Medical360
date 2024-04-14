@@ -35,11 +35,18 @@ const authRouter = require("./routes/auth-router");
 const userRouter = require("./routes/user-router");
 const patientRouter = require("./routes/patient-router");
 const departmentRouter = require("./routes/department-router");
+const roomRouter = require("./routes/room-router");
+const equipmentRouter = require("./routes/equipment-router");
+
 
 app.use("/patients", patientRouter);
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/departments", departmentRouter);
+app.use("/equipments", roomRouter);
+app.use("/equipments", equipmentRouter);
+
+
 
 // Connect to the database
 mongoose
