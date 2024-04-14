@@ -24,7 +24,7 @@ const DepartmentHead = () => {
 
   return (
     <div className="flex flex-col items-center justify-center" style={{ background: gradient }}>
-      <div className="flex overflow-y-auto space-x-2 py-2 pl-1" style={{ height: '300px' }}> 
+      <div className="flex overflow-y-auto space-x-2 py-2 pl-1" style={{ height: '380px' }}> 
   {departmentHead.map((head, index) => (
     <div key={index} className="p-4"> 
       <StaffCard staff={head} />
