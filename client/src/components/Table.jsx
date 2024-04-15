@@ -31,10 +31,15 @@ const Table = ({ cards, isAdmin, context }) => {
 
   if (context === "room") {
     newCards = cards.map((room) => {
+
+      const equipmentNames = room.equipment.map(
+        (equipmentId) => store.id_to_equipment[equipmentId] || 'Unknown Equipment'
+      ).join(', ');
       return {
         number: room.roomNumber,
         type: room.roomType,
-        availabilityStatus: room.availabilityStatus,
+        equipments: equipmentNames,
+        'Availability Status': room.availabilityStatus,
       };
     });
   }
@@ -45,7 +50,7 @@ const Table = ({ cards, isAdmin, context }) => {
         type: equipment.equipmentType,
         quantity: equipment.quantity,
         location: equipment.location,
-        maintenanceStatus: equipment.maintenanceStatus,
+        'Maintenance Status': equipment.maintenanceStatus,
       };
     });
   }
