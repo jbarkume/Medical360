@@ -17,12 +17,35 @@ const Table = ({ cards, isAdmin, context }) => {
         department: store.id_to_department[patient.department],
       };
     });
-  } else if (context === "user") {
+  }
+
+  if (context === "user") {
     newCards = cards.map((user) => {
       return {
         name: user.name,
         email: user.email,
         department: store.id_to_department[user.department],
+      };
+    });
+  }
+
+  if (context === "room") {
+    newCards = cards.map((room) => {
+      return {
+        number: room.roomNumber,
+        type: room.roomType,
+        availabilityStatus: room.availabilityStatus,
+      };
+    });
+  }
+  if (context === "equipment") {
+    newCards = cards.map((equipment) => {
+      return {
+        name: equipment.equipmentName,
+        type: equipment.equipmentType,
+        quantity: equipment.quantity,
+        location: equipment.location,
+        maintenanceStatus: equipment.maintenanceStatus,
       };
     });
   }
@@ -39,6 +62,7 @@ const Table = ({ cards, isAdmin, context }) => {
     // e.g., deleteItem(itemToDelete).then(() => setShowDeleteModal(false));
     if (context === "patient") store.deletePatient(itemToDelete._id);
     else if (context === "user") store.deleteUser(itemToDelete._id);
+    else if (context === "equipment") store.deleteEquipment(itemToDelete._id);
     setShowDeleteModal(false); // Close modal after deletion
   };
 

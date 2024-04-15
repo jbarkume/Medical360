@@ -9,10 +9,14 @@ function GlobalContextProvider({ children }) {
     doctors: [],
     patients: [],
     departments: [],
+    rooms: [],
+    equipments: [],
     id_to_department: {},
     department_to_id: {},
     currentPatient: null,
-    currentDeparment: null
+    currentDepartment: null,
+    currentEquipment: null,
+    currentRoom: null,
   });
 
   // create patient with given data
@@ -67,6 +71,65 @@ function GlobalContextProvider({ children }) {
     }
   };
 
+
+
+  // get all the rooms
+  store.getAllRooms = async function () {
+    const response = await storeApi.getAllRooms();
+    if (response.status === 200) {
+        setStore({
+            ...store,
+            rooms: response.data,
+            currentRoom: null
+        })
+    }
+    console.log(response);
+
+  };
+
+  // create room with given data
+  store.createRoom = async function (data) {
+    // get whether user is logged in or not
+    try {
+      const response = await storeApi.createRoom(data);
+      if (response.status === 200)
+        console.log("room created")
+    } catch (err) {
+      console.log(err.message);
+    }
+
+  };
+
+  // get all the rooms
+  store.getAllEquipments = async function () {
+    const response = await storeApi.getAllEquipments();
+    if (response.status === 200) {
+        setStore({
+            ...store,
+            equipments: response.data,
+            currentEquipment: null
+        })
+    }
+    console.log(response);
+
+  };
+
+  // delete a equipment
+  store.deleteEquipment = async function(id) {
+    try{
+        const response = await storeApi.deleteEquipment(id);
+        if (response.status === 200) {
+              console.log("deleted room")
+              setStore({
+                ...store,
+                currentPatient: null,
+              })
+          }
+      } catch(err){
+          console.log(err.message);
+      }
+  }
+
   // update department by id with data
   store.updateDepartment = async function (id, data) {
     try {
@@ -86,7 +149,7 @@ function GlobalContextProvider({ children }) {
       if (response.status === 200) {
             setStore({
                 ...store,
-                currentDeparment: response.data.department
+                currentDepartment: response.data.department
             })
         }
     } catch(err){
