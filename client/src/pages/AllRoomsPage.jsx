@@ -10,6 +10,7 @@ const AllRoomsPage = () => {
   const { auth } = useContext(AuthContext);
   const { store } = useContext(GlobalContext);
   const [rooms, setRooms] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // // Updated room data to match the specified fields
   // const roomData = [
@@ -56,6 +57,14 @@ const AllRoomsPage = () => {
     fetchRooms();
   }, [store]);
 
+  const handleSearch = term => {
+    setSearchTerm(term.toLowerCase());
+  };
+
+  const filterRooms = rooms.filter(room => 
+    room.roomNumber.toLowerCase().includes(searchTerm)
+  );
+
   return (
     <>
       <Banner goBackPath="/resource-management" />
@@ -63,7 +72,7 @@ const AllRoomsPage = () => {
         <div className="text-blue-500 p-4 rounded-lg text-3xl">All Rooms</div>
       </div>
       <div className="flex justify-between items-center mx-8 mb-4">
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         {auth.isAdmin && (
           <Link
             to={"/new-room"}
@@ -74,7 +83,7 @@ const AllRoomsPage = () => {
         )}
       </div>
       <div className="p-8">
-          <Table cards={rooms} isAdmin={auth.isAdmin} context={"room"} />
+          <Table cards={filterRooms} isAdmin={auth.isAdmin} context={"room"} />
       </div>
     </>
   );

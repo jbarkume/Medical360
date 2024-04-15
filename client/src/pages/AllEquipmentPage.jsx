@@ -12,6 +12,9 @@ const AllEquipmentPage = () => {
 
   const [equipments, setEquipments] = useState([]);
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+
 
   // // Updated and expanded equipment data to match the specified fields
   // const equipmentData = [
@@ -70,6 +73,14 @@ const AllEquipmentPage = () => {
     fetchEquipments();
   }, [store]);
 
+  const handleSearch = term => {
+    setSearchTerm(term.toLowerCase());
+  };
+
+  const filterEquipments = equipments.filter(equipment => 
+    equipment.equipmentName.toLowerCase().includes(searchTerm)
+  );
+
   return (
     <>
       <Banner goBackPath="/apppage" />
@@ -79,7 +90,7 @@ const AllEquipmentPage = () => {
         </div>
       </div>
       <div className="flex justify-between items-center mx-8 mb-4">
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         {auth.isAdmin && (
           <Link to={"/new-equipment"} className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl">
             New Equipment
@@ -87,7 +98,7 @@ const AllEquipmentPage = () => {
         )}
       </div>
       <div className="p-8">
-        <Table cards={equipments} isAdmin={auth.isAdmin} context={"equipment"} />
+        <Table cards={filterEquipments} isAdmin={auth.isAdmin} context={"equipment"} />
       </div>
     </>
   );
