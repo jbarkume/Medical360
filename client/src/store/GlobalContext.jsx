@@ -80,7 +80,7 @@ function GlobalContextProvider({ children }) {
           !store.id_to_equipment ||
           Object.keys(store.id_to_equipment).length === 0
         ) {
-          await store.getAllEquipments(); 
+          await store.getAllEquipments();
         }
 
         // Add equipment names to each room
@@ -116,15 +116,22 @@ function GlobalContextProvider({ children }) {
 
   // get all the rooms
   store.getAllEquipments = async function () {
-    const response = await storeApi.getAllEquipments();
-    if (response.status === 200) {
-      setStore({
-        ...store,
-        equipments: response.data,
-        currentEquipment: null,
-      });
+    try {
+      const response = await storeApi.getAllEquipments();
+      if (response.status === 200) {
+        const equipmentMapping = response.data.reduce((acc, equipment) => {
+          acc[equipment._id] = equipment.equipmentName; // Store only the equipment name
+          return acc;
+        }, {});
+
+        setStore((prevStore) => ({
+          ...prevStore,
+          id_to_equipment: equipmentMapping,
+        }));
+      }
+    } catch (error) {
+      console.error("Error fetching equipments:", error);
     }
-    console.log(response);
   };
 
   // delete a equipment
