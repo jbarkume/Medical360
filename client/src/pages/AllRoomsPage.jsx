@@ -47,6 +47,7 @@ const AllRoomsPage = () => {
 
   useEffect(() => {
     const fetchRooms = async () => {
+     
       await store.getAllRooms(); 
 
       setRooms(store.rooms); 
