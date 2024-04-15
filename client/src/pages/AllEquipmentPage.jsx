@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
-import Banner from '../components/Banner';
-import Table from '../components/Table';
-import SearchBar from '../components/SearchBar';
-import AuthContext from '../auth/AuthContext';
-import { Link } from 'react-router-dom';
-import GlobalContext from '../store/GlobalContext';
+import React, { useContext, useState, useEffect } from "react";
+import Banner from "../components/Banner";
+import Table from "../components/Table";
+import SearchBar from "../components/SearchBar";
+import AuthContext from "../auth/AuthContext";
+import { Link } from "react-router-dom";
+import GlobalContext from "../store/GlobalContext";
 
 const AllEquipmentPage = () => {
   const { auth } = useContext(AuthContext);
@@ -12,9 +12,7 @@ const AllEquipmentPage = () => {
 
   const [equipments, setEquipments] = useState([]);
 
-  const [searchTerm, setSearchTerm] = useState('');
-
-
+  const [searchTerm, setSearchTerm] = useState("");
 
   // // Updated and expanded equipment data to match the specified fields
   // const equipmentData = [
@@ -65,7 +63,7 @@ const AllEquipmentPage = () => {
 
   useEffect(() => {
     const fetchEquipments = async () => {
-      await store.getAllEquipments(); 
+      await store.getAllEquipments();
 
       setEquipments(store.equipments);
     };
@@ -73,11 +71,11 @@ const AllEquipmentPage = () => {
     fetchEquipments();
   }, [store]);
 
-  const handleSearch = term => {
+  const handleSearch = (term) => {
     setSearchTerm(term.toLowerCase());
   };
 
-  const filterEquipments = equipments.filter(equipment => 
+  const filterEquipments = equipments.filter((equipment) =>
     equipment.equipmentName.toLowerCase().includes(searchTerm)
   );
 
@@ -86,19 +84,26 @@ const AllEquipmentPage = () => {
       <Banner goBackPath="/apppage" />
       <div className="flex justify-center my-4">
         <div className="text-blue-500 p-4 rounded-lg text-3xl">
-          All Equipments
+          All Equipment
         </div>
       </div>
       <div className="flex justify-between items-center mx-8 mb-4">
         <SearchBar onSearch={handleSearch} />
         {auth.isAdmin && (
-          <Link to={"/new-equipment"} className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl">
+          <Link
+            to={"/new-equipment"}
+            className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl"
+          >
             New Equipment
           </Link>
         )}
       </div>
       <div className="p-8">
-        <Table cards={filterEquipments} isAdmin={auth.isAdmin} context={"equipment"} />
+        <Table
+          cards={filterEquipments}
+          isAdmin={auth.isAdmin}
+          context={"equipment"}
+        />
       </div>
     </>
   );
