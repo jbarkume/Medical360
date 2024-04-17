@@ -81,7 +81,7 @@ const AllEquipmentPage = () => {
 
   return (
     <>
-      <Banner goBackPath="/apppage" />
+      <Banner goBackPath="/resource-management" />
       <div className="flex justify-center my-4">
         <div className="text-blue-500 p-4 rounded-lg text-3xl">
           All Equipment

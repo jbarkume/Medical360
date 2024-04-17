@@ -14,12 +14,14 @@ const NewRoomPage = () => {
         const fetchEquipment = async () => {
             try {
                 const response = await store.getAllEquipments();
-                console.log("Fetching equipments in new room page",response);
-                if (response.status === 200) {
-                    setEquipmentOptions(response.data.map(equip => ({
-                        label: equip.equipmentName,
+            if (response.status === 200) {
+                const operationalEquipments = response.data
+                    .filter(equip => equip.quantity > 0 && equip.maintenanceStatus === "Operational")
+                    .map(equip => ({
+                        label:`${equip.equipmentName} (${equip.location})`,
                         value: equip._id
-                    })));
+                    }));
+                    setEquipmentOptions(operationalEquipments);
                 }
                 
             } catch (error) {
