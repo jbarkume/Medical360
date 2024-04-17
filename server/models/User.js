@@ -34,10 +34,10 @@ const userSchema = new Schema({
     ref: "Doctor",
     default: null,
   },
-  approvalStatus: {
-    type: String,
-    default: "pending",
-  },
+  // approvalStatus: {
+  //   type: String,
+  //   default: "pending",
+  // },
 });
 
 const User = mongoose.model("User", userSchema);
