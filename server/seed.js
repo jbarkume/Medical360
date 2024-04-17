@@ -63,6 +63,7 @@ db.once("open", async () => {
       const user = new User({
         name,
         email,
+        phone_number: chance.phone(),
         passwordHash,
         isAdmin,
         doctor: doctor._id,
@@ -114,10 +115,11 @@ db.once("open", async () => {
       const passwordHash = await bcrypt.hash("password@123", 10);
       const isAdmin = false;
       const department = chance.pickone(department_ids); // assign to doctor
-
+      const phoneNumber = chance.phone();
       const user = new User({
         name,
         email,
+        phoneNumber,
         passwordHash,
         isAdmin,
         department, // Set department reference
