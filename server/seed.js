@@ -119,7 +119,7 @@ db.once("open", async () => {
       const user = new User({
         name,
         email,
-        phoneNumber,
+        phone_number: chance.phone(),
         passwordHash,
         isAdmin,
         department, // Set department reference
@@ -137,7 +137,6 @@ db.once("open", async () => {
     for (let i = 0; i < 5; i++) {
       const name = chance.name();
       const email = chance.email();
-      const phoneNumber = chance.phone();
 
       const passwordHash = await bcrypt.hash("password@123", 10);
       const isAdmin = false;
@@ -145,7 +144,8 @@ db.once("open", async () => {
       const nurse = new User({
         name,
         email,
-        phoneNumber,
+        phone_number: chance.phone(),
+        department:chance.pickone(department_ids),
         passwordHash,
         isAdmin,
       });
@@ -163,7 +163,7 @@ db.once("open", async () => {
       const patient = new Patient({
         patientName: chance.name(),
         email: chance.email(),
-        phoneNumber: chance.phone(),
+        phone_number: chance.phone(),
         healthInsurance: chance.word(),
         visitNo: chance.integer(),
         sex: chance.pickone(["male", "female", "other"]),
