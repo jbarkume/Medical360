@@ -63,7 +63,6 @@ db.once("open", async () => {
       const user = new User({
         name,
         email,
-        phone_number: chance.phone(),
         passwordHash,
         isAdmin,
         doctor: doctor._id,
@@ -115,11 +114,10 @@ db.once("open", async () => {
       const passwordHash = await bcrypt.hash("password@123", 10);
       const isAdmin = false;
       const department = chance.pickone(department_ids); // assign to doctor
-      const phoneNumber = chance.phone();
+
       const user = new User({
         name,
         email,
-        phone_number: chance.phone(),
         passwordHash,
         isAdmin,
         department, // Set department reference
@@ -137,6 +135,7 @@ db.once("open", async () => {
     for (let i = 0; i < 5; i++) {
       const name = chance.name();
       const email = chance.email();
+      const phoneNumber = chance.phone();
 
       const passwordHash = await bcrypt.hash("password@123", 10);
       const isAdmin = false;
@@ -144,8 +143,7 @@ db.once("open", async () => {
       const nurse = new User({
         name,
         email,
-        phone_number: chance.phone(),
-        department:chance.pickone(department_ids),
+        phoneNumber,
         passwordHash,
         isAdmin,
       });
@@ -163,7 +161,7 @@ db.once("open", async () => {
       const patient = new Patient({
         patientName: chance.name(),
         email: chance.email(),
-        phone_number: chance.phone(),
+        phoneNumber: chance.phone(),
         healthInsurance: chance.word(),
         visitNo: chance.integer(),
         sex: chance.pickone(["male", "female", "other"]),
@@ -197,12 +195,12 @@ db.once("open", async () => {
     Object.entries(roomEquipmentMapping).forEach(
       ([roomType, equipmentTypes]) => {
         equipmentTypes.forEach((type) => {
-          for (let i = 0; i < 2; i++) {
+          for (let i = 1; i < 5; i++) {
             // Create two of each type for diversity
             const equipment = new Equipment({
               equipmentName: `${type} ${i}`,
               equipmentType: type,
-              quantity: chance.integer({ min: 1, max: 2 }),
+              quantity: chance.integer({ min: 1, max: 5 }),
               location: `${roomType} Storage`,
               maintenanceStatus: chance.pickone([
                 "Operational",
