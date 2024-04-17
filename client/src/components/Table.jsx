@@ -68,6 +68,7 @@ const Table = ({ cards, isAdmin, context }) => {
     if (context === "patient") store.deletePatient(itemToDelete._id);
     else if (context === "user") store.deleteUser(itemToDelete._id);
     else if (context === "equipment") store.deleteEquipment(itemToDelete._id);
+    else if (context === "room") store.deleteRoom(itemToDelete._id);
     setShowDeleteModal(false); // Close modal after deletion
   };
 

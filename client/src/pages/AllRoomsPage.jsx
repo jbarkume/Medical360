@@ -18,7 +18,14 @@ const AllRoomsPage = () => {
      
       await store.getAllRooms(); 
 
-      setRooms(store.rooms); 
+      const sortedRooms = [...store.rooms].sort((a, b) => {
+        const roomNumberA = parseInt(a.roomNumber.match(/\d+/), 10); 
+        const roomNumberB = parseInt(b.roomNumber.match(/\d+/), 10); 
+        return roomNumberA - roomNumberB;
+      });
+      
+
+      setRooms(sortedRooms); 
     };
 
     fetchRooms();

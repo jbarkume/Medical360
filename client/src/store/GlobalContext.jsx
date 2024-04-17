@@ -143,10 +143,25 @@ function GlobalContextProvider({ children }) {
     try {
       const response = await storeApi.deleteEquipment(id);
       if (response.status === 200) {
-        console.log("deleted room");
+        console.log("deleted equipment");
         setStore({
           ...store,
           currentPatient: null,
+        });
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  //delete a room 
+  store.deleteRoom = async function (id) {
+    try {
+      const response = await storeApi.deleteRoom(id);
+      if (response.status === 200) {
+        console.log("deleted room");
+        setStore({
+          ...store,
+          currentRoom: null,
         });
       }
     } catch (err) {
