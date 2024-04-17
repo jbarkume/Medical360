@@ -36,7 +36,7 @@ const Table = ({ cards, isAdmin, context }) => {
         (equipmentId) => store.id_to_equipment[equipmentId] || 'Unknown Equipment'
       ).join(', ');
       return {
-        number: room.roomNumber,
+        number:`Room ${room.roomNumber}`, 
         type: room.roomType,
         equipments: equipmentNames,
         'Availability Status': room.availabilityStatus,

@@ -97,7 +97,7 @@ function GlobalContextProvider({ children }) {
           currentRoom: null,
         }));
       }
-      console.log(response);
+
     } catch (error) {
       console.error("Error fetching rooms:", error);
     }
@@ -108,7 +108,10 @@ function GlobalContextProvider({ children }) {
     // get whether user is logged in or not
     try {
       const response = await storeApi.createRoom(data);
-      if (response.status === 200) console.log("room created");
+      if (response.status === 201) 
+      {console.log("room created");
+       return response;
+    }
     } catch (err) {
       console.log(err.message);
     }
@@ -117,6 +120,7 @@ function GlobalContextProvider({ children }) {
   // get all the rooms
   store.getAllEquipments = async function () {
     const response = await storeApi.getAllEquipments();
+
     if (response.status === 200) {
       const equipmentMapping = response.data.reduce((acc, equipment) => {
         acc[equipment._id] = equipment.equipmentName; // Store only the equipment name
@@ -129,7 +133,7 @@ function GlobalContextProvider({ children }) {
         id_to_equipment: equipmentMapping,
       });
     }
-    console.log(response);
+    return response;
   };
 
   

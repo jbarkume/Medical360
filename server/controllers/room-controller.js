@@ -1,19 +1,33 @@
-const Room = require("../models/Room"); // Assuming the Room model is in the models directory
+const Room = require("../models/Room"); 
+const mongoose = require('mongoose');
 
 function createRoom(req, res) {
+  const { roomNumber, roomType, equipment, availabilityStatus } = req.body;
+
+  const equipmentIds = equipment.map(id => 
+    mongoose.Types.ObjectId.isValid(id) ? new mongoose.Types.ObjectId(id) : null
+  ).filter(id => id !== null);
+
+  if (equipmentIds.length !== equipment.length) {
+    return res.status(400).json({ error: "Invalid equipment ID(s) provided." });
+  }
+
   const newRoom = new Room({
-    roomNumber: req.body.roomNumber,
-    roomType: req.body.roomType,
-    equipment: req.body.equipment,
-    availabilityStatus: req.body.availabilityStatus,
+    roomNumber,
+    roomType,
+    equipment: equipmentIds,
+    availabilityStatus
   });
 
-  newRoom
-    .save()
-    .then((room) => res.status(201).json(room))
-    .catch((error) =>
-      res.status(400).json({ error: "Error saving room: " + error })
-    );
+  newRoom.save()
+    .then(room => {
+      console.log("Room saved successfully", room);
+      res.status(201).json(room);
+    })
+    .catch(error => {
+      console.error("Error saving room:", error);
+      res.status(400).json({ error: "Error saving room: " + error.message });
+    });
 }
 
 async function updateRoom(req, res) {

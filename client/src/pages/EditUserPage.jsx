@@ -8,42 +8,49 @@ const EditUserPage = () => {
   const fields = [
     {
       name: "Name",
+      label:"Name",
       initialValue: "John Doe",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Username",
+      label:"Username",
       initialValue: "johndoe",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Email",
+      label:"Email",
       initialValue: "john.doe@stonybrook.edu",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Password",
+      label:"Password",
       initialValue: "pwd123",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Confirm Password",
+      label:"Confirm Password",
       initialValue: "pwd123",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Department",
+      label:"Department",
       initialValue: "Dermato-Genetics",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Phone Number",
+      label:"Phone Number",
       initialValue: "111-234-5678",
       editable: true,
       showEditIcon: true,
@@ -51,6 +58,7 @@ const EditUserPage = () => {
 
     {
       name: "Role",
+      label:"Role",
       initialValue: "Admin",
       editable: true,
       showEditIcon: true,

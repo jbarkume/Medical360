@@ -9,8 +9,8 @@ const ForgotPasswordPage = () => {
   
   // The fields for the ForgotPassword form
   const fields = [
-    { name: 'Email', initialValue: '', editable: true },
-    { name: 'New Password', initialValue: '', editable: true }
+    { name: 'Email', label:"Email",initialValue: '', editable: true },
+    { name: 'New Password', label:"New Password", initialValue: '', editable: true }
   ];
 
   // This function will be called when the form is submitted
