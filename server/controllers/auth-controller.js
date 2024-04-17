@@ -146,6 +146,7 @@ async function register(req, res) {
       phone_number,
       isAdmin, // Set to false by default
       doctor, // Set to null by default
+      approvalStatus: 'pending'
     });
 
     // Save the user
