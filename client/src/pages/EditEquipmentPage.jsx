@@ -4,27 +4,31 @@ import Banner from "../components/Banner";
 
 const EditEquipmentPage = () => {
   const fields = [
-    { name: "Name", initialValue: "MRI", editable: true, showEditIcon: true },
+    { name: "Name", label:"Name",initialValue: "MRI", editable: true, showEditIcon: true },
     {
       name: "Type",
+      label:"Type",
       initialValue: "Machine",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Quantity",
+      label:"Quantify",
       initialValue: "20",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Location",
+      label:"Location",
       initialValue: "Room 201",
       editable: true,
       showEditIcon: true,
     },
     { 
       name: 'Maintenance Status', 
+      label:"Maintenance Status",
       initialValue: 'Occupied', 
       editable: true,
       showEditIcon: true, 

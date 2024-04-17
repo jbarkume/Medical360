@@ -6,24 +6,28 @@ const EditRoomPage = () => {
   const fields = [
     {
       name: "Room Number",
+      label:"Room Number",
       initialValue: "205",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Room Type",
+      label:"Room Type",
       initialValue: "VIP",
       editable: true,
       showEditIcon: true,
     },
     {
       name: "Equipment",
+      label:"Equipment",
       initialValue: "Dialysis",
       editable: true,
       showEditIcon: true,
     },
     { 
       name: 'Availabity Status', 
+      label:'Availabity Status',
       initialValue: 'Available', 
       editable: true,
       showEditIcon: true, 

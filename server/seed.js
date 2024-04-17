@@ -226,7 +226,7 @@ db.once("open", async () => {
     });
 
     // Create rooms, assigning equipment based on room type
-    const roomNumbers = [...Array(20).keys()].map((i) => `Room ${100 + i}`);
+    const roomNumbers = [...Array(20).keys()].map((i) => 100 + i);
     const rooms = roomNumbers.map((roomNumber) => {
       const roomType = chance.pickone([
         "ICU",

@@ -6,9 +6,9 @@ import { useLocation } from 'react-router-dom';
 
 const EditPatientInfoPage = () => {
     const fields = [
-        { name: 'Care Notes', initialValue: 'allergies', editable:true ,showEditIcon: true},
-        { name: 'Age', initialValue: '21', editable:true ,  showEditIcon: true },
-        { name: 'Sex', initialValue: 'M', editable:true, showEditIcon: true },
+        { name: 'Care Notes', label:"Care Notes", initialValue: 'allergies', editable:true ,showEditIcon: true},
+        { name: 'Age', label:"Age", initialValue: '21', editable:true ,  showEditIcon: true },
+        { name: 'Sex', label:"Sex", initialValue: 'M', editable:true, showEditIcon: true },
         
       ];
 

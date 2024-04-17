@@ -7,17 +7,18 @@ const RegistrationForm = () => {
   const navigate = useNavigate();
 
   const fields = [
-    { name: "name", initialValue: "", editable: true },
-    { name: "email", initialValue: "", editable: true },
-    { name: "password", initialValue: "", editable: true, type: "password" },
+    { name: "name", label:"Name", initialValue: "", editable: true },
+    { name: "email", label:"Email",initialValue: "", editable: true },
+    { name: "password", label:"Password",initialValue: "", editable: true, type: "password" },
     {
       name: "confirmPassword",
+      label:"Confirm Password",
       initialValue: "",
       editable: true,
       type: "password",
     },
-    { name: "department", initialValue: "", editable: true },
-    { name: "phoneNumber", initialValue: "", editable: true },
+    { name: "department",label:"Department", initialValue: "", editable: true },
+    { name: "phoneNumber", label:"Phone Number",initialValue: "", editable: true },
   ];
 
   // Function to submit registration data to the backend

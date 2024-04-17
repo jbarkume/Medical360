@@ -12,39 +12,6 @@ const AllRoomsPage = () => {
   const [rooms, setRooms] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // // Updated room data to match the specified fields
-  // const roomData = [
-  //   {
-  //     'Room Number': '101A',
-  //     'Room Type': 'Single',
-  //     'Equipment': 'Ventilator, Heart Monitor',
-  //     'Availability Status': 'Occupied',
-  //   },
-  //   {
-  //     'Room Number': '101B',
-  //     'Room Type': 'Single',
-  //     'Equipment': 'Heart Monitor',
-  //     'Availability Status': 'Available',
-  //   },
-  //   {
-  //     'Room Number': '102',
-  //     'Room Type': 'Double',
-  //     'Equipment': 'Ventilator',
-  //     'Availability Status': 'Occupied',
-  //   },
-  //   {
-  //     'Room Number': '103',
-  //     'Room Type': 'ICU',
-  //     'Equipment': 'Ventilator, ECMO Machine',
-  //     'Availability Status': 'Occupied',
-  //   },
-  //   {
-  //     'Room Number': '104',
-  //     'Room Type': 'Recovery',
-  //     'Equipment': 'None',
-  //     'Availability Status': 'Available',
-  //   },
-  // ];
 
   useEffect(() => {
     const fetchRooms = async () => {

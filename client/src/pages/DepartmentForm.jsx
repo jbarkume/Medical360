@@ -10,35 +10,17 @@ const DepartmentForm = () => {
 
     // Define the fields for the department form
     const fields = [
-        { name: 'Name', initialValue: '', editable: true },
-        { name: 'Icon', initialValue: '', editable: true, type: 'file' },
+        { name: 'Name', label:'Name', initialValue: '', editable: true },
+        { name: 'Icon', label:'Icon',initialValue: '', editable: true, type: 'file' },
         
     ];
 
-    // Function to handle form submission
-    // const handleSubmit = (formData) => {
-    //     // such as sending the new department data to a server
-    //     console.log('New Department Data:', formData);
-        
-    //     axios.post('http://localhost:3000/department/department', formData)
-    //     .then(response => {
-    //         console.log('Department created:', response.data);
-    //         navigate('/departmentpage');
-            
-    //     })
-    //     .catch(error => {
-    //         console.error('There was an error creating the department:', error);
-    //         setFormError(true); 
-    //     });
-       
-       
-    // };
+    
     const handleSubmit = (formData) => {
         const data = new FormData();
         Object.keys(formData).forEach(key => {
             data.append(key, formData[key]);
         });
-        console.log("I am creating the department data");
     
         axios.post('http://localhost:3000/departments/department', data, {
             headers: {
