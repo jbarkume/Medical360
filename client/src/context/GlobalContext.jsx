@@ -286,10 +286,9 @@ function GlobalContextProvider({ children }) {
     try {
       console.log(`pinging ${store.BASE_URL}/departments`)
       const response = await fetch(store.BASE_URL + "/departments", {
-        method: "GET",
-        headers: { "Accept": "application/json" },
-        include: "credentials",
-
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({"email": "hello there"})
       });
       console.log(response);
       console.log(response.body);

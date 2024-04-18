@@ -56,7 +56,7 @@ router.delete('/:id', (req, res) => {
 });
 
 // get all departments
-router.get('/', DepartmentController.getAllDepartments)
+router.post('/', DepartmentController.getAllDepartments)
 
 // update department by id
 router.put('/:id', DepartmentController.updateDepartment)
