@@ -156,9 +156,13 @@ function GlobalContextProvider({ children }) {
   // get patient by id
   const getPatient = async function (id) {
     try {
-      const response = await storeApi.getPatient(id);
+      const response = await fetch(store.BASE_URL + "/departments", {
+        method: "GET"
+      })
+      const json = await response.json();
+      console.log(json)
       if (response.status === 200)
-        setStore({ type: "GET_RESOURCE", context: "patient", payload: response.data.patient});
+        setStore({ type: "GET_RESOURCE", context: "patient", payload: json});
     } catch (err) {
       console.log(err.message);
     }
