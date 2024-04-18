@@ -175,7 +175,6 @@ function GlobalContextProvider({ children }) {
     if (response.status === 200) {
       const patients = (await response.json()).patients;
       setStore({ type: "GET_ALL_PATIENTS", payload: patients});
-      return response.data.patients;
     }
   };
 
