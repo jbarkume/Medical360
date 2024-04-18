@@ -167,7 +167,7 @@ function GlobalContextProvider({ children }) {
 
   // get all the patients
   const getAllPatients = async function () {
-    const response = await fetch(`${store.BASE_URL}/patients`, {
+    const response = await fetch(`${store.BASE_URL}/patients/all`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({"Why": "god"})
@@ -223,7 +223,7 @@ function GlobalContextProvider({ children }) {
 
   // get all the rooms
   const getAllEquipments = async function () {
-    const response = await fetch(`${store.BASE_URL}/equipments`, {
+    const response = await fetch(`${store.BASE_URL}/equipments/all`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({"Why": "god"})

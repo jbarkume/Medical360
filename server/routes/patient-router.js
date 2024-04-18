@@ -16,7 +16,7 @@ router.get("/", PatientController.getAllPatients);
 router.get("/:id", PatientController.getPatient);
 
 // GET route to retrieve all patients
-router.get('/', (req, res) => {
+router.post('/all', (req, res) => {
     Patient.find()
         .then(patients => res.status(200).json(patients))
         .catch(error => res.status(500).json({ error: 'Error fetching patients: ' + error }));
