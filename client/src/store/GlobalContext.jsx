@@ -110,7 +110,7 @@ function GlobalContextProvider({ children }) {
     try {
       const response = await storeApi.createRoom(data);
       if (response.status === 201) 
-      {console.log("room created",response.data);
+      {
 
       setStore(prevStore => ({
         ...prevStore,
@@ -144,7 +144,16 @@ function GlobalContextProvider({ children }) {
     return response;
   };
 
-  
+  // Inside GlobalContextProvider
+
+// Method to add equipment to the global store
+ store.addEquipment = function (newEquipment) {
+  setStore(prevStore => ({
+    ...prevStore,
+    equipments: [...prevStore.equipments, newEquipment]
+  }));
+};
+
 
   // delete a equipment
   store.deleteEquipment = async function (id) {
@@ -152,10 +161,11 @@ function GlobalContextProvider({ children }) {
       const response = await storeApi.deleteEquipment(id);
       if (response.status === 200) {
         console.log("deleted equipment");
-        setStore({
-          ...store,
-          currentPatient: null,
-        });
+        setStore(prevStore => ({
+          ...prevStore,
+          equipments: prevStore.equipments.filter(equip => equip._id !== id),
+          lastUpdated: Date.now()  // Update lastUpdated to current timestamp
+        }));
       }
     } catch (err) {
       console.log(err.message);

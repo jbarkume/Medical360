@@ -94,7 +94,16 @@ const Table = ({ cards, isAdmin, context }) => {
     const editRoute = getEditRoute(context);
     navigate(`${editRoute}`);
   };
-
+  const getRowDataCy = (context, card, index) => {
+    switch(context) {
+      case "room":
+        return `room-${card.roomNumber}`;  // Assuming each room has a unique roomNumber field
+      case "equipment":
+        return `equipment-${card.id}`;  // Adjust according to your equipment identifier
+      default:
+        return `item-${index}`;  // Fallback to index if no unique identifier available
+    }
+  };
   return (
     <div className="overflow-x-auto relative">
       <div style={{ maxHeight: "500px", overflowY: "auto" }}>
@@ -118,6 +127,7 @@ const Table = ({ cards, isAdmin, context }) => {
             {cards.map((card, index) => (
               <tr
                 key={index}
+                data-cy={getRowDataCy(context, card,index)}
                 style={{
                   backgroundColor: index % 2 === 0 ? "#EDF2FB" : "#ABC4FF",
                 }}
