@@ -103,6 +103,7 @@ function GlobalContextProvider({ children }) {
 
   // get all users to the application
   const getAllUsers = async function() {
+    console.log(`Pinging ${store.BASE_URL}/users`)
     try {
       const response = await fetch(`${store.BASE_URL}/users`, {
         method: "GET",
@@ -113,12 +114,16 @@ function GlobalContextProvider({ children }) {
       if (!response.ok) {
         throw new Error("Failed to fetch users");
       }
-      const users = (await response.json()).users; // This should be the array directly
+      let json = await response.json(); // This should be the array directly
+      console.log(json)
+      let users = json.users;
+      console.log(users)
       if (!Array.isArray(users)) {
         // Check if the data is an array
-        console.error("Expected an array of users, received:", data);
+        console.error("Expected an array of users, received:", users);
         throw new Error("Data format error: Expected an array of users");
       }
+      console.log("setting store")
       setStore({ type: "GET_ALL_USERS", payload: users }); // Set fetched user data to state, ensuring you're setting the array
     } catch (error) {
       console.error("Error fetching users:", error);

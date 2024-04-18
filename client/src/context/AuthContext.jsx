@@ -31,7 +31,7 @@ function AuthContextProvider({ children }) {
 
   // login the user with email and passwrod. Upon success, set user to logged in. upon false, print why and return false
   const login = async function (email, password) {
-    console.log("pinging" + BASE_URL + "/auth/login");
+    console.log("pinging " + BASE_URL + "/auth/login");
     try {
       const response = await fetch(BASE_URL + "/auth/login", {
         method: "POST",
