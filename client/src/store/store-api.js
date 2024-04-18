@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://medical360-d65d823d7d75.herokuapp.com/auth";
+const BASE_URL = "https://medical360-d65d823d7d75.herokuapp.com";
 
 const api = axios.create({
   baseURL: BASE_URL,
