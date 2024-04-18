@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import axios from "axios";
 import Banner from "../components/Banner";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../store/GlobalContext";
 
 const NewEquipmentPage = () => {
   const navigate = useNavigate();
+  const { store } = useContext(GlobalContext);
   const [formData, setFormData] = useState({
     equipmentName: "",
     equipmentType: "",
@@ -45,6 +47,7 @@ const NewEquipmentPage = () => {
       .post("https://medical360-d65d823d7d75.herokuapp.com/equipments", formData)
       .then((response) => {
         console.log("Equipment created:", response.data);
+        store.addEquipment(response.data);
         navigate("/all-equipments");
       })
       .catch((error) => {

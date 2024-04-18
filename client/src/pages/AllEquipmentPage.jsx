@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect,useRef } from "react";
 import Banner from "../components/Banner";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
@@ -9,67 +9,37 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const AllEquipmentPage = () => {
   const { user } = useAuthContext();
   const { store } = useContext(GlobalContext);
-
+  const lastUpdatedRef = useRef(store.lastUpdated);
   const [equipments, setEquipments] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  // // Updated and expanded equipment data to match the specified fields
-  // const equipmentData = [
-  //   {
-  //     Name: 'MRI Machine',
-  //     Type: 'Imaging Machine',
-  //     Quantity: '2',
-  //     Location: 'Radiology Dept - Room 201',
-  //     'Maintenance Status': 'Operational',
-  //   },
-  //   {
-  //     Name: 'CT Scanner',
-  //     Type: 'Imaging Machine',
-  //     Quantity: '1',
-  //     Location: 'Radiology Dept - Room 202',
-  //     'Maintenance Status': 'Maintenance Required',
-  //   },
-  //   {
-  //     Name: 'X-Ray Machine',
-  //     Type: 'Imaging Machine',
-  //     Quantity: '3',
-  //     Location: 'Emergency Dept - Room 101',
-  //     'Maintenance Status': 'Operational',
-  //   },
-  //   {
-  //     Name: 'Ultrasound Machine',
-  //     Type: 'Imaging Machine',
-  //     Quantity: '2',
-  //     Location: 'Maternity Dept - Room 301',
-  //     'Maintenance Status': 'Operational',
-  //   },
-  //   {
-  //     Name: 'ECG Machine',
-  //     Type: 'Monitoring Machine',
-  //     Quantity: '5',
-  //     Location: 'Cardiology Dept - Room 401',
-  //     'Maintenance Status': 'Operational',
-  //   },
-  //   {
-  //     Name: 'Ventilator',
-  //     Type: 'Life Support Machine',
-  //     Quantity: '4',
-  //     Location: 'ICU - Room 501',
-  //     'Maintenance Status': 'Maintenance Required',
-  //   },
-  //   // Add more equipment items as needed
-  // ];
-
+  
   useEffect(() => {
     const fetchEquipments = async () => {
-      await store.getAllEquipments();
-
+      if (store.equipments.length === 0 ) { 
+        // Fetch only if the equipments array is empty
+        await store.getAllEquipments();
+      }
       setEquipments(store.equipments);
     };
-
+   
+    
     fetchEquipments();
-  }, [store]);
+  }, [store.equipments]); 
+  useEffect(() => {
+    const fetchEquipments = async () => {
+      if ( store.lastUpdated !== lastUpdatedRef.current) { 
+        lastUpdatedRef.current = store.lastUpdated;
+        await store.getAllEquipments();
+      }
+      setEquipments(store.equipments);
+    };
+   
+    
+    fetchEquipments();
+  }, [store.lastUpdated]);
+  
 
   const handleSearch = (term) => {
     setSearchTerm(term.toLowerCase());

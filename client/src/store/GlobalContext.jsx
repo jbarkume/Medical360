@@ -20,7 +20,7 @@ function GlobalContextProvider({ children }) {
     currentEquipment: null,
     currentRoom: null,
   });
-
+  const [lastUpdated, setLastUpdated] = useState(Date.now());
   // create patient with given data
   store.createPatient = async function (data) {
     // get whether user is logged in or not
@@ -96,6 +96,7 @@ function GlobalContextProvider({ children }) {
           rooms: roomsWithEquipmentNames,
           currentRoom: null,
         }));
+
       }
 
     } catch (error) {
@@ -109,7 +110,14 @@ function GlobalContextProvider({ children }) {
     try {
       const response = await storeApi.createRoom(data);
       if (response.status === 201) 
-      {console.log("room created");
+      {
+
+      setStore(prevStore => ({
+        ...prevStore,
+        rooms: [...prevStore.rooms, {...response.data}],  // Add the new room to the existing rooms array
+    }));
+    
+    setLastUpdated(Date.now()); 
        return response;
     }
     } catch (err) {
@@ -136,7 +144,16 @@ function GlobalContextProvider({ children }) {
     return response;
   };
 
-  
+  // Inside GlobalContextProvider
+
+// Method to add equipment to the global store
+ store.addEquipment = function (newEquipment) {
+  setStore(prevStore => ({
+    ...prevStore,
+    equipments: [...prevStore.equipments, newEquipment]
+  }));
+};
+
 
   // delete a equipment
   store.deleteEquipment = async function (id) {
@@ -144,10 +161,11 @@ function GlobalContextProvider({ children }) {
       const response = await storeApi.deleteEquipment(id);
       if (response.status === 200) {
         console.log("deleted equipment");
-        setStore({
-          ...store,
-          currentPatient: null,
-        });
+        setStore(prevStore => ({
+          ...prevStore,
+          equipments: prevStore.equipments.filter(equip => equip._id !== id),
+          lastUpdated: Date.now()  // Update lastUpdated to current timestamp
+        }));
       }
     } catch (err) {
       console.log(err.message);
@@ -159,10 +177,15 @@ function GlobalContextProvider({ children }) {
       const response = await storeApi.deleteRoom(id);
       if (response.status === 200) {
         console.log("deleted room");
-        setStore({
-          ...store,
-          currentRoom: null,
-        });
+        // setStore({
+        //   ...store,
+        //   currentRoom: null,
+        // });
+        setStore(prevStore => ({
+          ...prevStore,
+          rooms: prevStore.rooms.filter(room => room._id !== id)
+      }));
+      setLastUpdated(Date.now()); 
       }
     } catch (err) {
       console.log(err.message);
