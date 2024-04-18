@@ -2,9 +2,6 @@ import React from "react";
 import StaffCard from "../components/StaffCard";
 import doctorImageone from "../images/doctor2.jpeg";
 import Banner from "../components/Banner";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../auth/AuthContext";
 
 
 const staffMembers = [
@@ -45,7 +42,6 @@ const staffMembers = [
 ];
 
 const AllStaffPage = () => {
-  const { auth } = useContext(AuthContext);
   const goBackPath = "/apppage";
 
   return (

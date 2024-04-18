@@ -42,7 +42,7 @@ const NewEquipmentPage = () => {
     }
 
     axios
-      .post("http://localhost:3000/equipments", formData)
+      .post("https://medical360-d65d823d7d75.herokuapp.com/equipments", formData)
       .then((response) => {
         console.log("Equipment created:", response.data);
         navigate("/all-equipments");

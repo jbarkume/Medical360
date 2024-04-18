@@ -38,7 +38,7 @@ const RegistrationForm = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch("https://medical360-d65d823d7d75.herokuapp.com/auth/register", {
         // Adjust the URL as per your setup
         method: "POST",
         headers: {

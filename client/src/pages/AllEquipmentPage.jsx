@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from "react";
 import Banner from "../components/Banner";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
-import AuthContext from "../auth/AuthContext";
 import { Link } from "react-router-dom";
 import GlobalContext from "../store/GlobalContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const AllEquipmentPage = () => {
-  const { auth } = useContext(AuthContext);
+  const { user } = useAuthContext();
   const { store } = useContext(GlobalContext);
 
   const [equipments, setEquipments] = useState([]);
@@ -89,7 +89,7 @@ const AllEquipmentPage = () => {
       </div>
       <div className="flex justify-between items-center mx-8 mb-4">
         <SearchBar onSearch={handleSearch} />
-        {auth.isAdmin && (
+        {user.isAdmin && (
           <Link
             to={"/new-equipment"}
             className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl"
@@ -101,7 +101,7 @@ const AllEquipmentPage = () => {
       <div className="p-8">
         <Table
           cards={filterEquipments}
-          isAdmin={auth.isAdmin}
+          isAdmin={user.isAdmin}
           context={"equipment"}
         />
       </div>

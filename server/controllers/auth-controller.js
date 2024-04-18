@@ -6,44 +6,6 @@ const Doctor = require("../models/Doctor");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-// is user logged in currently
-async function loggedIn(req, res) {
-  // method : GET
-  // route : /auth/loggedIn
-  try {
-    // find user in database using JWT
-    let userId = auth.userVerify(req);
-
-    // if user DNE or token expired return null user
-    if (!userId)
-      return res.status(200).json({
-        loggedIn: false,
-        user: null,
-        department: null,
-        isDoctor: false,
-        isAdmin: false,
-      });
-
-    // else find user and return it
-    const user = await User.findById(userId);
-    let departmentId = null;
-    if (user.department)
-      departmentId = await Department.findById(user.department);
-
-    return res.status(200).json({
-      loggedIn: true,
-      user: user,
-      department: departmentId ? departmentId.departmentName : null,
-      isDoctor: user.doctor !== null,
-      isAdmin: user.isAdmin,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: err.message,
-    });
-  }
-}
-
 async function login(req, res) {
   // method : POST
   // route : /auth/register
@@ -57,13 +19,11 @@ async function login(req, res) {
       });
 
     // find user by email. If none exists send status of 401 with wrong fields provided
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({ email: email.toLowerCase() })
     if (!user)
       return res.status(401).json({
         message: "Wrong email or password provided.",
       });
-
-    let id = user._id;
 
     // check password matches
     const passwordCorrect = await bcrypt.compare(password, user.passwordHash);
@@ -72,40 +32,24 @@ async function login(req, res) {
         message: "Wrong email or password provided.",
       });
 
+    let id = user._id
+
     // login the user by signing a token and sending it in a cookie
     // then send status of 200 with user info
     let token = auth.tokenSign(id);
-
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: true,
-      })
-      .status(200)
-      .json({
-        user: user,
+      res.status(200).json({
+        email: user.email,
+        isAdmin: user.isAdmin,
+        doctor: user.doctor,
+        department: user.department,
+        id,
+        token
       });
   } catch (err) {
     res.status(500).json({
       message: err.message,
     });
   }
-}
-
-function logout(req, res) {
-  // method : GET
-  // route : /auth/logout
-
-  // send cookie with token = "" and expires as soon as it gets there
-  res
-    .cookie("token", "", {
-      httpOnly: true,
-      expires: new Date(0),
-      secure: true,
-      sameSite: "none",
-    })
-    .send();
 }
 
 async function register(req, res) {
@@ -189,10 +133,8 @@ async function resetPassword(req, res) {
 }
 
 const AuthController = {
-  loggedIn,
   login,
   register,
-  logout,
   resetPassword,
 };
 

@@ -2,19 +2,19 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Banner from "../components/Banner";
 import FormField from "../components/FormField";
-import AuthContext from "../auth/AuthContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const LoginForm = () => {
-  const { auth } = useContext(AuthContext);
+  const { user, login } = useAuthContext();
   const [wrong, setWrong] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (auth.loggedIn) {
+    if (user) {
       navigate("/apppage");
       setWrong(false);
     }
-  }, [auth]);
+  }, [user]);
 
   const fields = [
     { name: 'Email', label:'Email',initialValue: '', editable: true },
@@ -24,10 +24,11 @@ const LoginForm = () => {
   const handleLogin = (formData) => {
     let email = formData.Email;
     let password = formData.Password;
-    auth.login(email, password).then(() => {
-      if (!auth.loggedIn)
+    login(email, password).then(() => {
+      if (!user) {
         setWrong(true);
-    });
+      }
+    })
   };
 
   return (

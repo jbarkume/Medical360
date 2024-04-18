@@ -7,8 +7,7 @@ import {
 import Banner from "../components/Banner";
 import StaffCard from "../components/StaffCard";
 import doctorImageone from "../images/doctor2.jpeg";
-import { useContext } from "react";
-import AuthContext from "../auth/AuthContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 const appointments = [
   { id: 1, name: "Maria Elena" },
   { id: 2, name: "Jessie" },
@@ -51,7 +50,7 @@ const doctors = [
 ];
 
 const UnscheduledAppointments = () => {
-  const { auth } = useContext(AuthContext);
+  const { user } = useAuthContext();
   return (
     <div className=" bg-gray-100 min-h-screen">
       {/* <div className="flex justify-between items-center mb-8">
@@ -60,7 +59,7 @@ const UnscheduledAppointments = () => {
       </div> */}
       <Banner goBackPath={"/apppage"} />
 
-      {auth.isAdmin  && (
+      {user.isAdmin  && (
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl text-gray-700 font-bold">
             Unscheduled Appointments
@@ -76,7 +75,7 @@ const UnscheduledAppointments = () => {
         </div>
       )}
 
-      {auth.isAdmin && (
+      {user.isAdmin && (
         <div className="grid grid-cols-3 gap-4 mb-8">
           {appointments.map((appointment) => (
             <div

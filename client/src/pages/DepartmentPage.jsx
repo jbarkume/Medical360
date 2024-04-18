@@ -1,19 +1,12 @@
-import React, { useContext, useState ,useEffect } from "react";
+import React, { useState ,useEffect } from "react";
 import DepartmentList from "../components/DepartmentList";
-import AuthContext from "../auth/AuthContext";
-import emergency from "../images/emergencybutton.png";
-import pediatric from "../images/pediatric.jpeg";
-import obstetrics from "../images/obstetrics.png";
-import cardiology from "../images/cardiology.jpeg";
-import neurology from "../images/neurology.png";
-import psychiatry from "../images/Psychiatry.jpeg";
 import DepartmentHead from "../components/DepartmentHead";
-import DepartmentForm from "./DepartmentForm";
 import Banner from "../components/Banner";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const DepartmentPage = () => {
-  const { auth } = useContext(AuthContext);
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const [departments, setDepartments] = useState([]);
 
@@ -22,14 +15,14 @@ const DepartmentPage = () => {
   }, []);
 
   const fetchDepartments = async () => {
-    const response = await fetch('http://localhost:3000/departments/alldepartments');
+    const response = await fetch('https://medical360-d65d823d7d75.herokuapp.com/departments/alldepartments');
     const data = await response.json();
     setDepartments(data);
   };
 
   const deleteDepartment = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/departments/${id}`, {
+      const response = await fetch(`https://medical360-d65d823d7d75.herokuapp.com/departments/${id}`, {
             method: 'DELETE',
       });
       if (!response.ok) {
@@ -48,13 +41,13 @@ const DepartmentPage = () => {
           <h2 className="text-2xl font-bold text-center flex-1">
             Departments List
           </h2>
-          {auth.isAdmin && (
+          {user.isAdmin && (
             <button onClick={() => navigate("/department-form")} className="p-2 bg-blue-500 text-white rounded-md mb-5">
               Create Department
             </button>
           )}
         </div>
-        <DepartmentList departments={departments} onDelete={deleteDepartment} isAdmin={auth.isAdmin} />
+        <DepartmentList departments={departments} onDelete={deleteDepartment} isAdmin={user.isAdmin} />
       </div>
       <DepartmentHead />
     </>

@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../auth/AuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const AccountCircle = () => {
 
-  const { auth } = useContext(AuthContext);
+  const { logout } = useAuthContext();
   const navigate = useNavigate()
   const [isOpen, setOpen] = useState(false)
 
   const handleLogout = () => {
     // Handle logout logic here
     console.log('Logging out...');
-    auth.logout();
+    logout();
     navigate("/")
   };
 

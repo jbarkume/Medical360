@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../auth/AuthContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const UserApprovalTable = ({ cards }) => {
-  const { auth } = useContext(AuthContext);
+  const { user } = useAuthContext;
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(""); // "approve" or "deny"
@@ -32,7 +32,7 @@ const UserApprovalTable = ({ cards }) => {
                   {field.charAt(0).toUpperCase() + field.slice(1)}
                 </th>
               ))}
-              {auth.isAdmin && <th scope="col" className="py-3 px-6">Actions</th>}
+              {user.isAdmin && <th scope="col" className="py-3 px-6">Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -43,7 +43,7 @@ const UserApprovalTable = ({ cards }) => {
                     {user[field]}
                   </td>
                 ))}
-                {auth.isAdmin && (
+                {user.isAdmin && (
                   <td className="py-4 px-6 text-right">
                     <button
                       onClick={() => handleAction(user, "approve")}

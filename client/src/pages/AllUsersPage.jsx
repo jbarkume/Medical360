@@ -2,22 +2,22 @@ import React, { useContext, useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
-import AuthContext from "../auth/AuthContext";
 import GlobalContext from "../store/GlobalContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const AllUsersPage = () => {
-  const { auth } = useContext(AuthContext);
+  const { user } = useAuthContext();
   const { store } = useContext(GlobalContext);
   const [userData, setUserData] = useState([]); // State to hold the user data
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:3000/users", {
+        const response = await fetch("https://medical360-d65d823d7d75.herokuapp.com/users", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`, // Use actual auth token here
+            Authorization: `Bearer ${user.token}`, // Use actual auth token here
           },
         });
         if (!response.ok) {
@@ -38,7 +38,7 @@ const AllUsersPage = () => {
     };
     store.getAllDepartments();
     fetchUsers();
-  }, [auth.token]); // Re-fetch when auth.token changes
+  }, [user.token]); // Re-fetch when auth.token changes
 
   return (
     <>
@@ -51,7 +51,7 @@ const AllUsersPage = () => {
       </div>
       <div className="p-8">
         {Array.isArray(userData) ? (
-          <Table cards={userData} isAdmin={auth.isAdmin} context="user" />
+          <Table cards={userData} isAdmin={user.isAdmin} context="user" />
         ) : (
           <p>No user data available.</p>
         )}

@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AccountCircle from './AccountCircle';
-import AuthContext from '../auth/AuthContext';
 
 const Banner = ({ goBackPath, showGoBackButton = true }) => { // Added showGoBackButton prop with a default value
-  const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   return (

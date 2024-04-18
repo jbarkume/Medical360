@@ -1,11 +1,17 @@
-import React, { useContext } from "react";
-import AuthContext from "../auth/AuthContext";
 import Banner from "../components/Banner";
 
 
 const PatientInfo = ({}) => {
-  const { auth } = useContext(AuthContext);
-  const patient = auth.patients[0];
+  const patient = {
+    name: "Patient One",
+    age: "30",
+    sex: "Male",
+    files: "3 files",
+    email: "patient.one@hospital.com",
+    schedule: "Next appointment: 10th Oct, 10:00 AM",
+    carenotes: ["Note 1", "Note 2", "Note 3"],
+    image: patientImage,
+  };
   return (
     <>
     <Banner goBackPath={"/"}/>

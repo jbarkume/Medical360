@@ -2,13 +2,12 @@ import {useContext, useEffect, useState} from 'react';
 import Banner from '../components/Banner';
 import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
-import Sidebar from '../components/Sidebar'; // Import the Sidebar component
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../auth/AuthContext';
 import GlobalContext from '../store/GlobalContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const AllPatientPage = () => {
-    const { auth } = useContext(AuthContext);
+    const { user } = useAuthContext();
     const { store } = useContext(GlobalContext);
     const [patients, setPatients] = useState({});
 
@@ -16,7 +15,7 @@ const AllPatientPage = () => {
     useEffect(() => {
       store.getAllDepartments();
       store.getAllPatients();
-    }, []);
+    }, [user]);
     return (
         <>
           <Banner goBackPath="/resource-management" />
@@ -27,7 +26,7 @@ const AllPatientPage = () => {
           </div>
           <div className="flex justify-between items-center mx-8 mb-4">
             <SearchBar />
-            {auth.isAdmin && (
+            {user && user.isAdmin && (
               // Adjusted button size to be smaller
               <Link  to={"/new-patient"}className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl">
                 New Patient
@@ -35,7 +34,7 @@ const AllPatientPage = () => {
             )}
           </div>
           <div className="p-8">
-            {store && <Table cards={store.patients} isAdmin={auth.isAdmin} context={"patient"} />}
+            {user && store && <Table cards={store.patients} isAdmin={user.isAdmin} context={"patient"} />}
           </div>
         </>
       );
