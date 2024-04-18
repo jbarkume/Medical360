@@ -106,10 +106,11 @@ function GlobalContextProvider({ children }) {
     console.log(`Pinging ${store.BASE_URL}/users`)
     try {
       const response = await fetch(`${store.BASE_URL}/users`, {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({"Why": "God"})
       });
       if (!response.ok) {
         throw new Error("Failed to fetch users");
@@ -284,21 +285,14 @@ function GlobalContextProvider({ children }) {
   // get all the patients
   const getAllDepartments = async function () {
     try {
-      console.log(`pinging ${store.BASE_URL}/departments`)
       const response = await fetch(store.BASE_URL + "/departments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({"email": "hello there"})
       });
-      console.log(response);
-      console.log(response.body);
       const json = await response.json();
-      console.log("json hererrer")
-      console.log(json)
       if (response.status === 200) {
-        console.log(response);
-        console.log(response.data);
-        let departments = response.data.departments;
+        let departments = json.departments;
         let id_to_department = departments.reduce((result, obj) => {
           result[obj._id] = obj.departmentName;
           return result;
