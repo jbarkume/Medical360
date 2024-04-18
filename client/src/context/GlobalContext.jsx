@@ -156,13 +156,9 @@ function GlobalContextProvider({ children }) {
   // get patient by id
   const getPatient = async function (id) {
     try {
-      const response = await fetch(store.BASE_URL + "/departments", {
-        method: "GET"
-      })
-      const json = await response.json();
-      console.log(json)
+      const response = await storeApi.getPatient(id);
       if (response.status === 200)
-        setStore({ type: "GET_RESOURCE", context: "patient", payload: json});
+        setStore({ type: "GET_RESOURCE", context: "patient", payload: response.data.patient});
     } catch (err) {
       console.log(err.message);
     }
@@ -288,7 +284,12 @@ function GlobalContextProvider({ children }) {
   // get all the patients
   const getAllDepartments = async function () {
     try {
-      const response = await storeApi.getAllDepartments();
+      const response = await fetch(BASE_URL + "/departments", {
+        method: "GET"
+      });
+      const json = await response.json();
+      console.log("json hererrer")
+      console.log(json)
       if (response.status === 200) {
         console.log(response);
         console.log(response.data);
