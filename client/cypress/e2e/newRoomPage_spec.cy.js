@@ -1,6 +1,6 @@
 describe("New Room Page Tests", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5173/login");
+    cy.visit("https://medical360-d65d823d7d75.herokuapp.com/login");
     cy.get("#Email").type("admin@example.com");
     cy.get("#Password").type("admin@123");
     cy.get("button").contains("Login").click();
@@ -29,6 +29,6 @@ describe("New Room Page Tests", () => {
     cy.get("#availabilityStatus").should("be.visible").select("Available");
 
     cy.get("button").contains("Create Room").click();
-    cy.visit("http://localhost:5173/all-rooms");
+    cy.visit("https://medical360-d65d823d7d75.herokuapp.com/all-rooms");
   });
 });
