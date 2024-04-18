@@ -3,10 +3,12 @@ import Banner from '../components/Banner';
 import FormField from '../components/FormField';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../hooks/useGlobalContext';
 
 const DepartmentForm = () => {
     const [formError, setFormError] = useState(false);
     const navigate = useNavigate();
+    const { BASE_URL } = useGlobalContext();
 
     // Define the fields for the department form
     const fields = [
@@ -22,7 +24,7 @@ const DepartmentForm = () => {
             data.append(key, formData[key]);
         });
     
-        axios.post('https://medical360-d65d823d7d75.herokuapp.com/departments/deparment', data, {
+        axios.post(`${BASE_URL}/departments/deparment`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },

@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Banner from '../components/Banner';
+import { useGlobalContext } from '../hooks/useGlobalContext';
 
 const NewPatientPage = () => {
     const navigate = useNavigate();
+    const { BASE_URL } = useGlobalContext();
     const [formData, setFormData] = useState({
         patientName: '',
         email: '',
@@ -20,7 +22,7 @@ const NewPatientPage = () => {
     const [formError, setFormError] = useState(false);
 
     useEffect(() => {
-        axios.get('https://medical360-d65d823d7d75.herokuapp.com/departments/alldepartments')
+        axios.get(`${BASE_URL}/departments/alldepartments`)
             .then(response => {
                 setDepartments(response.data);
             })
@@ -46,7 +48,7 @@ const NewPatientPage = () => {
             return;
         }
     
-        axios.post('https://medical360-d65d823d7d75.herokuapp.com/patients', formData)
+        axios.post(`${BASE_URL}/patients`, formData)
             .then(response => {
                 console.log('Patient created:', response.data);
                 navigate("/all-patients");

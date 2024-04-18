@@ -3,8 +3,10 @@ import Banner from "../components/Banner";
 import FormField from "../components/FormField";
 import { useNavigate } from "react-router-dom";
 import  axios  from "axios";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 const ForgotPasswordPage = () => {
   const navigate = useNavigate();
+  const { BASE_URL } = useGlobalContext();
 
   
   // The fields for the ForgotPassword form
@@ -28,7 +30,7 @@ const ForgotPasswordPage = () => {
         newPassword: formData['New Password'],
     };
 
-    axios.post('https://medical360-d65d823d7d75.herokuapp.com/auth/reset-password', dataToSend)
+    axios.post(`${BASE_URL}/auth/reset-password`, dataToSend)
         .then(response => {
             alert('If an account with that email exists, a password reset link has been sent.');
             navigate('/');

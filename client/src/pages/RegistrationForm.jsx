@@ -2,9 +2,11 @@ import React from "react";
 import Banner from "../components/Banner";
 import FormField from "../components/FormField";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
+  const { BASE_URL } = useGlobalContext();
 
   const fields = [
     { name: "name", label:"Name", initialValue: "", editable: true },
@@ -38,7 +40,7 @@ const RegistrationForm = () => {
     };
 
     try {
-      const response = await fetch("https://medical360-d65d823d7d75.herokuapp.com/auth/register", {
+      const response = await fetch(`${BASE_URL}/auth/register`, {
         // Adjust the URL as per your setup
         method: "POST",
         headers: {

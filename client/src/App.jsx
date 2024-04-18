@@ -36,25 +36,29 @@ import UserApprovalPage from "./pages/UserApprovalsPage";
 
 import DepartmentForm from "./pages/DepartmentForm";
 import { useAuthContext } from "./hooks/useAuthContext";
+import { useGlobalContext } from "./hooks/useGlobalContext";
 
 
 function App() {
 
   const { user } = useAuthContext();
+  let lastRoute = localStorage.getItem("lastRoute");
+  if (!lastRoute)
+    lastRoute = "/apppage"
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={!user ? <HomePage /> : <Navigate to="/apppage"/>} />
+        <Route path="/" element={!user ? <HomePage /> : <Navigate to={lastRoute}/>} />
         <Route path="/apppage" element={user ? <AppPage /> : <Navigate to="/" />} />
         <Route path="/register" element={<RegistrationForm />} />
-        <Route path="/login" element={!user ? <LoginForm /> : <Navigate to="/apppage"/>} />
+        <Route path="/login" element={!user ? <LoginForm /> : <Navigate to={lastRoute}/>} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/all-staff" element={<AllStaffPage />} />
         <Route path="/all-equipments" element={<AllEquipmentPage />} />
         <Route path="/all-rooms" element={<AllRoomsPage />} />
-        <Route path="/all-patients" element={<AllPatientPage />} />
-        <Route path="/all-users" element={<AllUsersPage />} />
+        <Route path="/all-patients" element={user ? <AllPatientPage /> : <Navigate to="/" />} />
+        <Route path="/all-users" element={user ? <AllUsersPage /> : <Navigate to="/" />} />
         <Route path="/book-appointment" element={<AppointmentPage />} />
         <Route path="/all-doctors" element={<AllDoctorsPage />} />
         <Route path="/edit-equipment/" element={<EditEquipmentPage />} />
@@ -62,7 +66,7 @@ function App() {
         <Route path="/edit-patient" element={<EditPatientPage />} />
         <Route path="/edit-user" element={<EditUserPage />} />
         <Route path="/department-staff" element={<DepartmentStaffPage />} />
-        <Route path="/departmentpage" element={<DepartmentPage />} />
+        <Route path="/departmentpage" element={user ? <DepartmentPage /> : <Navigate to="/" />} />
         <Route path="/new-equipment" element={<NewEquipmentPage />} />
         <Route path="/new-room" element={<NewRoomPage />} />
         <Route path="/new-patient" element={<NewPatientPage />} />

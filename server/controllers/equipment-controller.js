@@ -40,7 +40,7 @@ async function updateEquipment(req, res) {
 async function getAllEquipment(req, res) {
   try {
     const equipmentList = await Equipment.find();
-    res.status(200).json(equipmentList);
+    res.status(200).json({equipmentList});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

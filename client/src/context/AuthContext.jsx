@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useReducer } from "react";
 
 const AuthContext = createContext();
-const BASEURL = "https://medical360-d65d823d7d75.herokuapp.com"
+const BASEURL = "http://localhost:3000";
 
 export const authReducer = (state, action) => {
   switch (action.type) {
