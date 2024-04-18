@@ -284,7 +284,7 @@ function GlobalContextProvider({ children }) {
   // get all the patients
   const getAllDepartments = async function () {
     try {
-      const response = await fetch(BASE_URL + "/departments", {
+      const response = await fetch(store.BASE_URL + "/departments", {
         method: "GET"
       });
       const json = await response.json();
