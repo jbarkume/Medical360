@@ -284,8 +284,10 @@ function GlobalContextProvider({ children }) {
   // get all the patients
   const getAllDepartments = async function () {
     try {
+      console.log(`pinging ${store.BASE_URL}/departments`)
       const response = await fetch(store.BASE_URL + "/departments", {
-        method: "GET"
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
       });
       const json = await response.json();
       console.log("json hererrer")
