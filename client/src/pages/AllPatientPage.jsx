@@ -9,6 +9,7 @@ import { useGlobalContext } from '../hooks/useGlobalContext';
 const AllPatientPage = () => {
     const { user } = useAuthContext();
     const { patients, getAllDepartments, getAllPatients } = useGlobalContext();
+    console.log("All-patient page: ", patients)
    
     useEffect(() => {
       localStorage.setItem("lastRoute", "/all-patients");
