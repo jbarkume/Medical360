@@ -286,6 +286,8 @@ function GlobalContextProvider({ children }) {
     try {
       const response = await storeApi.getAllDepartments();
       if (response.status === 200) {
+        console.log(response);
+        console.log(response.data);
         let departments = response.data.departments;
         let id_to_department = departments.reduce((result, obj) => {
           result[obj._id] = obj.departmentName;
