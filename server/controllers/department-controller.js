@@ -52,7 +52,7 @@ async function getDepartment(req, res) {
       try {
         const departments = await Department.find();
         res.status(200).json({
-            departments
+            departments: departments
         });
       } catch (error) {
         res.status(500).json({

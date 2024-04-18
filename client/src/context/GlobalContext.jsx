@@ -290,6 +290,7 @@ function GlobalContextProvider({ children }) {
         headers: { "Content-Type": "application/json" }
       });
       console.log(response);
+      console.log(response.body);
       const json = await response.json();
       console.log("json hererrer")
       console.log(json)
