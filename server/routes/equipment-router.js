@@ -10,7 +10,7 @@ router.post('/', EquipmentController.createEquipment);
 router.put('/:id', EquipmentController.updateEquipment);
 
 // GET route to get all equipments
-router.get('/', EquipmentController.getAllEquipment);
+router.post('/', EquipmentController.getAllEquipment);
 
 // GET route to get single equipment by id
 router.get('/:id', EquipmentController.getEquipment);
