@@ -64,12 +64,13 @@ const AllEquipmentPage = () => {
   useEffect(() => {
     const fetchEquipments = async () => {
       await store.getAllEquipments();
+      console.log("Here I am in all equipments room");
 
       setEquipments(store.equipments);
     };
 
     fetchEquipments();
-  }, [store]);
+  }, []);
 
   const handleSearch = (term) => {
     setSearchTerm(term.toLowerCase());

@@ -8,10 +8,11 @@ import GlobalContext from "../store/GlobalContext";
 
 const AllRoomsPage = () => {
   const { auth } = useContext(AuthContext);
-  const { store } = useContext(GlobalContext);
+  //const { store } = useContext(GlobalContext);
+  const { store, lastUpdated } = useContext(GlobalContext);
   const [rooms, setRooms] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-
+  
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -27,9 +28,31 @@ const AllRoomsPage = () => {
 
       setRooms(sortedRooms); 
     };
-
+  
     fetchRooms();
-  }, [store]);
+    
+  }, [lastUpdated]);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      // Fetch rooms if they are not already loaded
+      if (!store.rooms.length) {
+        await store.getAllRooms();
+      }
+  
+      // Sort and set rooms regardless of whether they were just fetched or pre-existing
+      const sortedRooms = [...store.rooms].sort((a, b) => {
+        const roomNumberA = parseInt(a.roomNumber.match(/\d+/), 10); 
+        const roomNumberB = parseInt(b.roomNumber.match(/\d+/), 10); 
+        return roomNumberA - roomNumberB;
+      });
+  
+      setRooms(sortedRooms);
+    };
+  
+    fetchRooms();
+  }, [store]); 
+  
 
   const handleSearch = term => {
     setSearchTerm(term.toLowerCase());
