@@ -2,43 +2,28 @@ import React, { useContext, useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
-import GlobalContext from "../store/GlobalContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const AllUsersPage = () => {
   const { user } = useAuthContext();
-  const { store } = useContext(GlobalContext);
-  const [userData, setUserData] = useState([]); // State to hold the user data
+  const { getAllDepartments, getAllUsers, users } = useGlobalContext();
 
   useEffect(() => {
+    localStorage.setItem("lastRoute", "/all-users");
+    console.log(users)
     const fetchUsers = async () => {
-      try {
-        const response = await fetch("https://medical360-d65d823d7d75.herokuapp.com/users", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`, // Use actual auth token here
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Failed to fetch users");
-        }
-        const data = (await response.json()).users; // This should be the array directly
-        console.log(data);
-        if (!Array.isArray(data)) {
-          // Check if the data is an array
-          console.error("Expected an array of users, received:", data);
-          throw new Error("Data format error: Expected an array of users");
-        }
-        setUserData(data); // Set fetched user data to state, ensuring you're setting the array
-      } catch (error) {
-        console.error("Error fetching users:", error);
-        setUserData([]); // Ensure userData is reset to an empty array on error
+      if (user && !users) {
+        await getAllDepartments();
+        await getAllUsers();
       }
     };
-    store.getAllDepartments();
     fetchUsers();
-  }, [user.token]); // Re-fetch when auth.token changes
+
+    return () => {
+      localStorage.removeItem("lastRoute")
+    }
+  }, [user, users]); // Re-fetch when auth.token changes
 
   return (
     <>
@@ -50,9 +35,10 @@ const AllUsersPage = () => {
         <SearchBar />
       </div>
       <div className="p-8">
-        {Array.isArray(userData) ? (
-          <Table cards={userData} isAdmin={user.isAdmin} context="user" />
-        ) : (
+        {users && (
+          <Table cards={users} isAdmin={user && user.isAdmin} context="user" />
+        )}
+        {!users && (
           <p>No user data available.</p>
         )}
       </div>

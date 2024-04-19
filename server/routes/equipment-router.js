@@ -10,10 +10,10 @@ router.post('/', EquipmentController.createEquipment);
 router.put('/:id', EquipmentController.updateEquipment);
 
 // GET route to get all equipments
-router.get('/', EquipmentController.getAllEquipment);
+router.post('/all', EquipmentController.getAllEquipment);
 
 // GET route to get single equipment by id
-router.get('/:id', EquipmentController.getEquipment);
+router.post('/:id', EquipmentController.getEquipment);
 
 // DELETE route to delete a specific equipment by ID
 router.delete('/:id', EquipmentController.deleteEquipment);

@@ -17,7 +17,7 @@ const DoctorInfo = (
     schedule: "Mon - Sat / 9 AM - 4 PM",
     profile:
       "Dr. Doe completed her medical degree at Stony Brook University, renowned for its rigorous medical program and emphasis on patient-centered care. She further specialized in dermatology during her residency at Yale University, where she excelled in both medical and surgical dermatology, with a particular focus on pediatric dermatology, cosmetic procedures",
-    image: doctorImageone,
+    
   };
   return (
     <>

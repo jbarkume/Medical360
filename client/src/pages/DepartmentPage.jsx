@@ -4,25 +4,31 @@ import DepartmentHead from "../components/DepartmentHead";
 import Banner from "../components/Banner";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const DepartmentPage = () => {
   const { user } = useAuthContext();
+  const { BASE_URL } = useGlobalContext();
   const navigate = useNavigate();
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
+    localStorage.setItem("lastRoute", "/departmentpage");
     fetchDepartments();
+    return () => {
+      localStorage.removeItem("lastRoute");
+    }
   }, []);
 
   const fetchDepartments = async () => {
-    const response = await fetch('https://medical360-d65d823d7d75.herokuapp.com/departments/alldepartments');
+    const response = await fetch(`${BASE_URL}/departments/alldepartments`);
     const data = await response.json();
     setDepartments(data);
   };
 
   const deleteDepartment = async (id) => {
     try {
-      const response = await fetch(`https://medical360-d65d823d7d75.herokuapp.com/departments/${id}`, {
+      const response = await fetch(`${BASE_URL}/departments/${id}`, {
             method: 'DELETE',
       });
       if (!response.ok) {

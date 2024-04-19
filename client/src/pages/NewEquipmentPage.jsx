@@ -3,10 +3,12 @@ import axios from "axios";
 import Banner from "../components/Banner";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../store/GlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const NewEquipmentPage = () => {
   const navigate = useNavigate();
   const { store } = useContext(GlobalContext);
+  const { BASE_URL } = useGlobalContext();
   const [formData, setFormData] = useState({
     equipmentName: "",
     equipmentType: "",
@@ -44,7 +46,7 @@ const NewEquipmentPage = () => {
     }
 
     axios
-      .post("https://medical360-d65d823d7d75.herokuapp.com/equipments", formData)
+      .post(`${BASE_URL}/equipments`, formData)
       .then((response) => {
         console.log("Equipment created:", response.data);
         store.addEquipment(response.data);

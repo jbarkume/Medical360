@@ -40,7 +40,7 @@ async function updateEquipment(req, res) {
 async function getAllEquipment(req, res) {
   try {
     const equipmentList = await Equipment.find();
-    res.status(200).json(equipmentList);
+    res.status(200).json({equipmentList});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -52,7 +52,7 @@ async function getEquipment(req, res) {
     if (!equipment) {
       return res.status(404).json({ message: "Equipment not found" });
     }
-    res.status(200).json(equipment);
+    res.status(200).json({equipment});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

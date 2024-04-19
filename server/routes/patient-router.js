@@ -10,17 +10,10 @@ router.post('/', PatientController.createPatient);
 router.put('/:id', PatientController.updatePatient);
 
 // GET route to get all patients
-router.get("/", PatientController.getAllPatients);
+router.post("/all", PatientController.getAllPatients);
 
 // GET route to get single patient by id
-router.get("/:id", PatientController.getPatient);
-
-// GET route to retrieve all patients
-router.get('/', (req, res) => {
-    Patient.find()
-        .then(patients => res.status(200).json(patients))
-        .catch(error => res.status(500).json({ error: 'Error fetching patients: ' + error }));
-});
+router.post("/:id", PatientController.getPatient);
 
 // GET route to retrieve a specific patient by ID
 router.get('/:id', (req, res) => {

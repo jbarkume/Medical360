@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useReducer } from "react";
 
 const AuthContext = createContext();
-const BASEURL = "https://medical360-d65d823d7d75.herokuapp.com"
+const BASE_URL = "https://medical360-d65d823d7d75.herokuapp.com";
+// const BASE_URL = "http://localhost:3000"
 
 export const authReducer = (state, action) => {
   switch (action.type) {
@@ -30,13 +31,16 @@ function AuthContextProvider({ children }) {
 
   // login the user with email and passwrod. Upon success, set user to logged in. upon false, print why and return false
   const login = async function (email, password) {
+    console.log("pinging " + BASE_URL + "/auth/login");
     try {
-      const response = await fetch(BASEURL + "/auth/login", {
+      const response = await fetch(BASE_URL + "/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
       })
+      console.log(response);
       const json = await response.json();
+      console.log(json)
 
       if (response.ok) {
         localStorage.setItem("user", JSON.stringify(json))

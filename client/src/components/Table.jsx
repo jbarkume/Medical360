@@ -1,30 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GlobalContext from "../store/GlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const Table = ({ cards, isAdmin, context }) => {
-  let newCards = cards;
-  const { store } = useContext(GlobalContext);
-  if (context === "patient") {
-    newCards = cards.map((patient) => {
-      return {
-        name: patient.patientName,
-        email: patient.email,
-        sex: patient.sex,
-        age: patient.age,
-        status: patient.patientStatus,
-        room: patient.roomNo,
-        department: store.id_to_department[patient.department],
-      };
-    });
-  }
+  let newCards = cards
+
+  const { id_to_department, id_to_equipment, deleteEquipment, deletePatient, deleteRoom, deleteUser, getPatient, getEquipment, getRoom } = useGlobalContext();
+    if (context === "patient") {
+      newCards = cards.map((patient) => {
+        return {
+          name: patient.patientName,
+          email: patient.email,
+          sex: patient.sex,
+          age: patient.age,
+          status: patient.patientStatus,
+          room: patient.roomNo,
+          department: id_to_department[patient.department],
+        };
+      });
+    }
 
   if (context === "user") {
     newCards = cards.map((user) => {
       return {
         name: user.name,
         email: user.email,
-        department: store.id_to_department[user.department],
+        department: id_to_department[user.department],
       };
     });
   }
@@ -33,7 +34,7 @@ const Table = ({ cards, isAdmin, context }) => {
     newCards = cards.map((room) => {
 
       const equipmentNames = room.equipment.map(
-        (equipmentId) => store.id_to_equipment[equipmentId] || 'Unknown Equipment'
+        (equipmentId) => id_to_equipment[equipmentId] || 'Unknown Equipment'
       ).join(', ');
       return {
         number:`Room ${room.roomNumber}`, 
@@ -65,10 +66,10 @@ const Table = ({ cards, isAdmin, context }) => {
     console.log(`Deleting ${context}:`, itemToDelete);
     // Here you would typically call a function to delete the item,
     // e.g., deleteItem(itemToDelete).then(() => setShowDeleteModal(false));
-    if (context === "patient") store.deletePatient(itemToDelete._id);
-    else if (context === "user") store.deleteUser(itemToDelete._id);
-    else if (context === "equipment") store.deleteEquipment(itemToDelete._id);
-    else if (context === "room") store.deleteRoom(itemToDelete._id);
+    if (context === "patient") deletePatient(itemToDelete._id);
+    else if (context === "user") deleteUser(itemToDelete._id);
+    else if (context === "equipment") deleteEquipment(itemToDelete._id);
+    else if (context === "room") deleteRoom(itemToDelete._id);
     setShowDeleteModal(false); // Close modal after deletion
   };
 
@@ -90,7 +91,9 @@ const Table = ({ cards, isAdmin, context }) => {
 
   // Handle the edit action
   const handleEdit = (itemId) => {
-    if (context === "patient") store.getPatient(itemId); // marks this patient as the current patient to edit
+    if (context === "patient") getPatient(itemId); // marks this patient as the current patient to edit
+    if (context === "equipment") getEquipment(itemId);
+    if (context == "room") getRoom(itemId);
     const editRoute = getEditRoute(context);
     navigate(`${editRoute}`);
   };

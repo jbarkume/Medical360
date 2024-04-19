@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Banner from '../components/Banner';
+import { useGlobalContext } from '../hooks/useGlobalContext';
 
 const NewPatientPage = () => {
     const navigate = useNavigate();
+    const { departments, getAllDepartments, createPatient } = useGlobalContext();
     const [formData, setFormData] = useState({
         patientName: '',
         email: '',
@@ -16,18 +18,16 @@ const NewPatientPage = () => {
         roomNo: '',
         department: ''
     });
-    const [departments, setDepartments] = useState([]);
     const [formError, setFormError] = useState(false);
 
     useEffect(() => {
-        axios.get('https://medical360-d65d823d7d75.herokuapp.com/departments/alldepartments')
-            .then(response => {
-                setDepartments(response.data);
-            })
-            .catch(error => {
-                console.error('Failed to load departments', error);
-            });
-    }, []);
+        async function fetchDepartments() {
+            if (!departments) {
+                await getAllDepartments();
+            }
+        }
+        fetchDepartments();
+    }, [departments]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -37,7 +37,7 @@ const NewPatientPage = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Basic validation example
@@ -46,15 +46,19 @@ const NewPatientPage = () => {
             return;
         }
     
-        axios.post('https://medical360-d65d823d7d75.herokuapp.com/patients', formData)
-            .then(response => {
-                console.log('Patient created:', response.data);
-                navigate("/all-patients");
-            })
-            .catch(error => {
-                console.error('There was an error creating the patient:', error);
-                setFormError(true);
-            });
+        // axios.post(`${BASE_URL}/patients`, formData)
+        //     .then(response => {
+        //         console.log('Patient created:', response.data);
+        //         navigate("/all-patients");
+        //     })
+        //     .catch(error => {
+        //         console.error('There was an error creating the patient:', error);
+        //         setFormError(true);
+        //     });
+        await createPatient(formData);
+        console.log('Patient created!');
+        navigate("/all-patients");
+        
     };
 
     return (
@@ -187,7 +191,7 @@ const NewPatientPage = () => {
                             
                         >
                             <option value="">Select Department</option>
-                            {departments.map((dept) => (
+                            {departments && departments.map((dept) => (
                                 <option key={dept._id} value={dept._id}>{dept.departmentName}</option>
                             ))}
                         </select>

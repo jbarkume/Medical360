@@ -4,6 +4,7 @@ import TextField from './TextField';
 import MultiSelectField from './MultiSelectField';
 
 const FormField = ({ fields, submit, buttonName }) => {
+    console.log(fields);
     const [formData, setFormData] = useState({});
 
     const handleInputChange = (name, value) => {

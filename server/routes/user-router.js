@@ -13,7 +13,7 @@ router.put('/:id', UserController.updateUser)
 router.get('/:id', UserController.getUser)
 
 // get all users route
-router.get('/', UserController.getAllUsers)
+router.post('/', UserController.getAllUsers)
 
 //  delete user route
 router.delete('/:id', UserController.deleteUser)

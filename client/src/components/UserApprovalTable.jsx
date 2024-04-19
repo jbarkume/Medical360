@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const UserApprovalTable = ({ cards }) => {
-  const { user } = useAuthContext;
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(""); // "approve" or "deny"
