@@ -23,7 +23,8 @@ const EditPatientPage = () => {
     // Function to handle form submission
     const handleSubmit = async (formData) => {
         // Such as updating the patient data or sending it to a server
-        formData["department"] = department_to_id[formData["department"]];
+        if (formData["deparment"])
+            formData["department"] = department_to_id[formData["department"]];
         await updatePatient(currentPatient._id, formData);
         getAllPatients();
         navigate("/all-patients");

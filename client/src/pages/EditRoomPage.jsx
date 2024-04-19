@@ -16,9 +16,10 @@ const EditRoomPage = () => {
   // Function to handle form submission
   const handleSubmit = async (formData) => {
       // Such as updating the patient data or sending it to a server
-      formData["equipment"] = formData["equipment"].split(";").map(equip => {
-        return equipment_to_id[equip];
-      })
+      if (formData["equipment"])
+        formData["equipment"] = formData["equipment"].split(";").map(equip => {
+          return equipment_to_id[equip];
+        })
       await updateRoom(currentRoom._id, formData);
       getAllRooms();
       navigate("/all-rooms");
