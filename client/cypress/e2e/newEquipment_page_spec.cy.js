@@ -1,6 +1,6 @@
 describe("New Equipment Page Tests", () => {
   beforeEach(() => {
-    cy.visit("https://medical360-d65d823d7d75.herokuapp.com/login");
+    cy.visit("/login");
     cy.get("#Email").type("admin@example.com");
     cy.get("#Password").type("admin@123");
     cy.get("button").contains("Login").click();
@@ -27,6 +27,6 @@ describe("New Equipment Page Tests", () => {
     cy.get('select[name="maintenanceStatus"]').should("be.visible").select("Operational");
 
     cy.get("button").contains("Create Equipment").click();
-    cy.visit("https://medical360-d65d823d7d75.herokuapp.com/all-equipments");
+    cy.visit("/all-equipments");
   });
 });

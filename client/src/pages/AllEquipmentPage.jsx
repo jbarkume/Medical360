@@ -9,41 +9,16 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 const AllEquipmentPage = () => {
   const { user } = useAuthContext();
   const { equipments, getAllEquipments } = useGlobalContext();
-  const { store } = useContext(GlobalContext);
-  const lastUpdatedRef = useRef(store.lastUpdated);
-  const [equipments, setEquipments] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  
-
   useEffect(() => {
     const fetchEquipments = async () => {
-      if (store.equipments.length === 0 ) { 
-        // Fetch only if the equipments array is empty
-        await store.getAllEquipments();
-      }
-      setEquipments(store.equipments);
-    };
-   
-    
-    fetchEquipments();
-  }, [store.equipments]); 
-  useEffect(() => {
-    const fetchEquipments = async () => {
-      if ( store.lastUpdated !== lastUpdatedRef.current) { 
-        lastUpdatedRef.current = store.lastUpdated;
-        await store.getAllEquipments();
-      }
-      setEquipments(store.equipments);
       if (!equipments)
         await getAllEquipments();
     };
-   
-    
+
     fetchEquipments();
-  }, [store.lastUpdated]);
-  
   }, [equipments]);
 
   const handleSearch = (term) => {

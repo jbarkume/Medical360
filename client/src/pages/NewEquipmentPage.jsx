@@ -2,12 +2,10 @@ import React, { useState,useContext } from "react";
 import axios from "axios";
 import Banner from "../components/Banner";
 import { useNavigate } from "react-router-dom";
-import GlobalContext from "../store/GlobalContext";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const NewEquipmentPage = () => {
   const navigate = useNavigate();
-  const { store } = useContext(GlobalContext);
   const { BASE_URL } = useGlobalContext();
   const [formData, setFormData] = useState({
     equipmentName: "",

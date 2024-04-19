@@ -7,30 +7,29 @@ import { useGlobalContext } from '../hooks/useGlobalContext';
 const NewRoomPage = () => {
     const [formError, setFormError] = useState(false);
     const navigate = useNavigate();
-    const { getAllEquipments, createRoom } = useGlobalContext();
+    const { getAllEquipments, createRoom,equipments } = useGlobalContext();
     const [equipmentOptions, setEquipmentOptions] = useState([]);
 
     useEffect(() => {
-        const fetchEquipment = async () => {
-            try {
-                const response = await getAllEquipments();
-            if (response.status === 200) {
-                const operationalEquipments = response.data
-                    .filter(equip => equip.quantity > 0 && equip.maintenanceStatus === "Operational")
-                    .map(equip => ({
-                        label:`${equip.equipmentName} (${equip.location})`,
-                        value: equip._id
-                    }));
-                    setEquipmentOptions(operationalEquipments);
-                }
-                
-            } catch (error) {
-                console.error("Error fetching equipment:", error);
-            }
+        const fetchEquipments = async () => {
+          if (!equipments)
+            await getAllEquipments();
         };
-
-        fetchEquipment();
-    }, []);
+    
+        fetchEquipments();
+      }, [equipments]);
+    
+    useEffect(() => {
+        if (equipments) {
+            const operationalEquipments = equipments
+                .filter(equip => equip.quantity > 0 && equip.maintenanceStatus === "Operational")
+                .map(equip => ({
+                    label: `${equip.equipmentName} (${equip.location})`,
+                    value: equip._id
+                }));
+            setEquipmentOptions(operationalEquipments);
+        }
+    }, [equipments]);
 
     const fields = [
         { name: 'roomNumber', label: 'Room Number', initialValue: '', editable: true },

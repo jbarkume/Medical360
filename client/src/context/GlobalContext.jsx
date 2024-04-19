@@ -94,7 +94,7 @@ function GlobalContextProvider({ children }) {
     patients: null,
     departments: null,
     rooms: null,
-    equipments: null,
+    equipments:null,
     id_to_department: {},
     department_to_id: {},
     id_to_equipment: {},
@@ -104,8 +104,9 @@ function GlobalContextProvider({ children }) {
     currentEquipment: null,
     currentRoom: null,
     BASE_URL: "https://medical360-d65d823d7d75.herokuapp.com"
+    //BASE_URL: "http://localhost:3000"
   });
-
+  const [lastUpdated, setLastUpdated] = useState(Date.now());
   // get all users to the application
   const getAllUsers = async function() {
     console.log(`Pinging ${store.BASE_URL}/users`)
@@ -258,6 +259,14 @@ function GlobalContextProvider({ children }) {
     try {
       const response = await storeApi.createRoom(data);
       if (response.status === 201) {
+        setStore({
+          type: "CREATE_ROOM",
+          payload: response.data  
+      });
+
+      // Update last updated time or handle other side effects
+      setLastUpdated(Date.now());
+      
         console.log("room created");
         return response;
     }
@@ -352,6 +361,7 @@ function GlobalContextProvider({ children }) {
       if (response.status === 200) {
         console.log("deleted equipment");
         setStore({ type: "DELETE", context: "equipment", payload: id });
+        setLastUpdated(Date.now());
       }
     } catch (err) {
       console.log(err.message);
@@ -363,7 +373,8 @@ function GlobalContextProvider({ children }) {
       const response = await storeApi.deleteRoom(id);
       if (response.status === 200) {
         console.log("deleted room");
-        setStore({ type: "DELETE", context: "room", payload: id })
+        setStore({ type: "DELETE", context: "room", payload: id });
+        setLastUpdated(Date.now());
       }
     } catch (err) {
       console.log(err.message);
@@ -450,6 +461,7 @@ function GlobalContextProvider({ children }) {
     <GlobalContext.Provider
       value={{
         ...store,
+        lastUpdated,
         createPatient,
         updatePatient,
         getPatient,

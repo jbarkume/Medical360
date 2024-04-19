@@ -8,60 +8,16 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const AllRoomsPage = () => {
   const { user } = useAuthContext();
-  const { rooms, getAllRooms } = useGlobalContext();
+  const { rooms, getAllRooms, lastUpdated } = useGlobalContext();
   const [allRooms, setRooms] = useState([]);
-  const { auth } = useContext(AuthContext);
-  //const { store } = useContext(GlobalContext);
-  const { store, lastUpdated } = useContext(GlobalContext);
-  const [rooms, setRooms] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const fetchRooms = async () => {
-     
-      await store.getAllRooms(); 
-
-      const sortedRooms = [...store.rooms].sort((a, b) => {
-        const roomNumberA = parseInt(a.roomNumber.match(/\d+/), 10); 
-        const roomNumberB = parseInt(b.roomNumber.match(/\d+/), 10); 
-        return roomNumberA - roomNumberB;
-      });
-      
-
-      setRooms(sortedRooms); 
-    };
-  
-    fetchRooms();
+    getAllRooms();
     
   }, [lastUpdated]);
 
-  useEffect(() => {
-    const fetchRooms = async () => {
-      // Fetch rooms if they are not already loaded
-      if (!store.rooms.length) {
-        await store.getAllRooms();
-      }
-  
-      // Sort and set rooms regardless of whether they were just fetched or pre-existing
-      const sortedRooms = [...store.rooms].sort((a, b) => {
-        const roomNumberA = parseInt(a.roomNumber.match(/\d+/), 10); 
-        const roomNumberB = parseInt(b.roomNumber.match(/\d+/), 10); 
-        return roomNumberA - roomNumberB;
-      });
-  
-      setRooms(sortedRooms);
-      if (!rooms) {
-        await getAllRooms(); 
-      }
-    };
-  
-    fetchRooms();
-  }, [store]); 
-  
-  }, [rooms]);
-
-  const handleSearch = term => {
+  const handleSearch = (term) => {
     setSearchTerm(term.toLowerCase());
   };
 
@@ -83,15 +39,21 @@ const AllRoomsPage = () => {
         )}
       </div>
       <div className="p-8">
-          {rooms && <Table cards={
-            Object.values(rooms).sort((a, b) => {
-            const roomNumberA = parseInt(a.roomNumber.match(/\d+/), 10); 
-            const roomNumberB = parseInt(b.roomNumber.match(/\d+/), 10); 
-            return roomNumberA - roomNumberB;
-          }).filter(room => 
-            room.roomNumber.toLowerCase().includes(searchTerm)
-          )
-          } isAdmin={user && user.isAdmin} context={"room"} />}
+        {rooms && (
+          <Table
+            cards={Object.values(rooms)
+              .sort((a, b) => {
+                const roomNumberA = parseInt(a.roomNumber.match(/\d+/), 10);
+                const roomNumberB = parseInt(b.roomNumber.match(/\d+/), 10);
+                return roomNumberA - roomNumberB;
+              })
+              .filter((room) =>
+                room.roomNumber.toLowerCase().includes(searchTerm)
+              )}
+            isAdmin={user && user.isAdmin}
+            context={"room"}
+          />
+        )}
       </div>
     </>
   );
