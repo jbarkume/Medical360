@@ -16,16 +16,9 @@ const AllRoomsPage = () => {
   useEffect(() => {
     const fetchRooms = async () => {
      
-      await getAllRooms(); 
-
-      const sortedRooms = [...rooms].sort((a, b) => {
-        const roomNumberA = parseInt(a.roomNumber.match(/\d+/), 10); 
-        const roomNumberB = parseInt(b.roomNumber.match(/\d+/), 10); 
-        return roomNumberA - roomNumberB;
-      });
-      
-
-      setRooms(sortedRooms); 
+      if (!rooms) {
+        await getAllRooms(); 
+      }
     };
 
     fetchRooms();
@@ -34,10 +27,6 @@ const AllRoomsPage = () => {
   const handleSearch = term => {
     setSearchTerm(term.toLowerCase());
   };
-
-  const filterRooms = allRooms.filter(room => 
-    room.roomNumber.toLowerCase().includes(searchTerm)
-  );
 
   return (
     <>
@@ -57,7 +46,15 @@ const AllRoomsPage = () => {
         )}
       </div>
       <div className="p-8">
-          <Table cards={filterRooms} isAdmin={user && user.isAdmin} context={"room"} />
+          {rooms && <Table cards={
+            Object.values(rooms).sort((a, b) => {
+            const roomNumberA = parseInt(a.roomNumber.match(/\d+/), 10); 
+            const roomNumberB = parseInt(b.roomNumber.match(/\d+/), 10); 
+            return roomNumberA - roomNumberB;
+          }).filter(room => 
+            room.roomNumber.toLowerCase().includes(searchTerm)
+          )
+          } isAdmin={user && user.isAdmin} context={"room"} />}
       </div>
     </>
   );

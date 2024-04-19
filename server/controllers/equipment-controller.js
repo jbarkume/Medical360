@@ -52,7 +52,7 @@ async function getEquipment(req, res) {
     if (!equipment) {
       return res.status(404).json({ message: "Equipment not found" });
     }
-    res.status(200).json(equipment);
+    res.status(200).json({equipment});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

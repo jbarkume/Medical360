@@ -13,7 +13,7 @@ router.put('/:id', PatientController.updatePatient);
 router.post("/all", PatientController.getAllPatients);
 
 // GET route to get single patient by id
-router.get("/:id", PatientController.getPatient);
+router.post("/:id", PatientController.getPatient);
 
 // GET route to retrieve a specific patient by ID
 router.get('/:id', (req, res) => {

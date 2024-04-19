@@ -9,10 +9,10 @@ router.post('/', RoomController.createRoom);
 router.put('/:id', RoomController.updateRoom);
 
 // GET route to get all rooms
-router.get('/', RoomController.getAllRooms);
+router.post('/all', RoomController.getAllRooms);
 
 // GET route to get single room by id
-router.get('/:id', RoomController.getRoom);
+router.post('/:id', RoomController.getRoom);
 
 // DELETE route to delete a specific room by ID
 router.delete('/:id', RoomController.deleteRoom);

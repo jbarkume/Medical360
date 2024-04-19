@@ -6,7 +6,7 @@ const Doctor = require("../models/Doctor");
 const Patient = require("../models/Patient");
 require("dotenv").config()
 
-function createPatient(req, res) {
+async function createPatient(req, res) {
     const newPatient = new Patient({
         patientName: req.body.patientName,
         email: req.body.email,
@@ -20,10 +20,12 @@ function createPatient(req, res) {
         patientStatus: req.body.patientStatus,
         roomNo: req.body.roomNo,
     });
-
-    newPatient.save()
-        .then(patient => res.status(201).json(patient))
-        .catch(error => res.status(400).json({ error: 'Error saving patient: ' + error }));
+    try {
+      await newPatient.save()
+      res.status(201).json({newPatient});
+    } catch (error) {
+      res.status(400).json({ error: 'Error saving patient: ' + error });
+    }
 }
 
 async function updatePatient(req, res) {

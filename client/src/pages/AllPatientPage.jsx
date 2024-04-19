@@ -38,7 +38,7 @@ const AllPatientPage = () => {
             <SearchBar />
             {user && user.isAdmin && (
               // Adjusted button size to be smaller
-              <Link  to={"/new-patient"}className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl">
+              <Link  to={"/new-patient"} className="bg-[#2260FF] text-white px-2 py-1 rounded-md font-medium text-xl">
                 New Patient
               </Link>
             )}

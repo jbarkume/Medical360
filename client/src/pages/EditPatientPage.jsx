@@ -6,26 +6,27 @@ import { useEffect, useState } from 'react';
 
 const EditPatientPage = () => {
 
-    const { department_to_id, currentPatient, updatePatient, id_to_department } = useGlobalContext();
+    const { department_to_id, currentPatient, updatePatient, id_to_department, getAllDepartments, departments, getAllPatients } = useGlobalContext();
     const navigate = useNavigate();
-    const [patient, setPatient] = useState(currentPatient);
-
-    useEffect(() => {
-        if (currentPatient) {
-            setPatient(currentPatient);
-        }
-    }, [currentPatient]);
 
 
     const fieldsToAvoid = ["_id", "medicalHistory", "__v"];
 
+    useEffect(() => {
+        async function fetchDepartments() {
+            if (!departments)
+                getAllDepartments();
+        }
+        fetchDepartments();
+    }, [departments])
+
     // Function to handle form submission
-    const handleSubmit = (formData) => {
+    const handleSubmit = async (formData) => {
         // Such as updating the patient data or sending it to a server
-        formData["department"] = department_to_id[formData["department"]]
-        updatePatient(patient._id, formData).then(() => {
-            navigate("/all-patients");
-        });
+        formData["department"] = department_to_id[formData["department"]];
+        await updatePatient(currentPatient._id, formData);
+        getAllPatients();
+        navigate("/all-patients");
     };
 
     return (
@@ -36,8 +37,8 @@ const EditPatientPage = () => {
                 <h1 className="text-3xl font-bold text-blue-500">Edit Patient</h1>
                 </div>
             </div>
-            {patient && <FormField
-                fields={Object.keys(patient)
+            {currentPatient && departments && <FormField
+                fields={Object.keys(currentPatient)
                     .filter(key => {
                         if (!fieldsToAvoid.includes(key))
                             return true;
@@ -45,7 +46,7 @@ const EditPatientPage = () => {
                     .map(key => {
                         let obj = {
                             name: key,
-                            initialValue: patient[key],
+                            initialValue: currentPatient[key],
                             editable: true,
                             showEditIcon: true
                         };

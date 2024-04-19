@@ -1,6 +1,7 @@
 const Room = require("../models/Room"); 
 const mongoose = require('mongoose');
 const Equipment=require("../models/Equipment");
+const Doctor = require("../models/Doctor");
 
 function createRoom(req, res) {
   const { roomNumber, roomType, equipment, availabilityStatus } = req.body;
@@ -60,8 +61,8 @@ async function updateRoom(req, res) {
 
 async function getAllRooms(req, res) {
   try {
-    const roomList = await Room.find();
-    res.status(200).json(roomList);
+    const rooms = await Room.find();
+    res.status(200).json({rooms});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -73,7 +74,7 @@ async function getRoom(req, res) {
     if (!room) {
       return res.status(404).json({ message: "Room not found" });
     }
-    res.status(200).json(room);
+    res.status(200).json({room});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -5,7 +5,7 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 const Table = ({ cards, isAdmin, context }) => {
   let newCards = cards
 
-  const { id_to_department, id_to_equipment, deleteEquipment, deletePatient, deleteRoom, deleteUser, getPatient } = useGlobalContext();
+  const { id_to_department, id_to_equipment, deleteEquipment, deletePatient, deleteRoom, deleteUser, getPatient, getEquipment, getRoom } = useGlobalContext();
     if (context === "patient") {
       newCards = cards.map((patient) => {
         return {
@@ -92,6 +92,8 @@ const Table = ({ cards, isAdmin, context }) => {
   // Handle the edit action
   const handleEdit = (itemId) => {
     if (context === "patient") getPatient(itemId); // marks this patient as the current patient to edit
+    if (context === "equipment") getEquipment(itemId);
+    if (context == "room") getRoom(itemId);
     const editRoute = getEditRoute(context);
     navigate(`${editRoute}`);
   };
