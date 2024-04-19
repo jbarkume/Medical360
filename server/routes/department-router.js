@@ -37,6 +37,7 @@ router.post('/department', upload.single('Icon'), (req, res) => {
 
  //get all departments
 router.get('/alldepartments', (req, res) => {
+    console.log("Here");
     Department.find()
         .then(departments => res.json(departments))
         .catch(error => res.status(500).json({ error: 'Error fetching departments: ' + error.message }));

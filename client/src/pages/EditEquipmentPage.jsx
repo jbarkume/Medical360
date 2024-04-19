@@ -49,6 +49,7 @@ const EditEquipmentPage = () => {
                       let obj = {
                           name: key,
                           initialValue: currentEquipment[key],
+                          label:key,
                           editable: true,
                           showEditIcon: true
                       };

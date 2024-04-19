@@ -24,7 +24,7 @@ const DepartmentForm = () => {
             data.append(key, formData[key]);
         });
     
-        axios.post(`${BASE_URL}/departments/deparment`, data, {
+        axios.post(`${BASE_URL}/departments/department`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },

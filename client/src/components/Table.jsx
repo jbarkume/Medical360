@@ -102,7 +102,7 @@ const Table = ({ cards, isAdmin, context }) => {
       case "room":
         return `room-${card.roomNumber}`;  // Assuming each room has a unique roomNumber field
       case "equipment":
-        return `equipment-${card.id}`;  // Adjust according to your equipment identifier
+        return `equipment-${card.equipmentName}`;  // Adjust according to your equipment identifier
       default:
         return `item-${index}`;  // Fallback to index if no unique identifier available
     }

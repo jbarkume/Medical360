@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 app.use("/uploads", express.static("uploads"));
 
-// // Serve static files (Make sure this is before your catch-all route if you are using React Router)
+// Serve static files (Make sure this is before your catch-all route if you are using React Router)
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // // // Catch-all handler for SPA (Make sure the path is correctly formatted)
